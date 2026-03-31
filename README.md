@@ -16,35 +16,37 @@ VietERP Platform is a comprehensive, enterprise-grade ERP ecosystem built with m
 
 | Chỉ số / Metric | Giá trị / Value |
 |--------|-------|
-| Tổng dòng mã / Total LOC | **809,735** (excl. generated/lock files) |
-| Ứng dụng / Applications | 15 modules |
-| Gói chia sẻ / Shared Packages | 27 |
+| Tổng dòng mã / Total LOC | **1,800,744** |
+| Ứng dụng / Applications | 16 modules |
+| Gói chia sẻ / Shared Packages | 27 (`@vierp/*`) |
 | Prisma Models | 980 |
-| API Routes | 1,302 |
-| Test/Spec Files | 624 |
+| API Routes | 1,322 |
+| Test/Spec Files | 723 (157 E2E specs) |
 | Dockerfiles | 17 |
 | Terraform Files | 29 (AWS + GCP + Azure) |
-| Grafana Dashboards | 6 |
-| CI/CD Workflows | 3 (ci, release, docker-push) |
-| Tổng tệp / Total Files | 8,959 |
+| Grafana Dashboards | 8 |
+| CI/CD Workflows | 3 (ci, release, deploy) |
+| Tổng tệp / Total Files | 9,012 |
 
 ### Phân bổ mã nguồn / Code Breakdown
 
-| Ngôn ngữ / Language | LOC | Ghi chú |
-|---|---|---|
-| TypeScript (.ts/.tsx) | 548,154 | Mã nguồn chính + giao diện |
-| CSS / Tailwind | 47,551 | Styles |
-| Prisma Schema | 36,830 | 980 models, 13 schemas |
-| JSON / YAML Config | 36,912 | Package configs + Helm + monitoring |
-| SQL Migrations | 17,462 | 34 migrations |
-| Terraform (.tf) | 6,168 | AWS + GCP + Azure |
-| Shell Scripts | 3,943 | DevOps + automation |
-| Markdown Docs | 112,715 | 32 guides + ADRs + API refs |
+| Ngôn ngữ / Language | LOC | Files | Ghi chú |
+|---|---|---|---|
+| TypeScript (.ts) | 947,891 | 4,732 | Backend, services, API routes |
+| React TSX (.tsx) | 562,950 | 3,104 | Giao diện, components |
+| JavaScript (.js/.jsx) | 28,134 | 106 | Config + scripts |
+| CSS / Tailwind | 47,577 | 58 | Styles |
+| Prisma Schema | 36,830 | 15 | 980 models, 13 schemas |
+| JSON / YAML Config | 36,962 | 248 | Package configs + Helm + monitoring |
+| SQL Migrations | 17,462 | 51 | 34 migrations |
+| Markdown Docs | 112,827 | 281 | ADRs + guides + API refs |
+| Terraform (.tf) | 6,168 | 29 | AWS + GCP + Azure |
+| Shell Scripts | 3,943 | 26 | DevOps + automation |
 
 ## Độ hoàn thiện / Completion Status
 
 ```
-Tổng thể / Overall:  ████████████████████░  95%
+Tổng thể / Overall:  █████████████████████  100%
 ```
 
 | Lĩnh vực / Area | Trạng thái | Chi tiết |
@@ -74,12 +76,14 @@ Tổng thể / Overall:  ██████████████████�
 | **HRM-Unified** | Nhân sự hợp nhất / Unified HRM | 3003 | Next.js |
 | **MRP** | Quản lý sản xuất / Manufacturing Resource Planning | 3005 | Next.js |
 | **OTB** | Kế hoạch mua hàng / Open-To-Buy Planning | 3009 | Next.js |
-| **TPM-API** | TPM Backend (NestJS) | 3010 | NestJS |
+| **TPM-API** | TPM Backend | — | Vercel |
+| **TPM-API-NestJS** | TPM Backend (NestJS) | 3010 | NestJS |
 | **TPM-Web** | TPM Frontend | 5180 | Vite |
 | **PM** | Quản lý dự án / Project Management | 5173 | Vite |
-| **ExcelAI** | Phân tích Excel bằng AI / AI-powered Excel Analysis | 5174 | Vite |
+| **ExcelAI** | Phân tích Excel bằng AI / AI-powered Excel Analysis | 5173 | Vite |
 | **Docs** | Tài liệu / Documentation portal | 3011 | Next.js |
 | **Landing Page** | Trang giới thiệu / Marketing landing page | 3012 | Next.js |
+| **Liphoco** | ERP cho Liphoco / Liphoco ERP module | 3020 | Next.js |
 
 ## Shared Packages (27)
 

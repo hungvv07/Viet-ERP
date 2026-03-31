@@ -31,9 +31,7 @@ export default function Navbar() {
     >
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 h-[60px] flex items-center justify-between">
         <a href="/" className="flex items-center">
-          <span className="font-semibold text-[15px] tracking-[-0.02em] text-text-primary">
-            VietERP
-          </span>
+          <span className="font-extrabold text-[16px] tracking-[-0.02em] vierp-logo"><span className="viet-text">Việt</span><span className="erp-text"><span className="erp-e">E</span><span className="erp-r">R</span><span className="erp-p">P</span></span></span>
         </a>
 
         <div className="hidden md:flex items-center gap-7">

@@ -6,7 +6,7 @@ import CircuitBackground from "./CircuitBackground";
 import { Code, Shield, Globe, Workflow, Cloud, Users } from "lucide-react";
 
 const features = [
-  { icon: Code, title: "Open Source", desc: "Mã nguồn mở 100%, MIT License. Fork, customize, deploy tự do. 812K+ dòng mã TypeScript.", color: "#22c55e" },
+  { icon: Code, title: "Open Source", desc: "Mã nguồn mở 100%, MIT License. Fork, customize, deploy tự do. 1.8 triệu dòng mã TypeScript.", color: "#22c55e" },
   { icon: Shield, title: "Enterprise Security", desc: "Rate limiting, CORS, CSRF, input sanitization, security headers. Audit trail cho mọi thao tác.", color: "#8b5cf6" },
   { icon: Globe, title: "Vietnam-First", desc: "Tuân thủ VAS TT200, hoá đơn điện tử NĐ123, BHXH/BHYT/BHTN, VietQR, tích hợp 20+ ngân hàng VN.", color: "#06b6d4" },
   { icon: Workflow, title: "Event-Driven", desc: "NATS JetStream cho inter-module communication. 25 typed event schemas, real-time sync giữa các modules.", color: "#f59e0b" },
@@ -26,7 +26,7 @@ export default function Features() {
             <span className="text-text-tertiary">Kiến trúc chuẩn doanh nghiệp.</span>
           </h2>
           <p className="text-[14px] text-text-tertiary leading-[1.7]">
-            14 modules chia sẻ 27 shared packages, kiến trúc microservices, event-driven, multi-tenant.
+            16 modules chia sẻ 27 shared packages, kiến trúc microservices, event-driven, multi-tenant.
           </p>
         </ScrollReveal>
 

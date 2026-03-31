@@ -44,7 +44,7 @@ export default function SocialProof() {
 
         <ScrollReveal delay={0.3}>
           <h2 className="text-[clamp(1.8rem,4vw,3rem)] font-bold tracking-[-0.03em] leading-[1.1] mb-5">
-            <span className="gradient-text">14 modules. 27 packages.</span><br />
+            <span className="gradient-text">16 modules. 27 packages.</span><br />
             <span className="text-text-tertiary">Một hệ sinh thái mã nguồn mở.</span>
           </h2>
           <p className="text-[14px] text-text-tertiary leading-[1.7] max-w-[500px] mx-auto mb-8">
@@ -59,10 +59,10 @@ export default function SocialProof() {
         <ScrollReveal delay={0.4} className="mt-20">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { value: "812K+", label: "Lines of Code" },
-              { value: "14", label: "Modules" },
-              { value: "971", label: "Prisma Models" },
-              { value: "154", label: "E2E Test Specs" },
+              { value: "1.8M+", label: "Dòng mã" },
+              { value: "16", label: "Modules" },
+              { value: "980", label: "Prisma Models" },
+              { value: "723", label: "Test Files" },
             ].map((s) => (
               <div key={s.label} className="group">
                 <p className="text-[28px] md:text-[36px] font-bold tracking-[-0.03em] text-white group-hover:opacity-100 opacity-90 transition-opacity">{s.value}</p>

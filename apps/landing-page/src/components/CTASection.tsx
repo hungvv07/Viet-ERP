@@ -17,11 +17,11 @@ export default function CTASection() {
             <p className="text-[11px] text-white/60 tracking-[0.15em] uppercase mb-5 font-medium">Start Building Today</p>
             <h2 className="text-[clamp(1.8rem,4vw,3.5rem)] font-bold tracking-[-0.03em] leading-[1.1] mb-6">
               <span className="gradient-text">Fork. Customize. Deploy.</span><br />
-              <span className="text-text-tertiary">ERP cho doanh nghiệp của bạn.</span>
+              <span className="text-text-tertiary">16 modules cho doanh nghiệp của bạn.</span>
             </h2>
             <p className="text-[16px] md:text-[18px] text-text-secondary max-w-2xl mx-auto mb-10 leading-[1.7]">
               Mã nguồn mở, MIT License. Fork về, thay branding, deploy lên cloud.<br />
-              812K+ LOC, 14 modules, 971 Prisma models — sẵn sàng production.
+              1.8 triệu dòng mã, 16 modules, 980 Prisma models — sẵn sàng production.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">

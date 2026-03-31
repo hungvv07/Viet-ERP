@@ -39,10 +39,10 @@ export default function Hero() {
               transition={{ duration: 0.7, delay: 0.4 }}
               className="text-[clamp(2rem,7vw,4.5rem)] font-bold tracking-[-0.03em] leading-[1.1] mb-5 md:mb-6"
             >
-              <span className="text-white">Một nền tảng ERP.</span>
+              <span className="text-white">Nền tảng </span>
+              <span className="vierp-logo text-[1.1em]"><span className="viet-text">Việt</span><span className="erp-text"><span className="erp-e">E</span><span className="erp-r">R</span><span className="erp-p">P</span></span></span>
               <br />
-              <span className="text-white/40">Mã nguồn mở.</span>{" "}
-              <span className="text-white/40">Miễn phí.</span>
+              <span className="text-white/50">Mã nguồn mở.</span>
             </motion.h1>
 
             <motion.p
@@ -51,7 +51,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.55 }}
               className="text-[15px] md:text-[17px] text-text-secondary leading-[1.7] mb-6 md:mb-8 max-w-[480px]"
             >
-              14 modules ERP cho doanh nghiệp Việt Nam. Tuân thủ VAS TT200, hoá đơn điện tử NĐ123, BHXH/BHYT. TypeScript, Next.js, PostgreSQL.
+              16 modules ERP cho doanh nghiệp Việt Nam. Tuân thủ VAS TT200, hoá đơn điện tử NĐ123, BHXH/BHYT. 1.8 triệu dòng mã TypeScript.
             </motion.p>
 
             <motion.div
@@ -76,9 +76,9 @@ export default function Hero() {
               className="flex items-baseline gap-6 md:gap-8 flex-wrap"
             >
               {[
-                { value: "14", label: "Modules" },
-                { value: "812K+", label: "Dòng mã" },
-                { value: "971", label: "Models" },
+                { value: "16", label: "Modules" },
+                { value: "1.8M+", label: "Dòng mã" },
+                { value: "980", label: "Models" },
               ].map((stat) => (
                 <div key={stat.label} className="flex items-baseline gap-1.5 md:gap-2">
                   <span className="text-[22px] md:text-[24px] font-bold text-white tracking-[-0.02em]">{stat.value}</span>
