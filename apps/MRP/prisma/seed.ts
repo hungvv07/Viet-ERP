@@ -782,7 +782,7 @@ async function main() {
         partNumber: "PRT-MT-001",
         name: "KDE7215XF-135 Brushless Motor",
         category: "Propulsion",
-        description: "High-performance brushless motor for heavy-lift drones",
+        description: "High-performance brushless motor for heavy-lift machines",
         unit: "pcs",
         isCritical: true,
         status: "active",
@@ -1016,7 +1016,7 @@ async function main() {
   const product = await prisma.product.create({
     data: {
       sku: "HERA-X8-PRO",
-      name: "HERA X8 Professional Drone",
+      name: "HERA X8 Professional Machine",
       description: "Heavy-lift octocopter with AI capabilities for enterprise applications",
       basePrice: 28500.0,
       assemblyHours: 16,

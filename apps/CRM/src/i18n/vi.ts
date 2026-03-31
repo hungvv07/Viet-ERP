@@ -976,7 +976,7 @@ const vi = {
   'bundles.tier.COMMERCIAL': 'Thương mại',
   'bundles.tier.ACADEMIC': 'Học thuật',
   'bundles.tier.PARTNER': 'Đối tác',
-  'products.category.DRONE': 'Drone',
+  'products.category.DRONE': 'Product',
   'products.category.PAYLOAD': 'Payload',
   'products.category.CAMERA': 'Camera',
   'products.category.TRAINING': 'Đào tạo',

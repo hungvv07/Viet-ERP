@@ -143,7 +143,7 @@ function buildEmailHtml(
       </a>
     </div>
     <p style="color:#9ca3af;font-size:11px;text-align:center;margin-top:16px;">
-      VietERP Project Manager — Quản lý dự án Drone<br/>
+      VietERP Project Manager — Quản lý dự án Product<br/>
       <a href="${APP_URL}" style="color:#9ca3af;">Mở Control Tower</a>
     </p>
   </div>

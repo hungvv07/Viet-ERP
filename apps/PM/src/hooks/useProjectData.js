@@ -69,7 +69,7 @@ function transformFlight(row) {
     testNumber: row.test_number,
     locationVi: row.location_vi,
     pilot: row.pilot_name,
-    droneUnit: row.drone_unit,
+    testUnit: row.test_unit,
     testType: row.test_type,
     testPhase: row.test_phase,
     duration: row.duration_seconds,

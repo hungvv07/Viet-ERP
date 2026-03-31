@@ -749,7 +749,7 @@ describe('Mobile Extended API Routes', () => {
           quantity: 50,
           completedQty: 25,
           plannedEnd: new Date('2026-03-10'),
-          product: { name: 'Drone Assembly' },
+          product: { name: 'Machine Assembly' },
         },
       ]);
 
@@ -819,7 +819,7 @@ describe('Mobile Extended API Routes', () => {
           assignedTo: 'user-1',
           workCenter: 'WC-01',
           notes: null,
-          product: { name: 'Drone Model X', sku: 'DRN-X-001' },
+          product: { name: 'Machine Model X', sku: 'DRN-X-001' },
         },
       ]);
 
@@ -830,7 +830,7 @@ describe('Mobile Extended API Routes', () => {
       expect(response.status).toBe(200);
       expect(data.workOrders).toHaveLength(1);
       expect(data.workOrders[0].number).toBe('WO-001');
-      expect(data.workOrders[0].productName).toBe('Drone Model X');
+      expect(data.workOrders[0].productName).toBe('Machine Model X');
     });
 
     it('should return single work order by id', async () => {
@@ -850,7 +850,7 @@ describe('Mobile Extended API Routes', () => {
         assignedTo: 'user-1',
         workCenter: 'WC-01',
         notes: 'Test note',
-        product: { name: 'Drone Model X', sku: 'DRN-X-001' },
+        product: { name: 'Machine Model X', sku: 'DRN-X-001' },
       });
 
       const request = createGetRequest('http://localhost:3000/api/mobile/work-orders?id=wo1');

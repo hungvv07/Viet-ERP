@@ -26,7 +26,7 @@
 
 ### Mô tả
 
-VietERP-MRP là hệ thống **Quản lý Hoạch định Tài nguyên Sản xuất (Manufacturing Resource Planning)** được thiết kế chuyên biệt cho sản xuất drone. Hệ thống giúp quản lý toàn bộ quy trình sản xuất từ quản lý nguyên vật liệu đến kiểm soát chất lượng.
+VietERP-MRP là hệ thống **Quản lý Hoạch định Tài nguyên Sản xuất (Manufacturing Resource Planning)** được thiết kế chuyên biệt cho sản xuất product. Hệ thống giúp quản lý toàn bộ quy trình sản xuất từ quản lý nguyên vật liệu đến kiểm soát chất lượng.
 
 ### Tech Stack
 

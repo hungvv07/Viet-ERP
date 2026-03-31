@@ -356,7 +356,7 @@ function EmailPreview({ eventType, lang, currentUser, onClose }) {
                 {vi ? ev?.labelVi : ev?.label}
               </div>
               <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 4, padding: 10, marginBottom: 8 }}>
-                <div style={{ fontSize: 12, color: "var(--text-dim)" }}>{vi ? "Dự án" : "Project"}: <span style={{ color: "var(--text-primary)" }}>RTR-X7 Surveyor</span></div>
+                <div style={{ fontSize: 12, color: "var(--text-dim)" }}>{vi ? "Dự án" : "Project"}: <span style={{ color: "var(--text-primary)" }}>ERP Module Alpha</span></div>
                 <div style={{ fontSize: 12, color: "var(--text-dim)" }}>Phase: <span style={{ color: "var(--text-primary)" }}>DVT</span></div>
                 <div style={{ fontSize: 12, color: "var(--text-dim)" }}>{vi ? "Mức độ" : "Severity"}: <span style={{ color: "#EF4444", fontWeight: 700 }}>CRITICAL</span></div>
               </div>

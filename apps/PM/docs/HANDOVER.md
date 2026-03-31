@@ -8,7 +8,7 @@
 
 ## 1. Project Overview
 
-**VietERP Project Manager** is a drone program management dashboard for VietERP, built to track 5 drone projects across the CONCEPT > EVT > DVT > PVT > MP lifecycle.
+**VietERP Project Manager** is a module program management dashboard for VietERP, built to track 5 module projects across the CONCEPT > EVT > DVT > PVT > MP lifecycle.
 
 | Metric | Value |
 |--------|-------|
@@ -128,7 +128,7 @@ supabase/
 ### Tables (18)
 | Table | Records | Description |
 |-------|---------|-------------|
-| projects | 5 | Drone projects (PRJ-001 to PRJ-005) |
+| projects | 5 | Module projects (PRJ-001 to PRJ-005) |
 | profiles | 0* | User profiles (linked to auth.users) |
 | issues | 21 | Engineering issues |
 | bom_parts | 53 | Bill of Materials |

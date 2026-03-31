@@ -10,7 +10,7 @@
 
 ## Bối cảnh thực tế
 
-**Tình huống:** Công ty RTR nhận đơn hàng sản xuất drone mới "HERA-V2". Engineering team vừa hoàn thành thiết kế, cần:
+**Tình huống:** Công ty RTR nhận đơn hàng sản xuất product mới "HERA-V2". Engineering team vừa hoàn thành thiết kế, cần:
 - Tạo BOM mới với 47 parts
 - 12 parts chưa có trong hệ thống (cần tạo mới)
 - 8 parts nằm trong sub-BOM (BOM lồng nhau)
@@ -750,7 +750,7 @@ NOTES: _______________________________________________________________
 CHAOS-PROD-002: Sản xuất xong 100 units nhưng BOM có 1 part chưa issue đủ
 ═══════════════════════════════════════════════════════════════════════════════
 
-👤 Supervisor: "Lắp xong 100 drones rồi. Báo complete thôi!"
+👤 Supervisor: "Lắp xong 100 products rồi. Báo complete thôi!"
 
 DATA:
 - WO-001: 100 units HERA-V2

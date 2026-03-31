@@ -450,7 +450,7 @@ f7b4f71 feat: Warehouse management, receiving inspection pipeline & inventory tr
 | Attribute | Value |
 |-----------|-------|
 | **Project** | VietERP MRP (Real-Time Resource - Material Requirements Planning) |
-| **Purpose** | Manufacturing intelligence system for drone companies (Vietnamese market) |
+| **Purpose** | Manufacturing intelligence system for product companies (Vietnamese market) |
 | **Stack** | Next.js 14 + TypeScript 5 + Prisma 5.22 + PostgreSQL + Redis + AI |
 | **Status** | UAT Ready - Sprint 3 Complete + Warehouse Pipeline |
 | **Repo** | `/Users/mac/AnhQuocLuong/vierp-mrp` |

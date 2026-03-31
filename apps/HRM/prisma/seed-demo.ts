@@ -128,7 +128,7 @@ for (let i = 0; i < 10; i++) {
   })
 }
 
-// Sản Xuất Drone (DEPT-SX): 18 more
+// Sản Xuất Product (DEPT-SX): 18 more
 for (let i = 0; i < 8; i++) {
   newEmployees.push({
     code: `RTR-${String(27 + i).padStart(4, "0")}`,
@@ -260,7 +260,7 @@ async function main() {
         name: "Nhân Viên Kinh Doanh",
         code: "POS-KD",
         departmentId: deptMap.get("DEPT-KD")!.id,
-        description: "Kinh doanh & phát triển thị trường drone",
+        description: "Kinh doanh & phát triển thị trường product",
       },
     })
     posMap.set("POS-KD", posKD)
@@ -690,10 +690,10 @@ async function main() {
   const requisitions = [
     { title: "Kỹ Sư Phần Mềm Embedded", dept: "DEPT-KT", pos: "POS-KSPM", headcount: 3, status: RequisitionStatus.OPEN, salaryFrom: 15000000, salaryTo: 25000000 },
     { title: "Kỹ Sư Phần Cứng PCB", dept: "DEPT-KT", pos: "POS-KSPH", headcount: 2, status: RequisitionStatus.OPEN, salaryFrom: 14000000, salaryTo: 22000000 },
-    { title: "Công Nhân Lắp Ráp Drone", dept: "DEPT-SX", pos: "POS-CNSX", headcount: 5, status: RequisitionStatus.OPEN, salaryFrom: 8000000, salaryTo: 12000000 },
+    { title: "Công Nhân Lắp Ráp Product", dept: "DEPT-SX", pos: "POS-CNSX", headcount: 5, status: RequisitionStatus.OPEN, salaryFrom: 8000000, salaryTo: 12000000 },
     { title: "Nhân Viên Kinh Doanh", dept: "DEPT-KD", pos: "POS-KD", headcount: 2, status: RequisitionStatus.APPROVED, salaryFrom: 10000000, salaryTo: 18000000 },
     { title: "QA Engineer", dept: "DEPT-KT", pos: "POS-QA", headcount: 1, status: RequisitionStatus.CLOSED, salaryFrom: 13000000, salaryTo: 20000000 },
-    { title: "Kỹ Sư Drone Thử Nghiệm", dept: "DEPT-SX", pos: "POS-KSD", headcount: 2, status: RequisitionStatus.OPEN, salaryFrom: 12000000, salaryTo: 20000000 },
+    { title: "Kỹ Sư Product Thử Nghiệm", dept: "DEPT-SX", pos: "POS-KSD", headcount: 2, status: RequisitionStatus.OPEN, salaryFrom: 12000000, salaryTo: 20000000 },
   ]
 
   const createdReqIds: string[] = []
@@ -875,7 +875,7 @@ async function main() {
 
     let payload: Record<string, unknown> = {}
     if (eventType === HREventType.DEPARTMENT_TRANSFER) {
-      payload = { fromDepartment: "Kỹ Thuật", toDepartment: "Sản Xuất Drone", reason: "Điều chuyển theo nhu cầu công việc" }
+      payload = { fromDepartment: "Kỹ Thuật", toDepartment: "Sản Xuất Product", reason: "Điều chuyển theo nhu cầu công việc" }
     } else if (eventType === HREventType.PROMOTION) {
       payload = { fromPosition: "Nhân viên", toPosition: "Trưởng nhóm", reason: "Hoàn thành xuất sắc nhiệm vụ" }
     } else if (eventType === HREventType.SALARY_ADJUSTMENT) {

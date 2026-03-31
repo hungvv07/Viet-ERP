@@ -48,7 +48,7 @@ describe('API Response Structure Validation', () => {
       const mockPart: PartData = {
         id: 'part-001',
         partNumber: 'DRN-MOT-001',
-        name: 'Drone Motor A2212',
+        name: 'Machine Motor A2212',
         category: 'COMPONENT',
         status: 'ACTIVE',
         unit: 'PCS',

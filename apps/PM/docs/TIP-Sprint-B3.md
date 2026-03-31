@@ -299,7 +299,7 @@ function buildEmailHtml(notif, profile, appUrl) {
         </a>
       </div>
       <p style="color:#9ca3af;font-size:11px;text-align:center;margin-top:16px;">
-        VietERP Project Manager — Quản lý dự án Drone
+        VietERP Project Manager — Quản lý dự án Module
       </p>
     </div>
   `;

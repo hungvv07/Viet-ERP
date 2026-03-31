@@ -300,9 +300,9 @@ async function main() {
     })
   }
 
-  // ── Seed VietERP Drone Products ──────────────────────────────────────
-  const droneProducts = await Promise.all([
-    prisma.product.upsert({ where: { sku: 'RTR-HERA-BASE' }, update: {}, create: { name: 'Hera Base Drone', sku: 'RTR-HERA-BASE', unitPrice: 18000, currency: 'USD', category: 'DRONE', description: 'Hera multi-rotor drone platform' } }),
+  // ── Seed VietERP Product Products ──────────────────────────────────────
+  const productProducts = await Promise.all([
+    prisma.product.upsert({ where: { sku: 'RTR-HERA-BASE' }, update: {}, create: { name: 'Hera Base Product', sku: 'RTR-HERA-BASE', unitPrice: 18000, currency: 'USD', category: 'DRONE', description: 'Hera multi-rotor product platform' } }),
     prisma.product.upsert({ where: { sku: 'RTR-VS-DUAL' }, update: {}, create: { name: 'VianSight Dual Cam', sku: 'RTR-VS-DUAL', unitPrice: 4500, currency: 'USD', category: 'PAYLOAD', description: 'Dual camera payload with thermal + RGB' } }),
     prisma.product.upsert({ where: { sku: 'RTR-M61-A7R4' }, update: {}, create: { name: 'M61 Sony A7R4', sku: 'RTR-M61-A7R4', unitPrice: 3800, currency: 'USD', category: 'CAMERA', description: 'High-resolution mapping camera' } }),
     prisma.product.upsert({ where: { sku: 'RTR-PH1-P3' }, update: {}, create: { name: 'Phase One P3', sku: 'RTR-PH1-P3', unitPrice: 8500, currency: 'USD', category: 'CAMERA', description: 'Medium format aerial camera (5.7lb)' } }),
@@ -320,7 +320,7 @@ async function main() {
   ])
 
   // Index by SKU for easy reference
-  const dp = Object.fromEntries(droneProducts.map((p) => [p.sku!, p]))
+  const dp = Object.fromEntries(productProducts.map((p) => [p.sku!, p]))
 
   // ── Seed Bundles ────────────────────────────────────────────────────
   type BundleItemDef = { sku: string; qty: number; isRequired?: boolean }
@@ -392,7 +392,7 @@ async function main() {
 
   // ── Seed Pricing Tiers ──────────────────────────────────────────────
   // Products: GOV=1.0, COM=1.0, ACA=0.75, PARTNER=0.85
-  for (const prod of droneProducts) {
+  for (const prod of productProducts) {
     // Military training: Government only
     const tiers = prod.sku === 'RTR-TRN-MIL'
       ? [{ tier: 'GOVERNMENT' as const, mult: 1.0 }]
@@ -487,7 +487,7 @@ async function main() {
       commissionRate: 15,
       contractStartDate: new Date('2024-01-01'),
       contractEndDate: new Date('2026-12-31'),
-      notes: 'Primary US channel partner for Hera drone platform. Gold tier with exclusive territory rights.',
+      notes: 'Primary US channel partner for Hera product platform. Gold tier with exclusive territory rights.',
     },
   })
 
@@ -556,8 +556,8 @@ async function main() {
   console.log(`  Contacts: ${contacts.length}`)
   console.log(`  Pipeline stages: ${stages.length}`)
   console.log(`  Deals: ${deals.length}`)
-  console.log(`  Products: ${products.length + droneProducts.length}`)
-  console.log(`  Drone products: ${droneProducts.length}`)
+  console.log(`  Products: ${products.length + productProducts.length}`)
+  console.log(`  Product products: ${productProducts.length}`)
   console.log(`  Bundles: ${bundleDefs.length}`)
   console.log(`  Compatibility rules: ${compatRules.length}`)
   console.log(`  Currencies: ${currencies.length}`)

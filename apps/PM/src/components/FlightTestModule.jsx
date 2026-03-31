@@ -113,7 +113,7 @@ export default function FlightTestModule({ lang, t, project, issues, onViewIssue
                 { icon: Clock, label: lang === "vi" ? "Ngày" : "Date", value: ft.date },
                 { icon: MapPin, label: lang === "vi" ? "Địa điểm" : "Location", value: lang === "vi" ? ft.locationVi : ft.location },
                 { icon: User, label: lang === "vi" ? "Phi công" : "Pilot", value: ft.pilot },
-                { icon: Plane, label: lang === "vi" ? "Máy bay" : "Unit", value: ft.droneUnit },
+                { icon: Plane, label: lang === "vi" ? "Máy bay" : "Unit", value: ft.testUnit },
                 { icon: Clock, label: lang === "vi" ? "Thời gian" : "Duration", value: formatDuration(ft.duration) },
                 { icon: Gauge, label: lang === "vi" ? "Tốc độ max" : "Max Speed", value: `${ft.maxSpeed} m/s` },
               ].map((f, i) => (

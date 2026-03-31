@@ -45,7 +45,7 @@ function transformFlightTest(row) {
     location: row.location,
     locationVi: row.location_vi,
     pilot: row.pilot,
-    droneUnit: row.drone_unit,
+    testUnit: row.test_unit,
     testType: row.test_type,
     testPhase: row.test_phase,
     relatedGateCondition: row.related_gate_condition,

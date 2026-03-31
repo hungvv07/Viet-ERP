@@ -127,7 +127,7 @@ export const DELIVERY_RECORDS_DATA = [
 // Level 0 = Assembly, Level 1 = Sub-assembly, Level 2 = Component
 export const BOM_DATA = [
   // Top-level assembly
-  { id: "BOM-001", projectId: "PRJ-001", parentId: null, level: 0, partNumber: "RTR-X7-ASY", description: "RTR-X7 Surveyor Drone Assembly", descriptionVi: "Bộ Drone RTR-X7 Surveyor hoàn chỉnh", category: "MECHANICAL", quantity: 1, unit: "set", unitCost: null, currency: "USD", supplierId: null, leadTimeDays: null, lifecycleStatus: "ACTIVE", alternatePartIds: [], designator: "" },
+  { id: "BOM-001", projectId: "PRJ-001", parentId: null, level: 0, partNumber: "RTR-X7-ASY", description: "ERP Module Alpha Module Assembly", descriptionVi: "Bộ Module ERP Module Alpha hoàn chỉnh", category: "MECHANICAL", quantity: 1, unit: "set", unitCost: null, currency: "USD", supplierId: null, leadTimeDays: null, lifecycleStatus: "ACTIVE", alternatePartIds: [], designator: "" },
 
   // Sub-assemblies (Level 1)
   { id: "BOM-002", projectId: "PRJ-001", parentId: "BOM-001", level: 1, partNumber: "RTR-X7-FRAME-ASY", description: "Frame Assembly", descriptionVi: "Bộ khung", category: "MECHANICAL", quantity: 1, unit: "set", unitCost: null, currency: "USD", supplierId: null, leadTimeDays: null, lifecycleStatus: "ACTIVE", alternatePartIds: [], designator: "" },
@@ -166,11 +166,11 @@ export const BOM_DATA = [
   { id: "BOM-027", projectId: "PRJ-001", parentId: "BOM-005", level: 2, partNumber: "SHRINK-KIT", description: "Heat shrink kit", descriptionVi: "Bộ ống co nhiệt", category: "CONSUMABLE", quantity: 1, unit: "set", unitCost: 10.00, currency: "USD", supplierId: "SUP-004", leadTimeDays: 3, lifecycleStatus: "ACTIVE", alternatePartIds: [], designator: "" },
 
   // ═══════════════════════════════════════════════════════════════
-  // PRJ-002: RTR-A3 Agri Sprayer — Full BOM Tree
+  // PRJ-002: ERP Module Beta — Full BOM Tree
   // ═══════════════════════════════════════════════════════════════
 
   // Top-level assembly
-  { id: "BOM-A01", projectId: "PRJ-002", parentId: null, level: 0, partNumber: "RTR-A3-ASY", description: "RTR-A3 Agri Sprayer Drone Assembly", descriptionVi: "Bộ Drone RTR-A3 Phun Nông Nghiệp hoàn chỉnh", category: "MECHANICAL", quantity: 1, unit: "set", unitCost: null, currency: "USD", supplierId: null, leadTimeDays: null, lifecycleStatus: "ACTIVE", alternatePartIds: [], designator: "" },
+  { id: "BOM-A01", projectId: "PRJ-002", parentId: null, level: 0, partNumber: "RTR-A3-ASY", description: "ERP Module Beta Module Assembly", descriptionVi: "Bộ Module RTR-A3 Phun Nông Nghiệp hoàn chỉnh", category: "MECHANICAL", quantity: 1, unit: "set", unitCost: null, currency: "USD", supplierId: null, leadTimeDays: null, lifecycleStatus: "ACTIVE", alternatePartIds: [], designator: "" },
 
   // Sub-assemblies (Level 1)
   { id: "BOM-A02", projectId: "PRJ-002", parentId: "BOM-A01", level: 1, partNumber: "RTR-A3-FRAME", description: "Hexa-Frame Assembly", descriptionVi: "Bộ khung Hexa", category: "MECHANICAL", quantity: 1, unit: "set", unitCost: null, currency: "USD", supplierId: null, leadTimeDays: null, lifecycleStatus: "ACTIVE", alternatePartIds: [], designator: "" },
@@ -245,7 +245,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-047", projectId: "PRJ-001", testNumber: 47, date: "2026-02-20",
     location: "VietERP Test Field Alpha", locationVi: "Bãi bay VietERP Alpha",
-    pilot: "Đức Anh", droneUnit: "X7-DVT-003",
+    pilot: "Đức Anh", testUnit: "X7-DVT-003",
     testType: "ENDURANCE", testPhase: "DVT", relatedGateCondition: "d2",
     result: "FAIL", duration: 1847, maxAltitude: 120, maxSpeed: 15.2, distanceCovered: 4500,
     sensorData: { batteryStart: 25.2, batteryEnd: 21.8, batteryMinCell: 3.45, maxCurrent: 42.5, avgCurrent: 18.3, maxVibration: 28.5, gpsAccuracy: 0.02, maxWind: 8.2, ambientTemp: 35 },
@@ -266,7 +266,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-046", projectId: "PRJ-001", testNumber: 46, date: "2026-02-18",
     location: "VietERP Test Field Alpha", locationVi: "Bãi bay VietERP Alpha",
-    pilot: "Đức Anh", droneUnit: "X7-DVT-003",
+    pilot: "Đức Anh", testUnit: "X7-DVT-003",
     testType: "STABILITY", testPhase: "DVT", relatedGateCondition: "d3",
     result: "PASS", duration: 1335, maxAltitude: 80, maxSpeed: 12.0, distanceCovered: 2100,
     sensorData: { batteryStart: 25.1, batteryEnd: 23.2, batteryMinCell: 3.82, maxCurrent: 22.0, avgCurrent: 14.5, maxVibration: 12.3, gpsAccuracy: 0.015, maxWind: 5.1, ambientTemp: 30 },
@@ -280,7 +280,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-045", projectId: "PRJ-001", testNumber: 45, date: "2026-02-15",
     location: "VietERP Test Field Bravo", locationVi: "Bãi bay VietERP Bravo",
-    pilot: "Thanh Hà", droneUnit: "X7-DVT-002",
+    pilot: "Thanh Hà", testUnit: "X7-DVT-002",
     testType: "PAYLOAD", testPhase: "DVT", relatedGateCondition: null,
     result: "PASS", duration: 1110, maxAltitude: 60, maxSpeed: 8.5, distanceCovered: 1800,
     sensorData: { batteryStart: 25.0, batteryEnd: 22.1, batteryMinCell: 3.62, maxCurrent: 28.0, avgCurrent: 20.1, maxVibration: 15.0, gpsAccuracy: 0.018, maxWind: 4.0, ambientTemp: 28 },
@@ -294,7 +294,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-044", projectId: "PRJ-001", testNumber: 44, date: "2026-02-12",
     location: "VietERP Test Field Alpha", locationVi: "Bãi bay VietERP Alpha",
-    pilot: "Đức Anh", droneUnit: "X7-DVT-003",
+    pilot: "Đức Anh", testUnit: "X7-DVT-003",
     testType: "ENDURANCE", testPhase: "DVT", relatedGateCondition: "d2",
     result: "PASS", duration: 2702, maxAltitude: 100, maxSpeed: 14.0, distanceCovered: 8200,
     sensorData: { batteryStart: 25.2, batteryEnd: 20.5, batteryMinCell: 3.38, maxCurrent: 25.0, avgCurrent: 16.8, maxVibration: 11.0, gpsAccuracy: 0.012, maxWind: 6.5, ambientTemp: 32 },
@@ -308,7 +308,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-043", projectId: "PRJ-001", testNumber: 43, date: "2026-02-10",
     location: "VietERP Test Field Alpha", locationVi: "Bãi bay VietERP Alpha",
-    pilot: "Thanh Hà", droneUnit: "X7-DVT-002",
+    pilot: "Thanh Hà", testUnit: "X7-DVT-002",
     testType: "SPEED", testPhase: "DVT", relatedGateCondition: null,
     result: "PARTIAL", duration: 525, maxAltitude: 50, maxSpeed: 22.5, distanceCovered: 3500,
     sensorData: { batteryStart: 25.0, batteryEnd: 23.8, batteryMinCell: 3.90, maxCurrent: 38.0, avgCurrent: 25.0, maxVibration: 22.0, gpsAccuracy: 0.025, maxWind: 3.2, ambientTemp: 29 },
@@ -324,7 +324,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-042", projectId: "PRJ-001", testNumber: 42, date: "2026-02-08",
     location: "VietERP Test Field Alpha", locationVi: "Bãi bay VietERP Alpha",
-    pilot: "Đức Anh", droneUnit: "X7-DVT-001",
+    pilot: "Đức Anh", testUnit: "X7-DVT-001",
     testType: "INTEGRATION", testPhase: "DVT", relatedGateCondition: null,
     result: "PASS", duration: 900, maxAltitude: 50, maxSpeed: 10.0, distanceCovered: 1200,
     sensorData: { batteryStart: 25.1, batteryEnd: 24.0, batteryMinCell: 3.95, maxCurrent: 18.0, avgCurrent: 12.0, maxVibration: 8.5, gpsAccuracy: 0.01, maxWind: 2.0, ambientTemp: 27 },
@@ -338,7 +338,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-048", projectId: "PRJ-001", testNumber: 48, date: "2026-02-22",
     location: "VietERP Alpha Field", locationVi: "Bãi bay VietERP Alpha",
-    pilot: "Thanh Hà", droneUnit: "X7-DVT-003",
+    pilot: "Thanh Hà", testUnit: "X7-DVT-003",
     testType: "ENVIRONMENTAL", testPhase: "DVT", relatedGateCondition: "d9",
     result: "FAIL", duration: 1020, maxAltitude: 80, maxSpeed: 12.0, distanceCovered: 2800,
     sensorData: { batteryStart: 25.2, batteryEnd: 22.1, batteryMinCell: 3.38, maxCurrent: 38.0, avgCurrent: 22.0, maxVibration: 15.0, gpsAccuracy: 0.03, maxWind: 6.5, ambientTemp: 46 },
@@ -355,7 +355,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-010", projectId: "PRJ-002", testNumber: 10, date: "2026-02-05",
     location: "Nông trại Bình Dương", locationVi: "Nông trại Bình Dương",
-    pilot: "Hồng Phúc", droneUnit: "A3-EVT-001",
+    pilot: "Hồng Phúc", testUnit: "A3-EVT-001",
     testType: "STABILITY", testPhase: "EVT", relatedGateCondition: "e5",
     result: "FAIL", duration: 600, maxAltitude: 15, maxSpeed: 6.0, distanceCovered: 800,
     sensorData: { batteryStart: 50.4, batteryEnd: 48.2, batteryMinCell: 3.85, maxCurrent: 55.0, avgCurrent: 30.0, maxVibration: 45.0, gpsAccuracy: 1.2, maxWind: 4.5, ambientTemp: 33 },
@@ -372,7 +372,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-009", projectId: "PRJ-002", testNumber: 9, date: "2026-02-01",
     location: "Nông trại Bình Dương", locationVi: "Nông trại Bình Dương",
-    pilot: "Bảo Trâm", droneUnit: "A3-EVT-001",
+    pilot: "Bảo Trâm", testUnit: "A3-EVT-001",
     testType: "PAYLOAD", testPhase: "EVT", relatedGateCondition: null,
     result: "PASS", duration: 780, maxAltitude: 10, maxSpeed: 5.5, distanceCovered: 1200,
     sensorData: { batteryStart: 50.4, batteryEnd: 46.8, batteryMinCell: 3.72, maxCurrent: 48.0, avgCurrent: 28.0, maxVibration: 18.0, gpsAccuracy: 0.8, maxWind: 3.0, ambientTemp: 31 },
@@ -386,7 +386,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-008", projectId: "PRJ-002", testNumber: 8, date: "2026-01-28",
     location: "Nông trại Long An", locationVi: "Nông trại Long An",
-    pilot: "Hồng Phúc", droneUnit: "A3-EVT-001",
+    pilot: "Hồng Phúc", testUnit: "A3-EVT-001",
     testType: "ENDURANCE", testPhase: "EVT", relatedGateCondition: "e5",
     result: "PARTIAL", duration: 1020, maxAltitude: 8, maxSpeed: 4.5, distanceCovered: 2200,
     sensorData: { batteryStart: 50.4, batteryEnd: 43.1, batteryMinCell: 3.40, maxCurrent: 52.0, avgCurrent: 32.0, maxVibration: 14.0, gpsAccuracy: 0.9, maxWind: 5.8, ambientTemp: 34 },
@@ -402,7 +402,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-007", projectId: "PRJ-002", testNumber: 7, date: "2026-01-22",
     location: "Nông trại Bình Dương", locationVi: "Nông trại Bình Dương",
-    pilot: "Bảo Trâm", droneUnit: "A3-EVT-001",
+    pilot: "Bảo Trâm", testUnit: "A3-EVT-001",
     testType: "INTEGRATION", testPhase: "EVT", relatedGateCondition: "e4",
     result: "PASS", duration: 540, maxAltitude: 12, maxSpeed: 3.0, distanceCovered: 600,
     sensorData: { batteryStart: 50.4, batteryEnd: 49.0, batteryMinCell: 3.92, maxCurrent: 35.0, avgCurrent: 20.0, maxVibration: 10.0, gpsAccuracy: 0.5, maxWind: 2.0, ambientTemp: 29 },
@@ -416,7 +416,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-006", projectId: "PRJ-002", testNumber: 6, date: "2026-01-15",
     location: "VietERP Test Field Alpha", locationVi: "Bãi bay VietERP Alpha",
-    pilot: "Hồng Phúc", droneUnit: "A3-EVT-001",
+    pilot: "Hồng Phúc", testUnit: "A3-EVT-001",
     testType: "SPEED", testPhase: "EVT", relatedGateCondition: null,
     result: "PASS", duration: 420, maxAltitude: 20, maxSpeed: 8.2, distanceCovered: 1500,
     sensorData: { batteryStart: 50.4, batteryEnd: 49.2, batteryMinCell: 3.95, maxCurrent: 58.0, avgCurrent: 22.0, maxVibration: 12.0, gpsAccuracy: 0.4, maxWind: 2.5, ambientTemp: 28 },
@@ -427,11 +427,11 @@ export const FLIGHT_TESTS_DATA = [
     autoIssueId: null,
     createdBy: "usr-002",
   },
-  // PRJ-004: RTR-I2 Inspector — 4 flight tests
+  // PRJ-004: ERP Module Delta — 4 flight tests
   {
     id: "FLT-101", projectId: "PRJ-004", testNumber: 101, date: "2026-01-15",
     location: "B\u00ECnh D\u01B0\u01A1ng Solar Farm", locationVi: "Trang tr\u1EA1i \u0111i\u1EC7n m\u1EB7t tr\u1EDDi B\u00ECnh D\u01B0\u01A1ng",
-    pilot: "L\u00EA Th\u1ECB Ph\u01B0\u01A1ng", droneUnit: "I2-PVT-002",
+    pilot: "L\u00EA Th\u1ECB Ph\u01B0\u01A1ng", testUnit: "I2-PVT-002",
     testType: "INTEGRATION", testPhase: "PVT", relatedGateCondition: null,
     result: "PASS", duration: 1500, maxAltitude: 80, maxSpeed: 12.0, distanceCovered: 3200,
     sensorData: { batteryStart: 25.1, batteryEnd: 22.3, batteryMinCell: 3.58, maxCurrent: 28.5, avgCurrent: 14.2, maxVibration: 15.3, gpsAccuracy: 0.015, maxWind: 6.5, ambientTemp: 32 },
@@ -444,7 +444,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-102", projectId: "PRJ-004", testNumber: 102, date: "2026-01-22",
     location: "VietERP Test Field Bravo", locationVi: "B\u00E3i bay VietERP Bravo",
-    pilot: "V\u0169 \u0110\u00ECnh To\u00E0n", droneUnit: "I2-PVT-003",
+    pilot: "V\u0169 \u0110\u00ECnh To\u00E0n", testUnit: "I2-PVT-003",
     testType: "ENDURANCE", testPhase: "PVT", relatedGateCondition: "p5",
     result: "PASS", duration: 2550, maxAltitude: 100, maxSpeed: 14.0, distanceCovered: 6500,
     sensorData: { batteryStart: 25.2, batteryEnd: 21.1, batteryMinCell: 3.42, maxCurrent: 32.0, avgCurrent: 15.8, maxVibration: 18.2, gpsAccuracy: 0.018, maxWind: 8.0, ambientTemp: 30 },
@@ -457,7 +457,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-103", projectId: "PRJ-004", testNumber: 103, date: "2026-02-05",
     location: "VietERP Test Field Alpha", locationVi: "B\u00E3i bay VietERP Alpha",
-    pilot: "L\u00EA Th\u1ECB Ph\u01B0\u01A1ng", droneUnit: "I2-PVT-001",
+    pilot: "L\u00EA Th\u1ECB Ph\u01B0\u01A1ng", testUnit: "I2-PVT-001",
     testType: "ENVIRONMENTAL", testPhase: "PVT", relatedGateCondition: "p3",
     result: "FAIL", duration: 1080, maxAltitude: 50, maxSpeed: 8.0, distanceCovered: 1500,
     sensorData: { batteryStart: 25.0, batteryEnd: 23.5, batteryMinCell: 3.62, maxCurrent: 22.0, avgCurrent: 12.5, maxVibration: 12.8, gpsAccuracy: 0.02, maxWind: 4.2, ambientTemp: 28 },
@@ -473,7 +473,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-104", projectId: "PRJ-004", testNumber: 104, date: "2026-02-12",
     location: "B\u00E0 R\u1ECBa Power Plant", locationVi: "Nh\u00E0 m\u00E1y \u0111i\u1EC7n B\u00E0 R\u1ECBa",
-    pilot: "L\u00EA Th\u1ECB Ph\u01B0\u01A1ng", droneUnit: "I2-PVT-002",
+    pilot: "L\u00EA Th\u1ECB Ph\u01B0\u01A1ng", testUnit: "I2-PVT-002",
     testType: "PAYLOAD", testPhase: "PVT", relatedGateCondition: null,
     result: "PASS", duration: 1215, maxAltitude: 60, maxSpeed: 10.0, distanceCovered: 2800,
     sensorData: { batteryStart: 25.1, batteryEnd: 22.8, batteryMinCell: 3.55, maxCurrent: 35.0, avgCurrent: 16.5, maxVibration: 20.1, gpsAccuracy: 0.02, maxWind: 7.5, ambientTemp: 34 },
@@ -483,11 +483,11 @@ export const FLIGHT_TESTS_DATA = [
     notesVi: "Test t\u1EA3i \u0111\u1EA7y \u0111\u1EE7 t\u1EA1i nh\u00E0 m\u00E1y th\u1EF1c t\u1EBF. Camera nhi\u1EC7t + LiDAR + 4G telemetry \u0111\u1EC1u ho\u1EA1t \u0111\u1ED9ng. Kh\u00E1ch h\u00E0ng (EVN) h\u00E0i l\u00F2ng v\u1EDBi demo.",
     autoIssueId: null, createdBy: "usr-008",
   },
-  // PRJ-005: RTR-M3 Mapper — 2 flight tests
+  // PRJ-005: ERP Module Epsilon — 2 flight tests
   {
     id: "FLT-201", projectId: "PRJ-005", testNumber: 201, date: "2026-02-01",
     location: "\u0110\u1ED3ng Nai Survey Site", locationVi: "B\u00E3i kh\u1EA3o s\u00E1t \u0110\u1ED3ng Nai",
-    pilot: "\u0110\u1ED7 Ho\u00E0ng S\u01A1n", droneUnit: "M3-EVT-001",
+    pilot: "\u0110\u1ED7 Ho\u00E0ng S\u01A1n", testUnit: "M3-EVT-001",
     testType: "INTEGRATION", testPhase: "EVT", relatedGateCondition: "e4",
     result: "PARTIAL", duration: 1650, maxAltitude: 100, maxSpeed: 15.0, distanceCovered: 5200,
     sensorData: { batteryStart: 25.2, batteryEnd: 21.5, batteryMinCell: 3.45, maxCurrent: 30.0, avgCurrent: 15.0, maxVibration: 14.5, gpsAccuracy: 0.025, maxWind: 5.8, ambientTemp: 31 },
@@ -503,7 +503,7 @@ export const FLIGHT_TESTS_DATA = [
   {
     id: "FLT-202", projectId: "PRJ-005", testNumber: 202, date: "2026-02-15",
     location: "VietERP Test Field Alpha", locationVi: "B\u00E3i bay VietERP Alpha",
-    pilot: "Tr\u1EA7n Minh Khoa", droneUnit: "M3-EVT-001",
+    pilot: "Tr\u1EA7n Minh Khoa", testUnit: "M3-EVT-001",
     testType: "ENDURANCE", testPhase: "EVT", relatedGateCondition: "e5",
     result: "PASS", duration: 2280, maxAltitude: 120, maxSpeed: 16.0, distanceCovered: 7500,
     sensorData: { batteryStart: 25.0, batteryEnd: 21.0, batteryMinCell: 3.40, maxCurrent: 28.0, avgCurrent: 14.0, maxVibration: 16.0, gpsAccuracy: 0.02, maxWind: 6.0, ambientTemp: 29 },
@@ -619,8 +619,8 @@ export const DECISIONS_DATA = [
       { label: "C: Trimble BD940", pros: "Best accuracy (1cm), dual antenna heading", prosVi: "\u0110\u1ED9 ch\u00EDnh x\u00E1c t\u1ED1t nh\u1EA5t (1cm), heading k\u00E9p", cons: "$2,400/unit, overkill", consVi: "$2,400/\u0111\u01A1n v\u1ECB, qu\u00E1 m\u1EE9c c\u1EA7n" },
     ],
     chosenOption: "B",
-    rationale: "Survey market trending toward cm-level accuracy. F9P at $320 is cost-effective for professional survey drones. RTK base station is one-time investment shared across fleet.",
-    rationaleVi: "Th\u1ECB tr\u01B0\u1EDDng kh\u1EA3o s\u00E1t h\u01B0\u1EDBng \u0111\u1EBFn \u0111\u1ED9 ch\u00EDnh x\u00E1c cm. F9P v\u1EDBi $320 l\u00E0 hi\u1EC7u qu\u1EA3 chi ph\u00ED cho drone kh\u1EA3o s\u00E1t. Tr\u1EA1m RTK \u0111\u1EA7u t\u01B0 1 l\u1EA7n d\u00F9ng chung.",
+    rationale: "Survey market trending toward cm-level accuracy. F9P at $320 is cost-effective for professional survey modules. RTK base station is one-time investment shared across fleet.",
+    rationaleVi: "Th\u1ECB tr\u01B0\u1EDDng kh\u1EA3o s\u00E1t h\u01B0\u1EDBng \u0111\u1EBFn \u0111\u1ED9 ch\u00EDnh x\u00E1c cm. F9P v\u1EDBi $320 l\u00E0 hi\u1EC7u qu\u1EA3 chi ph\u00ED cho module kh\u1EA3o s\u00E1t. Tr\u1EA1m RTK \u0111\u1EA7u t\u01B0 1 l\u1EA7n d\u00F9ng chung.",
     impactDescription: "BOM cost +$305/unit. GPS mount redesign needed.",
     impactDescriptionVi: "Chi ph\u00ED BOM +$305/\u0111\u01A1n v\u1ECB. C\u1EA7n thi\u1EBFt k\u1EBF l\u1EA1i gi\u00E1 \u0111\u1EE1 GPS.",
     costImpact: "+$305/unit BOM, +$3,500 RTK base station (one-time)",
@@ -641,8 +641,8 @@ export const DECISIONS_DATA = [
       { label: "C: Hybrid (CF arms + Al center)", pros: "Good compromise on weight and repairability", prosVi: "Th\u1ECFa hi\u1EC7p t\u1ED1t gi\u1EEFa tr\u1ECDng l\u01B0\u1EE3ng v\u00E0 s\u1EEDa ch\u1EEFa", cons: "Complex assembly, mixed thermal expansion", consVi: "L\u1EAFp r\u00E1p ph\u1EE9c t\u1EA1p, gi\u00E3n n\u1EDF nhi\u1EC7t h\u1ED7n h\u1EE3p" },
     ],
     chosenOption: "B",
-    rationale: "For professional survey drone, weight directly impacts flight time and payload capacity. 550g savings = +15% flight time. CF also provides natural vibration damping critical for camera stability.",
-    rationaleVi: "Cho drone kh\u1EA3o s\u00E1t chuy\u00EAn nghi\u1EC7p, tr\u1ECDng l\u01B0\u1EE3ng \u1EA3nh h\u01B0\u1EDFng tr\u1EF1c ti\u1EBFp \u0111\u1EBFn th\u1EDDi gian bay. Gi\u1EA3m 550g = +15% th\u1EDDi gian bay. CF gi\u1EA3m rung t\u1EF1 nhi\u00EAn, quan tr\u1ECDng cho camera.",
+    rationale: "For professional survey module, weight directly impacts flight time and payload capacity. 550g savings = +15% flight time. CF also provides natural vibration damping critical for camera stability.",
+    rationaleVi: "Cho module kh\u1EA3o s\u00E1t chuy\u00EAn nghi\u1EC7p, tr\u1ECDng l\u01B0\u1EE3ng \u1EA3nh h\u01B0\u1EDFng tr\u1EF1c ti\u1EBFp \u0111\u1EBFn th\u1EDDi gian bay. Gi\u1EA3m 550g = +15% th\u1EDDi gian bay. CF gi\u1EA3m rung t\u1EF1 nhi\u00EAn, quan tr\u1ECDng cho camera.",
     impactDescription: "Frame supplier change. Need CF manufacturing capability.",
     impactDescriptionVi: "Thay \u0111\u1ED5i NCC khung. C\u1EA7n n\u0103ng l\u1EF1c s\u1EA3n xu\u1EA5t CF.",
     costImpact: "+$120/unit BOM",
@@ -662,8 +662,8 @@ export const DECISIONS_DATA = [
       { label: "B: N\u00F4ng Nghi\u1EC7p Xanh NX-110 (domestic)", pros: "$12/nozzle, 1 week lead time, Vietnamese support", prosVi: "$12/v\u00F2i, lead time 1 tu\u1EA7n, h\u1ED7 tr\u1EE3 ti\u1EBFng Vi\u1EC7t", cons: "Less brand recognition", consVi: "\u00CDt \u0111\u01B0\u1EE3c bi\u1EBFt \u0111\u1EBFn" },
     ],
     chosenOption: "B",
-    rationale: "NX-110 tested equivalent to TeeJet for our flow rate range. 57% cost saving per nozzle \u00D7 4 nozzles = $64/drone saved. Lead time 4\u00D7 faster. Domestic support critical for agricultural season deadlines.",
-    rationaleVi: "NX-110 test t\u01B0\u01A1ng \u0111\u01B0\u01A1ng TeeJet. Ti\u1EBFt ki\u1EC7m 57% m\u1ED7i \u0111\u1EA7u phun \u00D7 4 = $64/drone. Lead time nhanh g\u1EA5p 4. H\u1ED7 tr\u1EE3 n\u1ED9i \u0111\u1ECBa quan tr\u1ECDng cho deadline m\u00F9a v\u1EE5.",
+    rationale: "NX-110 tested equivalent to TeeJet for our flow rate range. 57% cost saving per nozzle \u00D7 4 nozzles = $64/module saved. Lead time 4\u00D7 faster. Domestic support critical for agricultural season deadlines.",
+    rationaleVi: "NX-110 test t\u01B0\u01A1ng \u0111\u01B0\u01A1ng TeeJet. Ti\u1EBFt ki\u1EC7m 57% m\u1ED7i \u0111\u1EA7u phun \u00D7 4 = $64/module. Lead time nhanh g\u1EA5p 4. H\u1ED7 tr\u1EE3 n\u1ED9i \u0111\u1ECBa quan tr\u1ECDng cho deadline m\u00F9a v\u1EE5.",
     impactDescription: "BOM cost -$64/unit. Supplier risk: single source",
     impactDescriptionVi: "Chi ph\u00ED BOM -$64/\u0111\u01A1n v\u1ECB. R\u1EE7i ro NCC: ngu\u1ED3n duy nh\u1EA5t",
     costImpact: "-$64/unit BOM savings",
@@ -681,13 +681,13 @@ export const DECISIONS_DATA = [
     options: [
       { label: "A: Custom protocol", pros: "Optimized for our hardware, minimal overhead", prosVi: "T\u1ED1i \u01B0u cho ph\u1EA7n c\u1EE9ng c\u1EE7a ta, overhead t\u1ED1i thi\u1EC3u", cons: "Development cost, no ecosystem", consVi: "Chi ph\u00ED ph\u00E1t tri\u1EC3n, kh\u00F4ng h\u1EC7 sinh th\u00E1i" },
       { label: "B: MAVLink v2", pros: "Industry standard, huge ecosystem, GCS compatibility", prosVi: "Ti\u00EAu chu\u1EA9n ng\u00E0nh, h\u1EC7 sinh th\u00E1i l\u1EDBn, t\u01B0\u01A1ng th\u00EDch GCS", cons: "Some overhead, learning curve", consVi: "M\u1ED9t s\u1ED1 overhead, \u0111\u01B0\u1EDDng cong h\u1ECDc h\u1ECFi" },
-      { label: "C: DroneCAN/UAVCAN", pros: "Modern, CAN-bus native, type-safe", prosVi: "Hi\u1EC7n \u0111\u1EA1i, CAN-bus native, type-safe", cons: "Smaller ecosystem, limited GCS", consVi: "H\u1EC7 sinh th\u00E1i nh\u1ECF h\u01A1n, GCS h\u1EA1n ch\u1EBF" },
+      { label: "C: ModuleCAN/ERPCAN", pros: "Modern, CAN-bus native, type-safe", prosVi: "Hi\u1EC7n \u0111\u1EA1i, CAN-bus native, type-safe", cons: "Smaller ecosystem, limited GCS", consVi: "H\u1EC7 sinh th\u00E1i nh\u1ECF h\u01A1n, GCS h\u1EA1n ch\u1EBF" },
     ],
     chosenOption: "B",
     rationale: "MAVLink v2 is de facto standard. Ecosystem value (QGroundControl, Mission Planner) outweighs any protocol overhead. Applies to all VietERP products.",
     rationaleVi: "MAVLink v2 l\u00E0 ti\u00EAu chu\u1EA9n th\u1EF1c t\u1EBF. Gi\u00E1 tr\u1ECB h\u1EC7 sinh th\u00E1i v\u01B0\u1EE3t xa overhead. \u00C1p d\u1EE5ng cho t\u1EA5t c\u1EA3 s\u1EA3n ph\u1EA9m VietERP.",
-    impactDescription: "Cross-project decision affecting all VietERP drone platforms",
-    impactDescriptionVi: "Quy\u1EBFt \u0111\u1ECBnh xuy\u00EAn d\u1EF1 \u00E1n \u1EA3nh h\u01B0\u1EDFng m\u1ECDi n\u1EC1n t\u1EA3ng drone VietERP",
+    impactDescription: "Cross-project decision affecting all VietERP module platforms",
+    impactDescriptionVi: "Quy\u1EBFt \u0111\u1ECBnh xuy\u00EAn d\u1EF1 \u00E1n \u1EA3nh h\u01B0\u1EDFng m\u1ECDi n\u1EC1n t\u1EA3ng module VietERP",
     costImpact: "$0 (MAVLink is open source)",
     linkedIssueIds: ["ISS-004"],
     linkedFlightTestIds: [],

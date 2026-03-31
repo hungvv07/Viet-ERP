@@ -976,7 +976,7 @@ const en = {
   'bundles.tier.COMMERCIAL': 'Commercial',
   'bundles.tier.ACADEMIC': 'Academic',
   'bundles.tier.PARTNER': 'Partner',
-  'products.category.DRONE': 'Drone',
+  'products.category.DRONE': 'Product',
   'products.category.PAYLOAD': 'Payload',
   'products.category.CAMERA': 'Camera',
   'products.category.TRAINING': 'Training',

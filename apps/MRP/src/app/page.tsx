@@ -7,8 +7,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'VietERP MRP - Hệ thống quản lý sản xuất drone chuyên nghiệp',
-  description: 'Nền tảng MRP hàng đầu cho sản xuất UAV công nghiệp. Quản lý BOM đa cấp, theo dõi linh kiện và tuân thủ NDAA.',
+  title: 'VietERP MRP - Hệ thống quản lý sản xuất machine chuyên nghiệp',
+  description: 'Nền tảng MRP hàng đầu cho sản xuất ERP công nghiệp. Quản lý BOM đa cấp, theo dõi linh kiện và tuân thủ NDAA.',
 };
 import Image from 'next/image';
 import { Logo, LogoDark } from '@/components/ui/logo';
@@ -124,10 +124,10 @@ function HeroSection() {
           <h1 className="text-[42px] sm:text-[52px] lg:text-[64px] font-medium leading-[1.1] tracking-[-0.02em] text-gray-900 dark:text-white">
             Nền tảng sản xuất
             <br />
-            drone chuyên nghiệp
+            machine chuyên nghiệp
           </h1>
           <p className="mt-6 text-[18px] lg:text-[20px] text-gray-500 dark:text-gray-400 leading-relaxed max-w-2xl mx-auto">
-            Hệ thống MRP hàng đầu cho sản xuất UAV công nghiệp. Quản lý BOM đa cấp,
+            Hệ thống MRP hàng đầu cho sản xuất ERP công nghiệp. Quản lý BOM đa cấp,
             theo dõi linh kiện quan trọng và tuân thủ NDAA cho khách hàng chính phủ.
           </p>
 
@@ -348,7 +348,7 @@ function PartnersSection() {
 function FeaturesSection() {
   const features = [
     {
-      title: 'BOM đa cấp cho UAV',
+      title: 'BOM đa cấp cho ERP',
       description: 'Quản lý cấu trúc sản phẩm phức tạp với nhiều cấp linh kiện - từ khung, motor, ESC đến vi xử lý NVIDIA Jetson và cảm biến nhiệt FLIR.',
     },
     {
@@ -376,7 +376,7 @@ function FeaturesSection() {
           {/* Left Content */}
           <div>
             <h2 className="text-[36px] lg:text-[44px] font-medium leading-[1.15] tracking-[-0.02em] text-gray-900 dark:text-white">
-              Sản xuất drone
+              Sản xuất machine
               <br />
               chuyên nghiệp, chuẩn quân sự
             </h2>
@@ -490,12 +490,12 @@ function FeaturesSection() {
 }
 
 // =============================================================================
-// PLATFORM SECTION - Drone Architecture
+// PLATFORM SECTION - Machine Architecture
 // =============================================================================
 
 function PlatformSection() {
   const systemLayers = [
-    { name: 'FINISHED GOODS', desc: 'Drone hoàn thiện' },
+    { name: 'FINISHED GOODS', desc: 'Machine hoàn thiện' },
     { name: 'SUB-ASSEMBLIES', desc: 'Cụm lắp ráp' },
     { name: 'COMPONENTS', desc: 'Linh kiện điện tử' },
     { name: 'RAW MATERIALS', desc: 'Nguyên vật liệu' },
@@ -513,7 +513,7 @@ function PlatformSection() {
               <span>Kiến trúc hệ thống</span>
             </div>
             <h2 className="text-[36px] lg:text-[44px] font-medium leading-[1.15] tracking-[-0.02em] text-gray-900 dark:text-white">
-              Nền tảng sản xuất UAV
+              Nền tảng sản xuất ERP
               <br />
               hoàn toàn tùy biến
             </h2>
@@ -521,7 +521,7 @@ function PlatformSection() {
           <div className="lg:pt-12">
             <p className="text-[17px] text-gray-500 dark:text-gray-400 leading-relaxed">
               Từ quản lý BOM đa cấp đến theo dõi linh kiện - hệ thống được thiết kế
-              cho độ phức tạp của sản xuất drone chuyên nghiệp.
+              cho độ phức tạp của sản xuất machine chuyên nghiệp.
             </p>
           </div>
         </div>
@@ -550,7 +550,7 @@ function PlatformSection() {
               <div className="flex items-center justify-between mb-6 pb-4 border-b border-gray-200 dark:border-gray-600">
                 <div>
                   <div className="text-[10px] font-mono text-gray-400 uppercase tracking-widest">DRAWING NO. HERA-X8-001-REV.C</div>
-                  <div className="text-[18px] font-medium text-gray-900 dark:text-white tracking-tight mt-1">HERA X8 Professional UAV</div>
+                  <div className="text-[18px] font-medium text-gray-900 dark:text-white tracking-tight mt-1">HERA X8 Professional ERP</div>
                 </div>
                 <div className="text-right">
                   <div className="text-[10px] font-mono text-gray-400">SCALE 1:25</div>
@@ -730,7 +730,7 @@ function FrameworkSection() {
     <section className="py-24 border-t border-gray-100 dark:border-gray-800">
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-0">
-          {/* Left - Drone Blueprint Illustration (Light Theme) */}
+          {/* Left - Machine Blueprint Illustration (Light Theme) */}
           <div className="bg-gray-50 dark:bg-gray-900 rounded-l-3xl p-8 lg:p-12 flex items-center justify-center min-h-[500px] border border-gray-200 dark:border-gray-700 border-r-0">
             <div className="relative w-full max-w-md">
               {/* Blueprint Grid Background */}
@@ -753,7 +753,7 @@ function FrameworkSection() {
                 }}
               />
 
-              {/* Drone Blueprint SVG */}
+              {/* Machine Blueprint SVG */}
               <svg viewBox="0 0 400 300" className="w-full h-auto relative z-10">
                 {/* Center Body */}
                 <ellipse cx="200" cy="150" rx="45" ry="25" fill="white" stroke="#1e40af" strokeWidth="2" />
@@ -854,7 +854,7 @@ function FrameworkSection() {
               quy trình sản xuất
             </h2>
             <p className="text-[16px] text-gray-500 dark:text-gray-400 leading-relaxed mb-8">
-              Hệ thống linh hoạt cho phép bạn tùy chỉnh quy trình sản xuất drone
+              Hệ thống linh hoạt cho phép bạn tùy chỉnh quy trình sản xuất machine
               theo yêu cầu riêng. Từ quản lý BOM, work orders, kiểm tra chất lượng
               đến truy xuất nguồn gốc hoàn toàn.
             </p>
@@ -875,7 +875,7 @@ function FrameworkSection() {
 
 function StatsSection() {
   const stats = [
-    { icon: Plane, value: '500+', label: 'Drone đã sản xuất' },
+    { icon: Plane, value: '500+', label: 'Machine đã sản xuất' },
     { icon: Package, value: '15,000+', label: 'Linh kiện được theo dõi' },
     { icon: Shield, value: '100%', label: 'Tuân thủ NDAA' },
     { icon: Users, value: '50+', label: 'Khách hàng chính phủ & doanh nghiệp' },
@@ -912,7 +912,7 @@ function CTASection() {
           <h2 className="text-[28px] lg:text-[36px] font-medium leading-[1.2] tracking-[-0.02em] text-gray-900 dark:text-white">
             Sẵn sàng nâng cấp quy trình
             <br />
-            sản xuất drone của bạn?
+            sản xuất machine của bạn?
           </h2>
           <div className="flex items-center gap-3">
             <Link

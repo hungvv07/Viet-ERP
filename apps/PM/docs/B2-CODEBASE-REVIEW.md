@@ -79,7 +79,7 @@ Structure: { id, supplierId, bomPartId, projectId, orderDate, promisedDate, actu
 
 ### 2i. FLIGHT TESTS — 12 tests (v2Data.js L244–516)
 ```
-Structure: { id, projectId, testNumber, date, location, locationVi, pilot, droneUnit, testType, testPhase, relatedGateCondition, result, duration, maxAltitude, maxSpeed, distanceCovered, sensorData{}, anomalies[], attachments[], notes, notesVi, autoIssueId, createdBy }
+Structure: { id, projectId, testNumber, date, location, locationVi, pilot, moduleUnit, testType, testPhase, relatedGateCondition, result, duration, maxAltitude, maxSpeed, distanceCovered, sensorData{}, anomalies[], attachments[], notes, notesVi, autoIssueId, createdBy }
 Distribution: PRJ-001 (7), PRJ-002 (5)
 ```
 - `sensorData` = embedded `{ batteryStart, batteryEnd, batteryMinCell, maxCurrent, avgCurrent, maxVibration, gpsAccuracy, maxWind, ambientTemp }`

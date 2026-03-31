@@ -406,7 +406,7 @@ export default function NewBOMPage() {
               <Input
                 value={newProductName}
                 onChange={(e) => setNewProductName(e.target.value)}
-                placeholder="e.g., RTR Drone X1 Pro"
+                placeholder="e.g., RTR Machine X1 Pro"
               />
             </div>
 

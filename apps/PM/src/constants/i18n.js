@@ -2,7 +2,7 @@
 export const LANG = {
   vi: {
     appName: "VietERP Project Manager",
-    appSub: "VietERP • Quản lý Dự án Drone",
+    appSub: "VietERP • Quản lý Dự án",
     tabs: { tower: "Bảng Điều Khiển", issues: "Vấn Đề", gates: "Cổng Phase", impact: "Bản Đồ Ảnh Hưởng", team: "Đội Ngũ", review: "Duyệt", audit: "Nhật Ký", bom: "BOM & NCC", testing: "Test & QĐ", orders: "Đơn Hàng", production: "Sản Xuất", inventory: "Tồn Kho", finance: "Tài Chính", intelligence: "Trí Tuệ", settings: "Cài Đặt" },
     importExport: { import: "Nhập", export: "Xuất", exportExcel: "Xuất Excel", exportPdf: "Xuất PDF", exportSlides: "Slide Tổng Quan", importData: "Nhập Dữ Liệu" },
     email: { preferences: "Cài đặt Email", eventType: "Loại sự kiện", emailNotif: "Email", inApp: "Trong ứng dụng", frequency: "Tần suất", save: "Lưu cài đặt", preview: "Xem trước", realtime: "Thời gian thực", daily: "Hàng ngày", weekly: "Hàng tuần" },
@@ -31,7 +31,7 @@ export const LANG = {
   },
   en: {
     appName: "VietERP Project Manager",
-    appSub: "VietERP • Drone Program Management",
+    appSub: "VietERP • Project Management",
     tabs: { tower: "Control Tower", issues: "Issues", gates: "Phase Gates", impact: "Impact Map", team: "Team", review: "Review", audit: "Audit Log", bom: "BOM & Suppliers", testing: "Testing & Decisions", orders: "Orders", production: "Production", inventory: "Inventory", finance: "Finance", intelligence: "Intelligence", settings: "Settings" },
     importExport: { import: "Import", export: "Export", exportExcel: "Export Excel", exportPdf: "Export PDF", exportSlides: "Executive Slides", importData: "Import Data" },
     email: { preferences: "Email Preferences", eventType: "Event Type", emailNotif: "Email", inApp: "In-App", frequency: "Frequency", save: "Save Preferences", preview: "Preview", realtime: "Realtime", daily: "Daily Digest", weekly: "Weekly" },

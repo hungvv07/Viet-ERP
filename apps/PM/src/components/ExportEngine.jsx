@@ -96,7 +96,7 @@ export function exportFlightTestsExcel(flightTests, lang) {
     { key: "date", header: vi ? "Ngày" : "Date", width: 12 },
     { key: "testType", header: vi ? "Loại" : "Type", width: 14 },
     { key: "pilot", header: vi ? "Phi công" : "Pilot", width: 12 },
-    { key: "droneUnit", header: vi ? "Máy bay" : "Unit", width: 14 },
+    { key: "testUnit", header: vi ? "Máy bay" : "Unit", width: 14 },
     { key: "durationMin", header: vi ? "Thời gian (phút)" : "Duration (min)", width: 14 },
     { key: "result", header: vi ? "Kết quả" : "Result", width: 10 },
     { key: "maxAltitude", header: vi ? "Cao nhất (m)" : "Max Alt (m)", width: 12 },

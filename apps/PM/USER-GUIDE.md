@@ -228,7 +228,7 @@ L\u01B0\u1EDBi 5 c\u1ED9t (CONCEPT\u2013MP), m\u1ED7i c\u1ED9t \u0111\u1EBFm s\u
 
 **C\u1EA5u tr\u00FAc c\u00E2y 3 c\u1EA5p:**
 ```
-Level 0: Assembly (to\u00E0n b\u1ED9 drone)
+Level 0: Assembly (to\u00E0n b\u1ED9 module)
   Level 1: Sub-assembly (Khung, Ngu\u1ED3n, Avionics, D\u00E2y \u0111i\u1EC7n...)
     Level 2: Component (Motor, ESC, Pin, C\u00E1nh qu\u1EA1t...)
 ```

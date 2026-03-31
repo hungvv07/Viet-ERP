@@ -23,7 +23,7 @@
 ### Test 1.1: Project Identity
 **Q:** What project are you working on?
 
-**A:** VietERP MRP (Material Requirements Planning) - a full-stack Manufacturing Intelligence System for Vietnamese drone manufacturing businesses.
+**A:** VietERP MRP (Material Requirements Planning) - a full-stack Manufacturing Intelligence System for Vietnamese product manufacturing businesses.
 
 **Result:** ✅ PASS
 
@@ -276,7 +276,7 @@ const data = validation.data; // Type-safe!
 **Q:** What's the business context?
 
 **A:**
-- **Market:** Vietnamese drone manufacturing
+- **Market:** Vietnamese product manufacturing
 - **Currency:** VND (Vietnamese Dong)
 - **Seasons:** Peak Q2, Q4 | Low Q1, Q3
 - **Customer Management:** 4-tier system with different pricing/priority

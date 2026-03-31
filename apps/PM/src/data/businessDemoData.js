@@ -7,7 +7,7 @@ export const DEMO_ORDERS = [
     orderDate: "2026-02-01", deliveryDate: "2026-06-15",
     totalAmount: 125000, currency: "USD",
     items: [
-      { id: "OI-001", productName: "RTR-X7 Surveyor Unit", quantity: 2, unitPrice: 45000, total: 90000 },
+      { id: "OI-001", productName: "ERP Module Alpha Unit", quantity: 2, unitPrice: 45000, total: 90000 },
       { id: "OI-002", productName: "RTK Base Station", quantity: 1, unitPrice: 15000, total: 15000 },
       { id: "OI-003", productName: "Training Package", quantity: 1, unitPrice: 20000, total: 20000 },
     ],
@@ -19,7 +19,7 @@ export const DEMO_ORDERS = [
     orderDate: "2026-02-15", deliveryDate: "2026-09-01",
     totalAmount: 280000, currency: "USD",
     items: [
-      { id: "OI-004", productName: "RTR-A3 Agri Sprayer", quantity: 5, unitPrice: 35000, total: 175000 },
+      { id: "OI-004", productName: "ERP Module Beta", quantity: 5, unitPrice: 35000, total: 175000 },
       { id: "OI-005", productName: "Spray System Upgrade Kit", quantity: 5, unitPrice: 8000, total: 40000 },
       { id: "OI-006", productName: "Pilot Training (5 days)", quantity: 5, unitPrice: 5000, total: 25000 },
       { id: "OI-007", productName: "1-Year Maintenance Contract", quantity: 5, unitPrice: 8000, total: 40000 },
@@ -32,11 +32,11 @@ export const DEMO_ORDERS = [
     orderDate: "2026-01-10", deliveryDate: "2026-04-30",
     totalAmount: 95000, currency: "USD",
     items: [
-      { id: "OI-008", productName: "RTR-I2 Inspector", quantity: 1, unitPrice: 65000, total: 65000 },
+      { id: "OI-008", productName: "ERP Module Delta", quantity: 1, unitPrice: 65000, total: 65000 },
       { id: "OI-009", productName: "Thermal Camera Module", quantity: 1, unitPrice: 18000, total: 18000 },
       { id: "OI-010", productName: "Pilot Certification", quantity: 2, unitPrice: 6000, total: 12000 },
     ],
-    notes: "Pipeline inspection drone",
+    notes: "Pipeline inspection module",
   },
 ];
 
@@ -49,7 +49,7 @@ export const DEMO_CUSTOMERS = [
 export const DEMO_PRODUCTION_ORDERS = [
   {
     id: "WO-001", orderId: "ORD-001", projectId: "PRJ-001",
-    productName: "RTR-X7 Surveyor", quantity: 2, status: "IN_PROGRESS",
+    productName: "ERP Module Alpha", quantity: 2, status: "IN_PROGRESS",
     startDate: "2026-03-01", targetDate: "2026-05-15",
     station: "Assembly", yieldRate: 100, defectCount: 0,
     logs: [
@@ -60,7 +60,7 @@ export const DEMO_PRODUCTION_ORDERS = [
   },
   {
     id: "WO-002", orderId: "ORD-003", projectId: "PRJ-004",
-    productName: "RTR-I2 Inspector", quantity: 1, status: "QC",
+    productName: "ERP Module Delta", quantity: 1, status: "QC",
     startDate: "2026-02-15", targetDate: "2026-04-01",
     station: "QC", yieldRate: 100, defectCount: 0,
     logs: [

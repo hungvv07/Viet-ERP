@@ -26,9 +26,9 @@ async function main() {
     where: { code: "DEPT-SX" },
     update: {},
     create: {
-      name: "Sản Xuất Drone",
+      name: "Sản Xuất Product",
       code: "DEPT-SX",
-      description: "Phòng Sản Xuất - Lắp ráp & Kiểm thử Drone",
+      description: "Phòng Sản Xuất - Lắp ráp & Kiểm thử Product",
     },
   })
 
@@ -72,7 +72,7 @@ async function main() {
       name: "Kỹ Sư Phần Mềm",
       code: "POS-KSPM",
       departmentId: deptKyThuat.id,
-      description: "Phát triển phần mềm điều khiển drone",
+      description: "Phát triển phần mềm điều khiển product",
     },
   })
 
@@ -83,18 +83,18 @@ async function main() {
       name: "Kỹ Sư Phần Cứng",
       code: "POS-KSPH",
       departmentId: deptKyThuat.id,
-      description: "Thiết kế & phát triển phần cứng drone",
+      description: "Thiết kế & phát triển phần cứng product",
     },
   })
 
-  const posKSDrone = await prisma.position.upsert({
+  const posKSProduct = await prisma.position.upsert({
     where: { code: "POS-KSD" },
     update: {},
     create: {
-      name: "Kỹ Sư Drone",
+      name: "Kỹ Sư Product",
       code: "POS-KSD",
       departmentId: deptSanXuat.id,
-      description: "Lắp ráp, kiểm thử, bay thử drone",
+      description: "Lắp ráp, kiểm thử, bay thử product",
     },
   })
 
@@ -105,7 +105,7 @@ async function main() {
       name: "Công Nhân Sản Xuất",
       code: "POS-CNSX",
       departmentId: deptSanXuat.id,
-      description: "Sản xuất, lắp ráp linh kiện drone",
+      description: "Sản xuất, lắp ráp linh kiện product",
     },
   })
 

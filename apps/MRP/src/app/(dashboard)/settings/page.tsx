@@ -65,7 +65,7 @@ export default async function SettingsPage() {
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Industry</p>
-                <p className="font-medium">Drone Manufacturing</p>
+                <p className="font-medium">Machine Manufacturing</p>
               </div>
               <div>
                 <p className="text-sm text-muted-foreground">Currency</p>

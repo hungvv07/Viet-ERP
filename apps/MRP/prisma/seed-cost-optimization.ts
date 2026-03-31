@@ -40,7 +40,7 @@ export async function seedCostOptimization() {
         partNumber: "PRT-GMB-001",
         name: "Camera Gimbal 3-Axis",
         category: "Payload",
-        description: "3-axis stabilized camera gimbal for drone payload",
+        description: "3-axis stabilized camera gimbal for machine payload",
         unit: "pcs",
         isCritical: true,
         status: "active",
@@ -54,7 +54,7 @@ export async function seedCostOptimization() {
         partNumber: "PRT-FRM-001",
         name: "Carbon Fiber Frame",
         category: "Airframe",
-        description: "Lightweight carbon fiber drone frame",
+        description: "Lightweight carbon fiber machine frame",
         unit: "pcs",
         isCritical: true,
         status: "active",
@@ -329,7 +329,7 @@ export async function seedCostOptimization() {
   const costTarget = await prisma.costTarget.create({
     data: {
       productId: product.id,
-      name: "Hera Drone V2 - 50% Cost Reduction",
+      name: "Hera Machine V2 - 50% Cost Reduction",
       currentCost: 1250,
       targetCost: 625,
       targetDate: new Date("2027-03-31"),

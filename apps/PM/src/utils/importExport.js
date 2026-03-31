@@ -94,7 +94,7 @@ export const HEADER_ALIASES = {
   result: ["kết quả", "result", "pass/fail", "đạt/không", "outcome"],
   duration: ["thời gian", "duration", "thời gian bay", "flight time", "tg bay"],
   location: ["địa điểm", "location", "nơi bay", "bãi bay", "site"],
-  droneUnit: ["máy bay", "drone unit", "unit", "tàu", "drone id", "aircraft"],
+  testUnit: ["máy bay", "test unit", "unit", "tàu", "module id", "aircraft"],
   testNumber: ["số hiệu", "test number", "flight #", "số bay", "flt #", "#"],
 
   // Milestones
@@ -328,7 +328,7 @@ export const IMPORT_TYPE_FIELDS = {
   },
   flightTests: {
     required: ["testDate", "testType", "result"],
-    optional: ["testNumber", "pilot", "duration", "location", "droneUnit"],
+    optional: ["testNumber", "pilot", "duration", "location", "testUnit"],
     enums: { testType: "testType", result: "result" },
     defaults: { pilot: "Unknown" },
   },

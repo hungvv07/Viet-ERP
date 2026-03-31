@@ -599,7 +599,7 @@ export async function aiAnalyzeAttendance(
     _count: true,
   })
 
-  const prompt = `Phân tích dữ liệu chấm công tháng ${month}/${year} của công ty RTR Vietnam (70 nhân viên, sản xuất drone).
+  const prompt = `Phân tích dữ liệu chấm công tháng ${month}/${year} của công ty RTR Vietnam (70 nhân viên, sản xuất product).
 
 THỐNG KÊ:
 - Tổng bản ghi: ${totalRecords}

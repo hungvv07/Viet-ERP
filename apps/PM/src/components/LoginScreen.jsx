@@ -14,7 +14,7 @@ const ROLE_COLORS = { admin: "#EF4444", pm: "#3B82F6", engineer: "#F59E0B", view
 const LANG = {
   vi: {
     title: "VietERP Project Manager",
-    sub: "VietERP • Qu\u1EA3n l\u00FD D\u1EF1 \u00E1n Drone",
+    sub: "VietERP • Qu\u1EA3n l\u00FD D\u1EF1 \u00E1n Module",
     email: "Email",
     password: "M\u1EADt kh\u1EA9u",
     login: "\u0110\u0103ng nh\u1EADp",
@@ -26,7 +26,7 @@ const LANG = {
   },
   en: {
     title: "VietERP Project Manager",
-    sub: "VietERP • Drone Program Management",
+    sub: "VietERP • Project Management",
     email: "Email",
     password: "Password",
     login: "Sign In",

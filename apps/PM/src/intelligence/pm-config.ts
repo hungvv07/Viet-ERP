@@ -11,7 +11,7 @@ const DAY = 24 * HOUR;
 export const RTR_CONFIG: DomainConfig = {
   id: 'rtr-pm',
   name: 'VietERP Project Management',
-  description: 'Intelligence layer for VietERP Project Manager — drone hardware development tracking',
+  description: 'Intelligence layer for VietERP Project Manager — project development tracking',
   version: '1.0.0',
 
   // ── Data Sources (client-side, no adapters) ──

@@ -1,6 +1,6 @@
 # VietERP MRP — Hệ thống Hoạch định Nguồn lực Sản xuất
 
-> **Hệ thống MRP (Material Requirements Planning) toàn diện** dành cho doanh nghiệp sản xuất drone và thiết bị công nghệ cao, tích hợp AI/ML để dự báo nhu cầu và tối ưu hoạch định.
+> **Hệ thống MRP (Material Requirements Planning) toàn diện** dành cho doanh nghiệp sản xuất product và thiết bị công nghệ cao, tích hợp AI/ML để dự báo nhu cầu và tối ưu hoạch định.
 
 ---
 

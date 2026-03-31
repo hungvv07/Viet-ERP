@@ -517,7 +517,7 @@ Lấy cây BOM cho một sản phẩm.
     "product": {
       "id": "prod_001",
       "sku": "DRONE-X1",
-      "name": "Drone X1 Professional"
+      "name": "Product X1 Professional"
     },
     "lines": [
       {
