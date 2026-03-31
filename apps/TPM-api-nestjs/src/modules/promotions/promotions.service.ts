@@ -1,17 +1,9 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { CreatePromotionDto } from './dto/create-promotion.dto';
 import { UpdatePromotionDto } from './dto/update-promotion.dto';
 import { PromotionQueryDto } from './dto/promotion-query.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -68,11 +60,17 @@ export class PromotionsService {
     }
 
     // Build orderBy
-    const validSortFields = ['createdAt', 'name', 'budget', 'startDate', 'endDate', 'status', 'code'];
+    const validSortFields = [
+      'createdAt',
+      'name',
+      'budget',
+      'startDate',
+      'endDate',
+      'status',
+      'code',
+    ];
     const orderBy: Prisma.PromotionOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -226,12 +224,8 @@ export class PromotionsService {
 
     // Validate dates if provided
     if (dto.startDate || dto.endDate) {
-      const startDate = dto.startDate
-        ? new Date(dto.startDate)
-        : promotion.startDate;
-      const endDate = dto.endDate
-        ? new Date(dto.endDate)
-        : promotion.endDate;
+      const startDate = dto.startDate ? new Date(dto.startDate) : promotion.startDate;
+      const endDate = dto.endDate ? new Date(dto.endDate) : promotion.endDate;
 
       if (endDate <= startDate) {
         throw new BadRequestException('End date must be after start date');
@@ -449,9 +443,7 @@ export class PromotionsService {
     }
 
     if (['COMPLETED', 'CANCELLED'].includes(promotion.status)) {
-      throw new BadRequestException(
-        `Cannot cancel promotion in ${promotion.status} status.`,
-      );
+      throw new BadRequestException(`Cannot cancel promotion in ${promotion.status} status.`);
     }
 
     const updated = await this.prisma.promotion.update({
@@ -590,16 +582,18 @@ export class PromotionsService {
 
     return {
       ...base,
-      tactics: promotion.tactics?.map((t: any) => ({
-        ...t,
-        budget: Number(t.budget),
-        actualSpend: Number(t.actualSpend || 0),
-      })) || [],
-      claims: promotion.claims?.map((c: any) => ({
-        ...c,
-        amount: Number(c.amount),
-        approvedAmount: Number(c.approvedAmount || 0),
-      })) || [],
+      tactics:
+        promotion.tactics?.map((t: any) => ({
+          ...t,
+          budget: Number(t.budget),
+          actualSpend: Number(t.actualSpend || 0),
+        })) || [],
+      claims:
+        promotion.claims?.map((c: any) => ({
+          ...c,
+          amount: Number(c.amount),
+          approvedAmount: Number(c.approvedAmount || 0),
+        })) || [],
       transactionCount: promotion._count?.transactions || 0,
       poaCount: promotion._count?.poas || 0,
     };

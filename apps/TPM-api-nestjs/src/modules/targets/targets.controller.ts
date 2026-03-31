@@ -11,13 +11,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { TargetsService } from './targets.service';
 import { CreateTargetDto } from './dto/create-target.dto';
 import { UpdateTargetDto } from './dto/update-target.dto';
@@ -104,10 +98,7 @@ export class TargetsController {
   @ApiResponse({ status: 201, description: 'Target created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
   @ApiResponse({ status: 409, description: 'Target with this code already exists' })
-  async create(
-    @Body() createTargetDto: CreateTargetDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async create(@Body() createTargetDto: CreateTargetDto, @CurrentUser('id') userId: string) {
     return this.targetsService.create(createTargetDto, userId);
   }
 
@@ -125,10 +116,7 @@ export class TargetsController {
   @ApiResponse({ status: 200, description: 'Target updated successfully' })
   @ApiResponse({ status: 400, description: 'Target cannot be modified in current status' })
   @ApiResponse({ status: 404, description: 'Target not found' })
-  async update(
-    @Param('id') id: string,
-    @Body() updateTargetDto: UpdateTargetDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateTargetDto: UpdateTargetDto) {
     return this.targetsService.update(id, updateTargetDto);
   }
 
@@ -200,10 +188,7 @@ export class TargetsController {
   @ApiParam({ name: 'id', description: 'Target ID' })
   @ApiResponse({ status: 200, description: 'Achieved value updated successfully' })
   @ApiResponse({ status: 400, description: 'Target is not active' })
-  async updateAchieved(
-    @Param('id') id: string,
-    @Body('totalAchieved') totalAchieved: number,
-  ) {
+  async updateAchieved(@Param('id') id: string, @Body('totalAchieved') totalAchieved: number) {
     return this.targetsService.updateAchieved(id, totalAchieved);
   }
 

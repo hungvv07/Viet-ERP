@@ -9,10 +9,7 @@ import { PrismaService } from '../../database/prisma.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { CustomerQueryDto } from './dto/customer-query.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -63,9 +60,7 @@ export class CustomersService {
     // Build orderBy with dynamic field validation
     const validSortFields = ['createdAt', 'name', 'code', 'channel', 'isActive', 'updatedAt'];
     const orderBy: Prisma.CustomerOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([

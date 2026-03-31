@@ -1,18 +1,10 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { CreateClaimDto } from './dto/create-claim.dto';
 import { UpdateClaimDto } from './dto/update-claim.dto';
 import { ClaimQueryDto } from './dto/claim-query.dto';
 import { ReviewClaimDto } from './dto/review-claim.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -73,9 +65,7 @@ export class ClaimsService {
     // Build orderBy
     const validSortFields = ['createdAt', 'claimDate', 'amount', 'status', 'code'];
     const orderBy: Prisma.ClaimOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -343,7 +333,9 @@ export class ClaimsService {
       },
     });
 
-    this.logger.log(`Claim approved: ${claim.code} by user ${userId}${dto.comments ? `, comments: ${dto.comments}` : ''}`);
+    this.logger.log(
+      `Claim approved: ${claim.code} by user ${userId}${dto.comments ? `, comments: ${dto.comments}` : ''}`,
+    );
 
     return this.transformClaim(updated);
   }
@@ -383,7 +375,9 @@ export class ClaimsService {
       },
     });
 
-    this.logger.log(`Claim rejected: ${claim.code} by user ${userId}${dto.comments ? `, comments: ${dto.comments}` : ''}`);
+    this.logger.log(
+      `Claim rejected: ${claim.code} by user ${userId}${dto.comments ? `, comments: ${dto.comments}` : ''}`,
+    );
 
     return this.transformClaim(updated);
   }
@@ -496,10 +490,11 @@ export class ClaimsService {
             amount: claim.settlement.amount ? Number(claim.settlement.amount) : null,
           }
         : null,
-      transactions: claim.transactions?.map((t: any) => ({
-        ...t,
-        amount: Number(t.amount),
-      })) || [],
+      transactions:
+        claim.transactions?.map((t: any) => ({
+          ...t,
+          amount: Number(t.amount),
+        })) || [],
       pops: claim.pops || [],
     };
   }

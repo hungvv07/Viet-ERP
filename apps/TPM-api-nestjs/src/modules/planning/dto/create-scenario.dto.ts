@@ -18,7 +18,10 @@ export class CreateScenarioDto {
   @IsString()
   baselineId?: string;
 
-  @ApiProperty({ description: 'Scenario input parameters', example: { discount: 15, duration: 30 } })
+  @ApiProperty({
+    description: 'Scenario input parameters',
+    example: { discount: 15, duration: 30 },
+  })
   @IsObject()
   parameters: Record<string, any>;
 

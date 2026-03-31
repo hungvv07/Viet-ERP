@@ -1,10 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsNumber,
-  IsEnum,
-  MaxLength,
-} from 'class-validator';
+import { IsString, IsOptional, IsNumber, IsEnum, MaxLength } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -27,7 +21,8 @@ export class CreateTransactionDto {
 
   @ApiProperty({
     example: 25000,
-    description: 'Transaction amount. Can be positive or negative (e.g., RELEASE reverses a commitment).',
+    description:
+      'Transaction amount. Can be positive or negative (e.g., RELEASE reverses a commitment).',
   })
   @Type(() => Number)
   @IsNumber()

@@ -9,13 +9,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { PaymentsService } from './payments.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { TransactionQueryDto } from './dto/transaction-query.dto';
@@ -65,7 +59,8 @@ export class PaymentsController {
   @Get('by-fund/:fundId')
   @ApiOperation({
     summary: 'Get transactions for a specific fund',
-    description: 'Get all transactions recorded against a specific fund, ordered by most recent first',
+    description:
+      'Get all transactions recorded against a specific fund, ordered by most recent first',
   })
   @ApiParam({ name: 'fundId', description: 'Fund ID' })
   @ApiResponse({ status: 200, description: 'Transactions for the specified fund' })
@@ -81,7 +76,8 @@ export class PaymentsController {
   @Get(':id')
   @ApiOperation({
     summary: 'Get transaction by ID',
-    description: 'Get detailed transaction information including fund, promotion, and claim details',
+    description:
+      'Get detailed transaction information including fund, promotion, and claim details',
   })
   @ApiParam({ name: 'id', description: 'Transaction ID' })
   @ApiResponse({ status: 200, description: 'Transaction details' })

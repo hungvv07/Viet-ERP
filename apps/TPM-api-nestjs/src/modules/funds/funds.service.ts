@@ -9,10 +9,7 @@ import { PrismaService } from '../../database/prisma.service';
 import { CreateFundDto } from './dto/create-fund.dto';
 import { UpdateFundDto } from './dto/update-fund.dto';
 import { FundQueryDto } from './dto/fund-query.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -80,9 +77,7 @@ export class FundsService {
       'available',
     ];
     const orderBy: Prisma.FundOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -315,7 +310,7 @@ export class FundsService {
     if (fund._count.promotions > 0 || fund._count.transactions > 0) {
       throw new BadRequestException(
         `Cannot delete fund with ${fund._count.promotions} promotion(s) and ${fund._count.transactions} transaction(s). ` +
-        `Deactivate the fund instead using PATCH /:id/toggle-active.`,
+          `Deactivate the fund instead using PATCH /:id/toggle-active.`,
       );
     }
 
@@ -350,7 +345,7 @@ export class FundsService {
     if (fund.isActive && fund.promotions.length > 0) {
       throw new BadRequestException(
         `Cannot deactivate fund with ${fund.promotions.length} active promotion(s). ` +
-        `Complete or cancel all promotions first.`,
+          `Complete or cancel all promotions first.`,
       );
     }
 
@@ -437,10 +432,9 @@ export class FundsService {
         utilizationRate:
           totals._sum.totalBudget && Number(totals._sum.totalBudget) > 0
             ? Number(
-                (
-                  (Number(totals._sum.committed) / Number(totals._sum.totalBudget)) *
-                  100
-                ).toFixed(2),
+                ((Number(totals._sum.committed) / Number(totals._sum.totalBudget)) * 100).toFixed(
+                  2,
+                ),
               )
             : 0,
       },
@@ -489,9 +483,7 @@ export class FundsService {
     const available = Number(fund.available || 0);
 
     const utilizationRate =
-      totalBudget > 0
-        ? Number(((committed / totalBudget) * 100).toFixed(2))
-        : 0;
+      totalBudget > 0 ? Number(((committed / totalBudget) * 100).toFixed(2)) : 0;
 
     return {
       id: fund.id,

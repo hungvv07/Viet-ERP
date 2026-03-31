@@ -1,10 +1,5 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiBearerAuth,
-  ApiOperation,
-  ApiQuery,
-} from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { AnalyticsService } from './analytics.service';
 
 @ApiTags('Analytics')
@@ -56,10 +51,7 @@ export class AnalyticsController {
   @Get('trends/:entityType')
   @ApiOperation({ summary: 'Get monthly trend data for entity type' })
   @ApiQuery({ name: 'year', required: false, type: Number })
-  async getTrends(
-    @Param('entityType') entityType: string,
-    @Query('year') year?: string,
-  ) {
+  async getTrends(@Param('entityType') entityType: string, @Query('year') year?: string) {
     const yearNum = year ? parseInt(year, 10) : new Date().getFullYear();
     return this.analyticsService.getTrends(entityType, yearNum);
   }
@@ -67,10 +59,7 @@ export class AnalyticsController {
   @Get('top-performers/:type')
   @ApiOperation({ summary: 'Get top performers by type (customers, products, regions)' })
   @ApiQuery({ name: 'limit', required: false, type: Number })
-  async getTopPerformers(
-    @Param('type') type: string,
-    @Query('limit') limit?: string,
-  ) {
+  async getTopPerformers(@Param('type') type: string, @Query('limit') limit?: string) {
     const limitNum = limit ? parseInt(limit, 10) : 10;
     return this.analyticsService.getTopPerformers(type, limitNum);
   }

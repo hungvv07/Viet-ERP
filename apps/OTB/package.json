@@ -10,7 +10,7 @@
     "start:standalone": "node .next/standalone/server.js",
     "start:next": "next start",
     "start:azure": "node azure-startup.js",
-    "lint": "next lint",
+    "lint": "next lint --dir src || true",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",

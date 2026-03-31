@@ -36,7 +36,10 @@ export class DeductionQueryDto extends PaginationDto {
   @IsEnum(DeductionStatusFilter)
   status?: DeductionStatusFilter;
 
-  @ApiPropertyOptional({ enum: DeductionCategoryFilter, description: 'Filter by deduction category' })
+  @ApiPropertyOptional({
+    enum: DeductionCategoryFilter,
+    description: 'Filter by deduction category',
+  })
   @IsOptional()
   @IsEnum(DeductionCategoryFilter)
   category?: DeductionCategoryFilter;

@@ -69,13 +69,15 @@ export class WorkflowsController {
     summary: 'Find matching approval rule',
     description: 'Find which approval rule applies for a given amount and optional channel',
   })
-  @ApiQuery({ name: 'amount', required: true, type: Number, description: 'Amount to match against' })
+  @ApiQuery({
+    name: 'amount',
+    required: true,
+    type: Number,
+    description: 'Amount to match against',
+  })
   @ApiQuery({ name: 'channel', required: false, type: String, description: 'Channel to filter by' })
   @ApiResponse({ status: 200, description: 'Matching rule or no-match result' })
-  async findMatchingRule(
-    @Query('amount') amount: string,
-    @Query('channel') channel?: string,
-  ) {
+  async findMatchingRule(@Query('amount') amount: string, @Query('channel') channel?: string) {
     const parsedAmount = parseFloat(amount);
     if (isNaN(parsedAmount)) {
       return { matched: false, message: 'Invalid amount provided' };
@@ -113,10 +115,7 @@ export class WorkflowsController {
   @ApiResponse({ status: 201, description: 'Approval rule created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
   @ApiResponse({ status: 409, description: 'Approval rule name already exists' })
-  async create(
-    @Body() createDto: CreateApprovalRuleDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async create(@Body() createDto: CreateApprovalRuleDto, @CurrentUser('id') userId: string) {
     return this.workflowsService.create(createDto, userId);
   }
 
@@ -135,10 +134,7 @@ export class WorkflowsController {
   @ApiResponse({ status: 400, description: 'Validation error' })
   @ApiResponse({ status: 404, description: 'Approval rule not found' })
   @ApiResponse({ status: 409, description: 'Name conflict' })
-  async update(
-    @Param('id') id: string,
-    @Body() updateDto: UpdateApprovalRuleDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateDto: UpdateApprovalRuleDto) {
     return this.workflowsService.update(id, updateDto);
   }
 

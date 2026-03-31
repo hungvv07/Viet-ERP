@@ -11,13 +11,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { FundsService } from './funds.service';
 import { CreateFundDto } from './dto/create-fund.dto';
 import { UpdateFundDto } from './dto/update-fund.dto';
@@ -82,7 +76,8 @@ export class FundsController {
   @Get(':id')
   @ApiOperation({
     summary: 'Get fund by ID',
-    description: 'Get detailed fund information including company, customer, counts, and recent transactions',
+    description:
+      'Get detailed fund information including company, customer, counts, and recent transactions',
   })
   @ApiParam({ name: 'id', description: 'Fund ID' })
   @ApiResponse({ status: 200, description: 'Fund details' })
@@ -104,11 +99,11 @@ export class FundsController {
   })
   @ApiResponse({ status: 201, description: 'Fund created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  @ApiResponse({ status: 409, description: 'Fund with same code and year already exists for this company' })
-  async create(
-    @Body() createFundDto: CreateFundDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  @ApiResponse({
+    status: 409,
+    description: 'Fund with same code and year already exists for this company',
+  })
+  async create(@Body() createFundDto: CreateFundDto, @CurrentUser('id') userId: string) {
     return this.fundsService.create(createFundDto, userId);
   }
 
@@ -125,10 +120,7 @@ export class FundsController {
   @ApiParam({ name: 'id', description: 'Fund ID' })
   @ApiResponse({ status: 200, description: 'Fund updated successfully' })
   @ApiResponse({ status: 404, description: 'Fund not found' })
-  async update(
-    @Param('id') id: string,
-    @Body() updateFundDto: UpdateFundDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateFundDto: UpdateFundDto) {
     return this.fundsService.update(id, updateFundDto);
   }
 
@@ -141,7 +133,8 @@ export class FundsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Delete a fund',
-    description: 'Delete a fund (only if no promotions or transactions linked). Requires ADMIN role.',
+    description:
+      'Delete a fund (only if no promotions or transactions linked). Requires ADMIN role.',
   })
   @ApiParam({ name: 'id', description: 'Fund ID' })
   @ApiResponse({ status: 200, description: 'Fund deleted successfully' })

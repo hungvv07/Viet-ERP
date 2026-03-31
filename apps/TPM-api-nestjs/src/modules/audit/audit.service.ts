@@ -2,10 +2,7 @@ import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { CreateAuditLogDto } from './dto/create-audit-log.dto';
 import { AuditQueryDto, AuditActionEnum } from './dto/audit-query.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 import { createHash } from 'crypto';
 
@@ -74,17 +71,9 @@ export class AuditService {
     }
 
     // Build orderBy
-    const validSortFields = [
-      'timestamp',
-      'createdAt',
-      'action',
-      'entityType',
-      'sequenceNumber',
-    ];
+    const validSortFields = ['timestamp', 'createdAt', 'action', 'entityType', 'sequenceNumber'];
     const orderBy: Prisma.ImmutableAuditLogOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { timestamp: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { timestamp: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -393,11 +382,7 @@ export class AuditService {
   // ═══════════════════════════════════════════════════════════════════════════
   // CONVENIENCE: Log a LOGIN action
   // ═══════════════════════════════════════════════════════════════════════════
-  async logLogin(
-    companyId: string,
-    userId: string,
-    metadata?: Record<string, any>,
-  ) {
+  async logLogin(companyId: string, userId: string, metadata?: Record<string, any>) {
     return this.create({
       companyId,
       userId,

@@ -120,10 +120,7 @@ export class BudgetsController {
   @ApiResponse({ status: 201, description: 'Budget created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
   @ApiResponse({ status: 409, description: 'Budget already exists for this period' })
-  async create(
-    @Body() createBudgetDto: CreateBudgetDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async create(@Body() createBudgetDto: CreateBudgetDto, @CurrentUser('id') userId: string) {
     return this.budgetsService.create(createBudgetDto, userId);
   }
 
@@ -164,10 +161,7 @@ export class BudgetsController {
   @ApiResponse({ status: 200, description: 'Budget deleted successfully' })
   @ApiResponse({ status: 400, description: 'Budget cannot be deleted in current status' })
   @ApiResponse({ status: 404, description: 'Budget not found' })
-  async remove(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async remove(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.budgetsService.remove(id, userId);
   }
 
@@ -185,10 +179,7 @@ export class BudgetsController {
   @ApiParam({ name: 'id', description: 'Budget ID' })
   @ApiResponse({ status: 200, description: 'Budget submitted for approval' })
   @ApiResponse({ status: 400, description: 'Budget cannot be submitted in current status' })
-  async submit(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async submit(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.budgetsService.submitForApproval(id, userId);
   }
 
@@ -250,10 +241,7 @@ export class BudgetsController {
   @ApiParam({ name: 'id', description: 'Budget ID' })
   @ApiResponse({ status: 200, description: 'Budget closed successfully' })
   @ApiResponse({ status: 400, description: 'Budget cannot be closed in current status' })
-  async close(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async close(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.budgetsService.close(id, userId);
   }
 

@@ -19,12 +19,18 @@ export class CreateDeductionDocumentDto {
   @Min(1)
   fileSize: number;
 
-  @ApiProperty({ example: '/uploads/deductions/invoice-2024-001.pdf', description: 'File path or URL' })
+  @ApiProperty({
+    example: '/uploads/deductions/invoice-2024-001.pdf',
+    description: 'File path or URL',
+  })
   @IsString()
   @MaxLength(1000)
   filePath: string;
 
-  @ApiProperty({ example: 'INVOICE', description: 'Document type (e.g., INVOICE, CREDIT_NOTE, PROOF)' })
+  @ApiProperty({
+    example: 'INVOICE',
+    description: 'Document type (e.g., INVOICE, CREDIT_NOTE, PROOF)',
+  })
   @IsString()
   @MaxLength(100)
   documentType: string;

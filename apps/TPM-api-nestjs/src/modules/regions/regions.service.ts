@@ -9,10 +9,7 @@ import { PrismaService } from '../../database/prisma.service';
 import { CreateGeographicUnitDto, GeographicLevelEnum } from './dto/create-geographic-unit.dto';
 import { UpdateGeographicUnitDto } from './dto/update-geographic-unit.dto';
 import { GeographicUnitQueryDto } from './dto/geographic-unit-query.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 // Level hierarchy order for validation (lower index = higher in hierarchy)
@@ -39,14 +36,7 @@ export class RegionsService {
   // ═══════════════════════════════════════════════════════════════════════════
   async findAll(query: GeographicUnitQueryDto) {
     const { skip, take, page, pageSize } = getPaginationParams(query);
-    const {
-      level,
-      parentId,
-      isActive,
-      search,
-      sortBy,
-      sortOrder = 'asc',
-    } = query;
+    const { level, parentId, isActive, search, sortBy, sortOrder = 'asc' } = query;
 
     // Build where clause
     const where: Prisma.GeographicUnitWhereInput = {};
@@ -73,9 +63,10 @@ export class RegionsService {
 
     // Build orderBy with validated sort fields
     const validSortFields = ['name', 'code', 'level', 'sortOrder', 'createdAt', 'updatedAt'];
-    const orderBy = sortBy && validSortFields.includes(sortBy)
-      ? { [sortBy]: sortOrder }
-      : { name: 'asc' as const };
+    const orderBy =
+      sortBy && validSortFields.includes(sortBy)
+        ? { [sortBy]: sortOrder }
+        : { name: 'asc' as const };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -152,9 +143,7 @@ export class RegionsService {
     });
 
     if (existing) {
-      throw new ConflictException(
-        `Geographic unit with code "${dto.code}" already exists`,
-      );
+      throw new ConflictException(`Geographic unit with code "${dto.code}" already exists`);
     }
 
     // Validate parent exists and level constraints
@@ -164,9 +153,7 @@ export class RegionsService {
       });
 
       if (!parent) {
-        throw new BadRequestException(
-          `Parent geographic unit with ID "${dto.parentId}" not found`,
-        );
+        throw new BadRequestException(`Parent geographic unit with ID "${dto.parentId}" not found`);
       }
 
       // Child level must be lower in hierarchy than parent level
@@ -176,7 +163,7 @@ export class RegionsService {
       if (childIndex <= parentIndex) {
         throw new BadRequestException(
           `Child level "${dto.level}" must be lower in hierarchy than parent level "${parent.level}". ` +
-          `Expected one of: ${LEVEL_ORDER.slice(parentIndex + 1).join(', ')}`,
+            `Expected one of: ${LEVEL_ORDER.slice(parentIndex + 1).join(', ')}`,
         );
       }
     }
@@ -248,7 +235,7 @@ export class RegionsService {
         if (childIndex <= parentIndex) {
           throw new BadRequestException(
             `Level "${effectiveLevel}" must be lower in hierarchy than parent level "${parent.level}". ` +
-            `Expected one of: ${LEVEL_ORDER.slice(parentIndex + 1).join(', ')}`,
+              `Expected one of: ${LEVEL_ORDER.slice(parentIndex + 1).join(', ')}`,
           );
         }
       }
@@ -266,7 +253,7 @@ export class RegionsService {
           if (childIndex <= newParentIndex) {
             throw new BadRequestException(
               `Cannot change level to "${dto.level}" because child "${child.code}" has level "${child.level}" ` +
-              `which would violate the hierarchy constraint`,
+                `which would violate the hierarchy constraint`,
             );
           }
         }

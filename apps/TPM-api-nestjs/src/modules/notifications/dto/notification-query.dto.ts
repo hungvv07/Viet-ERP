@@ -16,12 +16,18 @@ export class NotificationQueryDto extends PaginationDto {
   @IsEnum(NotificationTypeEnum)
   type?: NotificationTypeEnum;
 
-  @ApiPropertyOptional({ enum: NotificationStatusEnum, description: 'Filter by notification status' })
+  @ApiPropertyOptional({
+    enum: NotificationStatusEnum,
+    description: 'Filter by notification status',
+  })
   @IsOptional()
   @IsEnum(NotificationStatusEnum)
   status?: NotificationStatusEnum;
 
-  @ApiPropertyOptional({ enum: NotificationChannelEnum, description: 'Filter by notification channel' })
+  @ApiPropertyOptional({
+    enum: NotificationChannelEnum,
+    description: 'Filter by notification channel',
+  })
   @IsOptional()
   @IsEnum(NotificationChannelEnum)
   channel?: NotificationChannelEnum;

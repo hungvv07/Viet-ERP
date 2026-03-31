@@ -40,15 +40,24 @@ export class ContractsController {
   @Get()
   @ApiOperation({
     summary: 'List all contracts',
-    description: 'Get paginated list of volume contracts with optional filtering by status, customer, channel, region, risk level, and search',
+    description:
+      'Get paginated list of volume contracts with optional filtering by status, customer, channel, region, risk level, and search',
   })
   @ApiResponse({ status: 200, description: 'Contract list with pagination' })
-  @ApiQuery({ name: 'status', required: false, enum: ['DRAFT', 'ACTIVE', 'COMPLETED', 'CANCELLED'] })
+  @ApiQuery({
+    name: 'status',
+    required: false,
+    enum: ['DRAFT', 'ACTIVE', 'COMPLETED', 'CANCELLED'],
+  })
   @ApiQuery({ name: 'customerId', required: false, description: 'Filter by customer ID' })
   @ApiQuery({ name: 'channel', required: false, description: 'Filter by channel' })
   @ApiQuery({ name: 'region', required: false, description: 'Filter by region' })
   @ApiQuery({ name: 'riskLevel', required: false, enum: ['ON_TRACK', 'AT_RISK', 'CRITICAL'] })
-  @ApiQuery({ name: 'search', required: false, description: 'Search by code, name, or customer name' })
+  @ApiQuery({
+    name: 'search',
+    required: false,
+    description: 'Search by code, name, or customer name',
+  })
   async findAll(@Query() query: ContractQueryDto) {
     return this.contractsService.findAll(query);
   }
@@ -74,7 +83,8 @@ export class ContractsController {
   @Get('at-risk')
   @ApiOperation({
     summary: 'Get at-risk contracts',
-    description: 'Get active contracts with AT_RISK or CRITICAL risk level, including next upcoming milestone',
+    description:
+      'Get active contracts with AT_RISK or CRITICAL risk level, including next upcoming milestone',
   })
   @ApiResponse({ status: 200, description: 'List of at-risk contracts' })
   async getAtRisk() {
@@ -88,7 +98,8 @@ export class ContractsController {
   @Get(':id')
   @ApiOperation({
     summary: 'Get contract by ID',
-    description: 'Get detailed contract information including customer, milestones, and progress data',
+    description:
+      'Get detailed contract information including customer, milestones, and progress data',
   })
   @ApiParam({ name: 'id', description: 'Contract ID' })
   @ApiResponse({ status: 200, description: 'Contract details' })
@@ -106,7 +117,8 @@ export class ContractsController {
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary: 'Create a new contract',
-    description: 'Create a new volume contract in DRAFT status. Requires ADMIN, MANAGER, or KAM role.',
+    description:
+      'Create a new volume contract in DRAFT status. Requires ADMIN, MANAGER, or KAM role.',
   })
   @ApiResponse({ status: 201, description: 'Contract created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
@@ -128,10 +140,7 @@ export class ContractsController {
   @ApiResponse({ status: 200, description: 'Contract updated successfully' })
   @ApiResponse({ status: 400, description: 'Contract cannot be modified in current status' })
   @ApiResponse({ status: 404, description: 'Contract not found' })
-  async update(
-    @Param('id') id: string,
-    @Body() updateContractDto: UpdateContractDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateContractDto: UpdateContractDto) {
     return this.contractsService.update(id, updateContractDto);
   }
 
@@ -163,7 +172,8 @@ export class ContractsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Complete a contract',
-    description: 'Transition an ACTIVE contract to COMPLETED status. Requires ADMIN or MANAGER role.',
+    description:
+      'Transition an ACTIVE contract to COMPLETED status. Requires ADMIN or MANAGER role.',
   })
   @ApiParam({ name: 'id', description: 'Contract ID' })
   @ApiResponse({ status: 200, description: 'Contract completed successfully' })
@@ -207,10 +217,7 @@ export class ContractsController {
   @ApiResponse({ status: 201, description: 'Milestone added successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
   @ApiResponse({ status: 404, description: 'Contract not found' })
-  async addMilestone(
-    @Param('id') id: string,
-    @Body() createMilestoneDto: CreateMilestoneDto,
-  ) {
+  async addMilestone(@Param('id') id: string, @Body() createMilestoneDto: CreateMilestoneDto) {
     return this.contractsService.addMilestone(id, createMilestoneDto);
   }
 
@@ -223,16 +230,14 @@ export class ContractsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Record monthly progress',
-    description: 'Record or update monthly volume progress for a contract. Upserts by year and month. Only ACTIVE contracts.',
+    description:
+      'Record or update monthly volume progress for a contract. Upserts by year and month. Only ACTIVE contracts.',
   })
   @ApiParam({ name: 'id', description: 'Contract ID' })
   @ApiResponse({ status: 200, description: 'Progress recorded successfully' })
   @ApiResponse({ status: 400, description: 'Contract is not in ACTIVE status' })
   @ApiResponse({ status: 404, description: 'Contract not found' })
-  async recordProgress(
-    @Param('id') id: string,
-    @Body() recordProgressDto: RecordProgressDto,
-  ) {
+  async recordProgress(@Param('id') id: string, @Body() recordProgressDto: RecordProgressDto) {
     return this.contractsService.recordProgress(id, recordProgressDto);
   }
 

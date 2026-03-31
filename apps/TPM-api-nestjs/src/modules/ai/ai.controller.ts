@@ -1,20 +1,5 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Query,
-  HttpCode,
-  HttpStatus,
-} from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Param, Query, HttpCode, HttpStatus } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { AiService } from './ai.service';
 import { CreateSuggestionDto } from './dto/create-suggestion.dto';
 import { CreateInsightDto } from './dto/create-insight.dto';
@@ -75,10 +60,7 @@ export class AiController {
   })
   @ApiResponse({ status: 201, description: 'Suggestion created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async createSuggestion(
-    @Body() dto: CreateSuggestionDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async createSuggestion(@Body() dto: CreateSuggestionDto, @CurrentUser('id') userId: string) {
     return this.aiService.createSuggestion(dto, userId);
   }
 
@@ -112,10 +94,7 @@ export class AiController {
   @ApiParam({ name: 'id', description: 'Suggestion ID' })
   @ApiResponse({ status: 200, description: 'Suggestion rejected' })
   @ApiResponse({ status: 404, description: 'Suggestion not found' })
-  async rejectSuggestion(
-    @Param('id') id: string,
-    @Body('feedback') feedback?: string,
-  ) {
+  async rejectSuggestion(@Param('id') id: string, @Body('feedback') feedback?: string) {
     return this.aiService.rejectSuggestion(id, feedback);
   }
 
@@ -158,7 +137,8 @@ export class AiController {
   @Get('insights/summary')
   @ApiOperation({
     summary: 'Get insights summary statistics',
-    description: 'Get aggregated statistics for all insights by type, read/unread status, and average confidence',
+    description:
+      'Get aggregated statistics for all insights by type, read/unread status, and average confidence',
   })
   @ApiResponse({ status: 200, description: 'Insight summary statistics' })
   async getInsightsSummary() {
@@ -214,10 +194,7 @@ export class AiController {
   @ApiResponse({ status: 201, description: 'Insight created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
   @ApiResponse({ status: 403, description: 'Insufficient permissions' })
-  async createInsight(
-    @Body() dto: CreateInsightDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async createInsight(@Body() dto: CreateInsightDto, @CurrentUser('id') userId: string) {
     return this.aiService.createInsight(dto, userId);
   }
 

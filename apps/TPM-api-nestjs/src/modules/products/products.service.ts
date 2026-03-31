@@ -9,10 +9,7 @@ import { PrismaService } from '../../database/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { ProductQueryDto } from './dto/product-query.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -63,11 +60,18 @@ export class ProductsService {
     }
 
     // Build orderBy
-    const validSortFields = ['createdAt', 'name', 'sku', 'category', 'brand', 'price', 'cogs', 'updatedAt'];
+    const validSortFields = [
+      'createdAt',
+      'name',
+      'sku',
+      'category',
+      'brand',
+      'price',
+      'cogs',
+      'updatedAt',
+    ];
     const orderBy: Prisma.ProductOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -132,9 +136,7 @@ export class ProductsService {
     });
 
     if (existing) {
-      throw new ConflictException(
-        `Product with SKU "${dto.sku}" already exists for this company`,
-      );
+      throw new ConflictException(`Product with SKU "${dto.sku}" already exists for this company`);
     }
 
     const product = await this.prisma.product.create({

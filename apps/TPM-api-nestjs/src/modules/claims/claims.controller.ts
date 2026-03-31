@@ -10,13 +10,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { ClaimsService } from './claims.service';
 import { CreateClaimDto } from './dto/create-claim.dto';
 import { UpdateClaimDto } from './dto/update-claim.dto';
@@ -66,7 +60,8 @@ export class ClaimsController {
   @Get(':id')
   @ApiOperation({
     summary: 'Get claim by ID',
-    description: 'Get detailed claim information including customer, promotion, and related records',
+    description:
+      'Get detailed claim information including customer, promotion, and related records',
   })
   @ApiParam({ name: 'id', description: 'Claim ID' })
   @ApiResponse({ status: 200, description: 'Claim details' })
@@ -88,10 +83,7 @@ export class ClaimsController {
   })
   @ApiResponse({ status: 201, description: 'Claim created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async create(
-    @Body() createClaimDto: CreateClaimDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async create(@Body() createClaimDto: CreateClaimDto, @CurrentUser('id') userId: string) {
     return this.claimsService.create(createClaimDto, userId);
   }
 
@@ -109,10 +101,7 @@ export class ClaimsController {
   @ApiResponse({ status: 200, description: 'Claim updated successfully' })
   @ApiResponse({ status: 400, description: 'Claim cannot be modified in current status' })
   @ApiResponse({ status: 404, description: 'Claim not found' })
-  async update(
-    @Param('id') id: string,
-    @Body() updateClaimDto: UpdateClaimDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateClaimDto: UpdateClaimDto) {
     return this.claimsService.update(id, updateClaimDto);
   }
 
@@ -125,7 +114,8 @@ export class ClaimsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Delete a claim',
-    description: 'Delete a claim. Only PENDING claims with no linked transactions can be deleted. Requires ADMIN role.',
+    description:
+      'Delete a claim. Only PENDING claims with no linked transactions can be deleted. Requires ADMIN role.',
   })
   @ApiParam({ name: 'id', description: 'Claim ID' })
   @ApiResponse({ status: 200, description: 'Claim deleted successfully' })

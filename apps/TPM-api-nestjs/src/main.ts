@@ -124,7 +124,8 @@ async function bootstrap() {
   // Swagger Documentation
   const config = new DocumentBuilder()
     .setTitle('Promo Master V3 API')
-    .setDescription(`
+    .setDescription(
+      `
       Trade Promotion Management System API
       
       ## Overview
@@ -137,7 +138,8 @@ async function bootstrap() {
       - **V3 Features**: Contracts, AI Suggestions, Live Monitoring
       - **Finance**: Settlements, Payments, Reconciliation
       - **Planning**: Planning, Targets, Execution, Operations
-    `)
+    `,
+    )
     .setVersion('3.0.0')
     .addBearerAuth(
       {
@@ -179,7 +181,7 @@ async function bootstrap() {
   // Start server
   const port = configService.get('PORT') || 3000;
   await app.listen(port);
-  
+
   console.log(`
 ╔═══════════════════════════════════════════════════════════════╗
 ║                   PROMO MASTER V3 API                         ║

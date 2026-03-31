@@ -9,10 +9,7 @@ import { PrismaService } from '../../database/prisma.service';
 import { CreateSettlementDto } from './dto/create-settlement.dto';
 import { UpdateSettlementDto } from './dto/update-settlement.dto';
 import { SettlementQueryDto } from './dto/settlement-query.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -26,13 +23,7 @@ export class SettlementsService {
   // ═══════════════════════════════════════════════════════════════════════════
   async findAll(query: SettlementQueryDto) {
     const { skip, take, page, pageSize } = getPaginationParams(query);
-    const {
-      dateFrom,
-      dateTo,
-      search,
-      sortBy = 'settledAt',
-      sortOrder = 'desc',
-    } = query;
+    const { dateFrom, dateTo, search, sortBy = 'settledAt', sortOrder = 'desc' } = query;
 
     // Build where clause
     const where: Prisma.SettlementWhereInput = {};
@@ -59,16 +50,9 @@ export class SettlementsService {
     }
 
     // Build orderBy with validated sort fields
-    const validSortFields = [
-      'settledAt',
-      'settledAmount',
-      'variance',
-      'createdAt',
-    ];
+    const validSortFields = ['settledAt', 'settledAmount', 'variance', 'createdAt'];
     const orderBy: Prisma.SettlementOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { settledAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { settledAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -96,9 +80,7 @@ export class SettlementsService {
     ]);
 
     // Transform data
-    const transformedData = data.map((settlement) =>
-      this.transformSettlement(settlement),
-    );
+    const transformedData = data.map((settlement) => this.transformSettlement(settlement));
 
     return createPaginatedResponse(transformedData, total, page, pageSize);
   }
@@ -172,17 +154,12 @@ export class SettlementsService {
 
     // Validate no existing settlement (claimId is unique)
     if (claim.settlement) {
-      throw new ConflictException(
-        `A settlement already exists for claim ${dto.claimId}`,
-      );
+      throw new ConflictException(`A settlement already exists for claim ${dto.claimId}`);
     }
 
     // Calculate variance = settledAmount - claim.amount
     const claimAmount = Number(claim.amount);
-    const variance =
-      dto.variance !== undefined
-        ? dto.variance
-        : dto.settledAmount - claimAmount;
+    const variance = dto.variance !== undefined ? dto.variance : dto.settledAmount - claimAmount;
 
     // Create settlement AND update claim status to SETTLED in a transaction
     const settlement = await this.prisma.$transaction(async (tx) => {
@@ -332,18 +309,13 @@ export class SettlementsService {
     });
 
     const count = settlements.length;
-    const totalSettled = settlements.reduce(
-      (sum, s) => sum + Number(s.settledAmount),
-      0,
-    );
-    const totalVariance = settlements.reduce(
-      (sum, s) => sum + Number(s.variance || 0),
-      0,
-    );
+    const totalSettled = settlements.reduce((sum, s) => sum + Number(s.settledAmount), 0);
+    const totalVariance = settlements.reduce((sum, s) => sum + Number(s.variance || 0), 0);
     const averageSettlement = count > 0 ? totalSettled / count : 0;
 
     // Settlements by month
-    const byMonth: Record<string, { count: number; totalSettled: number; totalVariance: number }> = {};
+    const byMonth: Record<string, { count: number; totalSettled: number; totalVariance: number }> =
+      {};
     settlements.forEach((s) => {
       const monthKey = `${s.settledAt.getFullYear()}-${String(s.settledAt.getMonth() + 1).padStart(2, '0')}`;
       if (!byMonth[monthKey]) {

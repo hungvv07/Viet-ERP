@@ -1,8 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { CreateSuggestionDto } from './dto/create-suggestion.dto';
 import { CreateInsightDto } from './dto/create-insight.dto';
@@ -71,7 +67,9 @@ export class AiService {
       },
     });
 
-    this.logger.log(`AI Suggestion created: ${suggestion.id} (type: ${suggestion.type}) by user ${userId}`);
+    this.logger.log(
+      `AI Suggestion created: ${suggestion.id} (type: ${suggestion.type}) by user ${userId}`,
+    );
 
     return suggestion;
   }
@@ -176,9 +174,7 @@ export class AiService {
     // Build orderBy
     const validSortFields = ['createdAt', 'type', 'priority', 'confidence', 'title'];
     const orderBy: Prisma.AIInsightOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -229,15 +225,9 @@ export class AiService {
       where: {
         isRead: false,
         isDismissed: false,
-        OR: [
-          { expiresAt: null },
-          { expiresAt: { gt: now } },
-        ],
+        OR: [{ expiresAt: null }, { expiresAt: { gt: now } }],
       },
-      orderBy: [
-        { priority: 'desc' },
-        { createdAt: 'desc' },
-      ],
+      orderBy: [{ priority: 'desc' }, { createdAt: 'desc' }],
       include: {
         user: {
           select: { id: true, name: true, email: true },
@@ -294,7 +284,9 @@ export class AiService {
       },
     });
 
-    this.logger.log(`AI Insight created: ${insight.id} (type: ${insight.type}, title: ${insight.title}) by user ${userId}`);
+    this.logger.log(
+      `AI Insight created: ${insight.id} (type: ${insight.type}, title: ${insight.title}) by user ${userId}`,
+    );
 
     return insight;
   }
@@ -353,7 +345,12 @@ export class AiService {
         title: 'Rising promotion redemption rates in Q1',
         description:
           'Promotion redemption rates have increased by 12% compared to the same period last year. Beverage category promotions are leading this trend with a 18% increase. Consider increasing budget allocation for high-performing categories.',
-        data: { redemptionRate: 0.45, previousRate: 0.33, category: 'Beverages', period: 'Q1 2026' },
+        data: {
+          redemptionRate: 0.45,
+          previousRate: 0.33,
+          category: 'Beverages',
+          period: 'Q1 2026',
+        },
         confidence: 0.92,
         actionable: true,
         action: 'Review and increase budget for beverage category promotions',
@@ -379,7 +376,12 @@ export class AiService {
         title: 'Optimize discount structure for snack promotions',
         description:
           'Analysis of historical promotion performance suggests that 15-20% discount promotions on snack products yield the highest ROI (2.8x) compared to deeper discounts (25%+) which show diminishing returns (1.9x ROI). Recommend capping snack category discounts at 20%.',
-        data: { optimalDiscount: { min: 15, max: 20 }, currentAvgDiscount: 28, projectedROI: 2.8, currentROI: 1.9 },
+        data: {
+          optimalDiscount: { min: 15, max: 20 },
+          currentAvgDiscount: 28,
+          projectedROI: 2.8,
+          currentROI: 1.9,
+        },
         confidence: 0.85,
         actionable: true,
         action: 'Cap snack category promotion discounts at 20% for new promotions',
@@ -392,7 +394,12 @@ export class AiService {
         title: 'Q2 promotion spend projected to exceed budget by 8%',
         description:
           'Based on current run rate and committed promotions, Q2 total promotional spending is projected to reach $2.16M against a budget of $2.0M. Early intervention recommended to prevent budget overrun.',
-        data: { projectedSpend: 2160000, budget: 2000000, overagePercent: 8, confidenceInterval: { low: 2050000, high: 2280000 } },
+        data: {
+          projectedSpend: 2160000,
+          budget: 2000000,
+          overagePercent: 8,
+          confidenceInterval: { low: 2050000, high: 2280000 },
+        },
         confidence: 0.78,
         actionable: true,
         action: 'Review Q2 promotion pipeline and prioritize high-ROI promotions',
@@ -424,7 +431,11 @@ export class AiService {
         title: 'Cross-sell opportunity: Beverage + Snack bundle promotions',
         description:
           'Market basket analysis reveals that 67% of customers who purchase promoted beverages also purchase snack items. A combined bundle promotion could increase average basket size by an estimated 22% with minimal incremental cost.',
-        data: { crossSellRate: 0.67, projectedBasketIncrease: 0.22, topPairings: ['Cola + Chips', 'Juice + Crackers', 'Water + Trail Mix'] },
+        data: {
+          crossSellRate: 0.67,
+          projectedBasketIncrease: 0.22,
+          topPairings: ['Cola + Chips', 'Juice + Crackers', 'Water + Trail Mix'],
+        },
         confidence: 0.81,
         actionable: true,
         action: 'Create beverage + snack bundle promotion for testing in select regions',
@@ -468,9 +479,7 @@ export class AiService {
     const dismissedCount = insights.filter((i) => i.isDismissed).length;
     const actionableCount = insights.filter((i) => i.actionable).length;
     const avgConfidence =
-      total > 0
-        ? insights.reduce((sum, i) => sum + i.confidence, 0) / total
-        : 0;
+      total > 0 ? insights.reduce((sum, i) => sum + i.confidence, 0) / total : 0;
 
     // Aggregate by type
     const byType: Record<string, { count: number; avgConfidence: number; unread: number }> = {};
@@ -488,9 +497,7 @@ export class AiService {
     // Calculate averages per type
     Object.keys(byType).forEach((type) => {
       byType[type].avgConfidence =
-        byType[type].count > 0
-          ? byType[type].avgConfidence / byType[type].count
-          : 0;
+        byType[type].count > 0 ? byType[type].avgConfidence / byType[type].count : 0;
     });
 
     // Aggregate by priority

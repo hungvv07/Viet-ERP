@@ -10,13 +10,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { TemplatesService } from './templates.service';
 import { CreateTemplateDto } from './dto/create-template.dto';
 import { UpdateTemplateDto } from './dto/update-template.dto';
@@ -37,7 +31,8 @@ export class TemplatesController {
   @Get()
   @ApiOperation({
     summary: 'List all templates',
-    description: 'Get paginated list of promotion templates with optional filtering by category, visibility, and search',
+    description:
+      'Get paginated list of promotion templates with optional filtering by category, visibility, and search',
   })
   @ApiResponse({ status: 200, description: 'Template list with pagination' })
   async findAll(@Query() query: TemplateQueryDto) {
@@ -67,7 +62,10 @@ export class TemplatesController {
     summary: 'Get templates by category',
     description: 'Get all templates in a specific category',
   })
-  @ApiParam({ name: 'category', description: 'Template category (SEASONAL, DISPLAY, LISTING, REBATE, CUSTOM)' })
+  @ApiParam({
+    name: 'category',
+    description: 'Template category (SEASONAL, DISPLAY, LISTING, REBATE, CUSTOM)',
+  })
   @ApiResponse({ status: 200, description: 'Templates in the given category' })
   async findByCategory(@Param('category') category: string) {
     return this.templatesService.findByCategory(category);
@@ -102,10 +100,7 @@ export class TemplatesController {
   })
   @ApiResponse({ status: 201, description: 'Template created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error or company not found' })
-  async create(
-    @Body() createTemplateDto: CreateTemplateDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async create(@Body() createTemplateDto: CreateTemplateDto, @CurrentUser('id') userId: string) {
     return this.templatesService.create(createTemplateDto, userId);
   }
 
@@ -117,7 +112,8 @@ export class TemplatesController {
   @Roles('ADMIN', 'MANAGER')
   @ApiOperation({
     summary: 'Update a template',
-    description: 'Update template details. If template JSON changes, a new version is created. companyId cannot be changed.',
+    description:
+      'Update template details. If template JSON changes, a new version is created. companyId cannot be changed.',
   })
   @ApiParam({ name: 'id', description: 'Template ID' })
   @ApiResponse({ status: 200, description: 'Template updated successfully' })
@@ -157,15 +153,13 @@ export class TemplatesController {
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary: 'Duplicate a template',
-    description: 'Create a copy of an existing template with "(Copy)" appended to the name. Requires ADMIN or MANAGER role.',
+    description:
+      'Create a copy of an existing template with "(Copy)" appended to the name. Requires ADMIN or MANAGER role.',
   })
   @ApiParam({ name: 'id', description: 'Template ID to duplicate' })
   @ApiResponse({ status: 201, description: 'Template duplicated successfully' })
   @ApiResponse({ status: 404, description: 'Source template not found' })
-  async duplicate(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async duplicate(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.templatesService.duplicate(id, userId);
   }
 }

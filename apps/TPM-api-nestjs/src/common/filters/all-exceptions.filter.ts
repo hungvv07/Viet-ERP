@@ -94,9 +94,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       status = HttpStatus.BAD_REQUEST;
       code = 'VALIDATION_ERROR';
       message = 'Invalid data provided';
-    } else if (
-      exception instanceof Prisma.PrismaClientInitializationError
-    ) {
+    } else if (exception instanceof Prisma.PrismaClientInitializationError) {
       code = 'DATABASE_CONNECTION_ERROR';
       message = `Database connection failed [${exception.errorCode}]`;
     }

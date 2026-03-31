@@ -1,11 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsInt,
-  IsNumber,
-  IsDateString,
-  Min,
-} from 'class-validator';
+import { IsString, IsOptional, IsInt, IsNumber, IsDateString, Min } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -57,13 +50,13 @@ export class CreateSellOutDto {
   @IsNumber()
   quantityCase?: number;
 
-  @ApiProperty({ description: 'Selling price per unit', example: 500.00 })
+  @ApiProperty({ description: 'Selling price per unit', example: 500.0 })
   @Type(() => Number)
   @IsNumber()
   @Min(0)
   sellingPrice: number;
 
-  @ApiProperty({ description: 'Total value', example: 40000.00 })
+  @ApiProperty({ description: 'Total value', example: 40000.0 })
   @Type(() => Number)
   @IsNumber()
   @Min(0)

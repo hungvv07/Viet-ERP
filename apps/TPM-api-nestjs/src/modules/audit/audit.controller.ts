@@ -1,20 +1,5 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Query,
-  HttpCode,
-  HttpStatus,
-} from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Param, Query, HttpCode, HttpStatus } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { AuditService } from './audit.service';
 import { AuditQueryDto } from './dto/audit-query.dto';
 import { CreateAuditLogDto } from './dto/create-audit-log.dto';
@@ -79,8 +64,7 @@ export class AuditController {
   @Get('entity-types')
   @ApiOperation({
     summary: 'Get distinct entity types',
-    description:
-      'Returns the list of distinct entity types found in audit logs.',
+    description: 'Returns the list of distinct entity types found in audit logs.',
   })
   @ApiResponse({ status: 200, description: 'List of distinct entity types' })
   async getEntityTypes() {
@@ -101,10 +85,7 @@ export class AuditController {
   @ApiParam({ name: 'entityType', description: 'Entity type (e.g., Promotion, Claim)' })
   @ApiParam({ name: 'entityId', description: 'Entity ID' })
   @ApiResponse({ status: 200, description: 'Audit logs for the entity' })
-  async findByEntity(
-    @Param('entityType') entityType: string,
-    @Param('entityId') entityId: string,
-  ) {
+  async findByEntity(@Param('entityType') entityType: string, @Param('entityId') entityId: string) {
     return this.auditService.findByEntity(entityType, entityId);
   }
 

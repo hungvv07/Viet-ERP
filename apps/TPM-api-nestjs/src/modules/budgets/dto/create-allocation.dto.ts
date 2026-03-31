@@ -13,7 +13,10 @@ export class CreateAllocationDto {
   @Min(0)
   allocatedAmount: number;
 
-  @ApiPropertyOptional({ example: 'alloc-parent-123', description: 'Parent allocation ID for hierarchy' })
+  @ApiPropertyOptional({
+    example: 'alloc-parent-123',
+    description: 'Parent allocation ID for hierarchy',
+  })
   @IsOptional()
   @IsString()
   parentId?: string;

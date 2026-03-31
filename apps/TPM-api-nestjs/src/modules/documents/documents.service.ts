@@ -1,14 +1,6 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 import { FileQueryDto } from './dto/file-query.dto';
 import { CreateFileDto } from './dto/create-file.dto';
@@ -70,9 +62,7 @@ export class DocumentsService {
     // Build orderBy
     const validSortFields = ['createdAt', 'filename', 'originalName', 'size', 'category'];
     const orderBy: Prisma.FileOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -336,9 +326,7 @@ export class DocumentsService {
     }
 
     if (poa.status !== 'PENDING') {
-      throw new BadRequestException(
-        `Cannot approve POA in ${poa.status} status. Must be PENDING.`,
-      );
+      throw new BadRequestException(`Cannot approve POA in ${poa.status} status. Must be PENDING.`);
     }
 
     const updated = await this.prisma.pOA.update({
@@ -380,9 +368,7 @@ export class DocumentsService {
     }
 
     if (poa.status !== 'PENDING') {
-      throw new BadRequestException(
-        `Cannot reject POA in ${poa.status} status. Must be PENDING.`,
-      );
+      throw new BadRequestException(`Cannot reject POA in ${poa.status} status. Must be PENDING.`);
     }
 
     const updated = await this.prisma.pOA.update({
@@ -524,9 +510,7 @@ export class DocumentsService {
     }
 
     if (pop.status !== 'PENDING') {
-      throw new BadRequestException(
-        `Cannot verify POP in ${pop.status} status. Must be PENDING.`,
-      );
+      throw new BadRequestException(`Cannot verify POP in ${pop.status} status. Must be PENDING.`);
     }
 
     const updated = await this.prisma.pOP.update({
@@ -568,9 +552,7 @@ export class DocumentsService {
     }
 
     if (pop.status !== 'PENDING') {
-      throw new BadRequestException(
-        `Cannot reject POP in ${pop.status} status. Must be PENDING.`,
-      );
+      throw new BadRequestException(`Cannot reject POP in ${pop.status} status. Must be PENDING.`);
     }
 
     const updated = await this.prisma.pOP.update({

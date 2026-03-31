@@ -1,13 +1,6 @@
-import {
-  Injectable,
-  NotFoundException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 import { TrackingQueryDto } from './dto/tracking-query.dto';
 import { CreateTrackingDto } from './dto/create-tracking.dto';
@@ -38,9 +31,7 @@ export class ExecutionService {
 
     const validSortFields = ['createdAt', 'period', 'sellInQty', 'sellOutQty', 'stockQty'];
     const orderBy: Prisma.SellTrackingOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     const [data, total] = await Promise.all([
       this.prisma.sellTracking.findMany({
@@ -98,7 +89,9 @@ export class ExecutionService {
       },
     });
 
-    this.logger.log(`Sell tracking upserted: ${record.customerId}/${record.productId}/${record.period}`);
+    this.logger.log(
+      `Sell tracking upserted: ${record.customerId}/${record.productId}/${record.period}`,
+    );
 
     return this.transformTracking(record);
   }
@@ -123,16 +116,19 @@ export class ExecutionService {
       },
     });
 
-    const byPeriod: Record<string, {
-      period: string;
-      totalSellInQty: number;
-      totalSellInValue: number;
-      totalSellOutQty: number;
-      totalSellOutValue: number;
-      totalStockQty: number;
-      totalStockValue: number;
-      recordCount: number;
-    }> = {};
+    const byPeriod: Record<
+      string,
+      {
+        period: string;
+        totalSellInQty: number;
+        totalSellInValue: number;
+        totalSellOutQty: number;
+        totalSellOutValue: number;
+        totalStockQty: number;
+        totalStockValue: number;
+        recordCount: number;
+      }
+    > = {};
 
     records.forEach((r) => {
       if (!byPeriod[r.period]) {
@@ -168,9 +164,16 @@ export class ExecutionService {
   async findAllSellIn(query: SellInQueryDto) {
     const { skip, take, page, pageSize } = getPaginationParams(query);
     const {
-      companyId, customerId, productId, promotionId,
-      periodYear, periodMonth, dateFrom, dateTo,
-      sortBy = 'createdAt', sortOrder = 'desc',
+      companyId,
+      customerId,
+      productId,
+      promotionId,
+      periodYear,
+      periodMonth,
+      dateFrom,
+      dateTo,
+      sortBy = 'createdAt',
+      sortOrder = 'desc',
     } = query;
 
     const where: Prisma.SellInWhereInput = {};
@@ -190,9 +193,7 @@ export class ExecutionService {
 
     const validSortFields = ['createdAt', 'transactionDate', 'quantity', 'grossValue', 'netValue'];
     const orderBy: Prisma.SellInOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     const [data, total] = await Promise.all([
       this.prisma.sellIn.findMany({
@@ -277,15 +278,18 @@ export class ExecutionService {
       },
     });
 
-    const byPeriod: Record<string, {
-      periodYear: number;
-      periodMonth: number;
-      totalQuantity: number;
-      totalGrossValue: number;
-      totalDiscountValue: number;
-      totalNetValue: number;
-      recordCount: number;
-    }> = {};
+    const byPeriod: Record<
+      string,
+      {
+        periodYear: number;
+        periodMonth: number;
+        totalQuantity: number;
+        totalGrossValue: number;
+        totalDiscountValue: number;
+        totalNetValue: number;
+        recordCount: number;
+      }
+    > = {};
 
     records.forEach((r) => {
       const key = `${r.periodYear}-${String(r.periodMonth).padStart(2, '0')}`;
@@ -321,9 +325,16 @@ export class ExecutionService {
   async findAllSellOut(query: SellOutQueryDto) {
     const { skip, take, page, pageSize } = getPaginationParams(query);
     const {
-      companyId, customerId, productId, promotionId,
-      periodYear, periodMonth, dateFrom, dateTo,
-      sortBy = 'createdAt', sortOrder = 'desc',
+      companyId,
+      customerId,
+      productId,
+      promotionId,
+      periodYear,
+      periodMonth,
+      dateFrom,
+      dateTo,
+      sortBy = 'createdAt',
+      sortOrder = 'desc',
     } = query;
 
     const where: Prisma.SellOutWhereInput = {};
@@ -341,11 +352,15 @@ export class ExecutionService {
       if (dateTo) where.transactionDate.lte = new Date(dateTo);
     }
 
-    const validSortFields = ['createdAt', 'transactionDate', 'quantity', 'totalValue', 'sellingPrice'];
+    const validSortFields = [
+      'createdAt',
+      'transactionDate',
+      'quantity',
+      'totalValue',
+      'sellingPrice',
+    ];
     const orderBy: Prisma.SellOutOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     const [data, total] = await Promise.all([
       this.prisma.sellOut.findMany({
@@ -428,13 +443,16 @@ export class ExecutionService {
       },
     });
 
-    const byPeriod: Record<string, {
-      periodYear: number;
-      periodMonth: number;
-      totalQuantity: number;
-      totalValue: number;
-      recordCount: number;
-    }> = {};
+    const byPeriod: Record<
+      string,
+      {
+        periodYear: number;
+        periodMonth: number;
+        totalQuantity: number;
+        totalValue: number;
+        recordCount: number;
+      }
+    > = {};
 
     records.forEach((r) => {
       const key = `${r.periodYear}-${String(r.periodMonth).padStart(2, '0')}`;
@@ -506,7 +524,10 @@ export class ExecutionService {
     ]);
 
     // Aggregate sell-in by period
-    const sellInByPeriod: Record<string, { quantity: number; grossValue: number; netValue: number }> = {};
+    const sellInByPeriod: Record<
+      string,
+      { quantity: number; grossValue: number; netValue: number }
+    > = {};
     sellInRecords.forEach((r) => {
       const key = `${r.periodYear}-${String(r.periodMonth).padStart(2, '0')}`;
       if (!sellInByPeriod[key]) {
@@ -529,41 +550,38 @@ export class ExecutionService {
     });
 
     // Combine periods
-    const allPeriods = new Set([
-      ...Object.keys(sellInByPeriod),
-      ...Object.keys(sellOutByPeriod),
-    ]);
+    const allPeriods = new Set([...Object.keys(sellInByPeriod), ...Object.keys(sellOutByPeriod)]);
 
-    const performance = Array.from(allPeriods).sort().map((period) => {
-      const sellIn = sellInByPeriod[period] || { quantity: 0, grossValue: 0, netValue: 0 };
-      const sellOut = sellOutByPeriod[period] || { quantity: 0, totalValue: 0 };
-      const sellThrough = sellIn.quantity > 0
-        ? Number(((sellOut.quantity / sellIn.quantity) * 100).toFixed(2))
-        : 0;
+    const performance = Array.from(allPeriods)
+      .sort()
+      .map((period) => {
+        const sellIn = sellInByPeriod[period] || { quantity: 0, grossValue: 0, netValue: 0 };
+        const sellOut = sellOutByPeriod[period] || { quantity: 0, totalValue: 0 };
+        const sellThrough =
+          sellIn.quantity > 0 ? Number(((sellOut.quantity / sellIn.quantity) * 100).toFixed(2)) : 0;
 
-      return {
-        period,
-        sellIn: {
-          quantity: sellIn.quantity,
-          grossValue: sellIn.grossValue,
-          netValue: sellIn.netValue,
-        },
-        sellOut: {
-          quantity: sellOut.quantity,
-          totalValue: sellOut.totalValue,
-        },
-        sellThroughRate: sellThrough,
-      };
-    });
+        return {
+          period,
+          sellIn: {
+            quantity: sellIn.quantity,
+            grossValue: sellIn.grossValue,
+            netValue: sellIn.netValue,
+          },
+          sellOut: {
+            quantity: sellOut.quantity,
+            totalValue: sellOut.totalValue,
+          },
+          sellThroughRate: sellThrough,
+        };
+      });
 
     // Totals
     const totalSellInQty = sellInRecords.reduce((sum, r) => sum + r.quantity, 0);
     const totalSellInValue = sellInRecords.reduce((sum, r) => sum + Number(r.netValue), 0);
     const totalSellOutQty = sellOutRecords.reduce((sum, r) => sum + r.quantity, 0);
     const totalSellOutValue = sellOutRecords.reduce((sum, r) => sum + Number(r.totalValue), 0);
-    const overallSellThrough = totalSellInQty > 0
-      ? Number(((totalSellOutQty / totalSellInQty) * 100).toFixed(2))
-      : 0;
+    const overallSellThrough =
+      totalSellInQty > 0 ? Number(((totalSellOutQty / totalSellInQty) * 100).toFixed(2)) : 0;
 
     return {
       summary: {

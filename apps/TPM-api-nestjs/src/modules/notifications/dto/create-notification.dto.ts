@@ -1,11 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsEnum,
-  IsObject,
-  IsDateString,
-  MaxLength,
-} from 'class-validator';
+import { IsString, IsOptional, IsEnum, IsObject, IsDateString, MaxLength } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export enum NotificationTypeEnum {
@@ -53,7 +46,10 @@ export class CreateNotificationDto {
   @MaxLength(200)
   title: string;
 
-  @ApiProperty({ example: 'Your promotion PRO-2026-0001 has been approved.', description: 'Notification message' })
+  @ApiProperty({
+    example: 'Your promotion PRO-2026-0001 has been approved.',
+    description: 'Notification message',
+  })
   @IsString()
   message: string;
 
@@ -62,12 +58,18 @@ export class CreateNotificationDto {
   @IsObject()
   data?: object;
 
-  @ApiPropertyOptional({ example: '/promotions/abc123', description: 'URL for the notification action' })
+  @ApiPropertyOptional({
+    example: '/promotions/abc123',
+    description: 'URL for the notification action',
+  })
   @IsOptional()
   @IsString()
   actionUrl?: string;
 
-  @ApiPropertyOptional({ description: 'Expiration date (ISO date string)', example: '2026-12-31T23:59:59Z' })
+  @ApiPropertyOptional({
+    description: 'Expiration date (ISO date string)',
+    example: '2026-12-31T23:59:59Z',
+  })
   @IsOptional()
   @IsDateString()
   expiresAt?: string;

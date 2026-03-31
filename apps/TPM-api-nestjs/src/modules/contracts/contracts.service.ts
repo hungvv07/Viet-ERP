@@ -1,19 +1,11 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { CreateContractDto } from './dto/create-contract.dto';
 import { UpdateContractDto } from './dto/update-contract.dto';
 import { ContractQueryDto } from './dto/contract-query.dto';
 import { CreateMilestoneDto } from './dto/create-milestone.dto';
 import { RecordProgressDto } from './dto/record-progress.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -82,9 +74,7 @@ export class ContractsService {
       'code',
     ];
     const orderBy: Prisma.VolumeContractOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -130,7 +120,8 @@ export class ContractsService {
     const totalCurrentVolume = contracts.reduce((sum, c) => sum + Number(c.currentVolume), 0);
 
     // Count by status
-    const byStatus: Record<string, { count: number; targetVolume: number; currentVolume: number }> = {};
+    const byStatus: Record<string, { count: number; targetVolume: number; currentVolume: number }> =
+      {};
     contracts.forEach((c) => {
       if (!byStatus[c.status]) {
         byStatus[c.status] = { count: 0, targetVolume: 0, currentVolume: 0 };
@@ -150,9 +141,10 @@ export class ContractsService {
       totalContracts,
       totalTargetVolume,
       totalCurrentVolume,
-      overallCompletionRate: totalTargetVolume > 0
-        ? Number(((totalCurrentVolume / totalTargetVolume) * 100).toFixed(2))
-        : 0,
+      overallCompletionRate:
+        totalTargetVolume > 0
+          ? Number(((totalCurrentVolume / totalTargetVolume) * 100).toFixed(2))
+          : 0,
       draftCount: byStatus['DRAFT']?.count || 0,
       activeCount: byStatus['ACTIVE']?.count || 0,
       completedCount: byStatus['COMPLETED']?.count || 0,
@@ -174,10 +166,7 @@ export class ContractsService {
         riskLevel: { in: ['AT_RISK', 'CRITICAL'] },
         status: 'ACTIVE',
       },
-      orderBy: [
-        { riskLevel: 'desc' },
-        { completionRate: 'asc' },
-      ],
+      orderBy: [{ riskLevel: 'desc' }, { completionRate: 'asc' }],
       include: {
         customer: {
           select: { id: true, name: true, code: true },
@@ -264,9 +253,9 @@ export class ContractsService {
         bonusType: (dto.bonusType as any) || 'PERCENTAGE',
         bonusValue: dto.bonusValue,
         bonusCondition: dto.bonusCondition || undefined,
-        channel: dto.channel as any || undefined,
-        region: dto.region as any || undefined,
-        categories: dto.categories as any || [],
+        channel: (dto.channel as any) || undefined,
+        region: (dto.region as any) || undefined,
+        categories: (dto.categories as any) || [],
         riskLevel: 'ON_TRACK',
         completionRate: 0,
         notes: dto.notes || null,
@@ -515,10 +504,7 @@ export class ContractsService {
     const existingProgress = await this.prisma.volumeContractProgress.findMany({
       where: {
         contractId,
-        OR: [
-          { year: { lt: dto.year } },
-          { year: dto.year, month: { lt: dto.month } },
-        ],
+        OR: [{ year: { lt: dto.year } }, { year: dto.year, month: { lt: dto.month } }],
       },
       orderBy: [{ year: 'asc' }, { month: 'asc' }],
     });
@@ -528,9 +514,8 @@ export class ContractsService {
 
     const cumVolume = cumVolumePrior + dto.volume;
     const cumTarget = cumTargetPrior + (dto.target || 0);
-    const gapPercent = cumTarget > 0
-      ? Number((((cumVolume - cumTarget) / cumTarget) * 100).toFixed(2))
-      : 0;
+    const gapPercent =
+      cumTarget > 0 ? Number((((cumVolume - cumTarget) / cumTarget) * 100).toFixed(2)) : 0;
 
     // Upsert progress
     const progress = await this.prisma.volumeContractProgress.upsert({
@@ -569,9 +554,10 @@ export class ContractsService {
       where: { contractId },
     });
     const totalVolume = allProgress.reduce((sum, p) => sum + Number(p.volume), 0);
-    const completionRate = Number(contract.targetVolume) > 0
-      ? Number(((totalVolume / Number(contract.targetVolume)) * 100).toFixed(2))
-      : 0;
+    const completionRate =
+      Number(contract.targetVolume) > 0
+        ? Number(((totalVolume / Number(contract.targetVolume)) * 100).toFixed(2))
+        : 0;
 
     // Determine risk level
     let riskLevel: 'ON_TRACK' | 'AT_RISK' | 'CRITICAL' = 'ON_TRACK';

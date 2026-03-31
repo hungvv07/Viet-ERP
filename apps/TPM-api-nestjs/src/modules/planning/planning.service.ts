@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { CreateScenarioDto } from './dto/create-scenario.dto';
 import { UpdateScenarioDto } from './dto/update-scenario.dto';
@@ -11,10 +6,7 @@ import { ScenarioQueryDto } from './dto/scenario-query.dto';
 import { BaselineQueryDto } from './dto/baseline-query.dto';
 import { CreateBaselineDto } from './dto/create-baseline.dto';
 import { UpdateBaselineDto } from './dto/update-baseline.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -51,9 +43,7 @@ export class PlanningService {
 
     const validSortFields = ['createdAt', 'name', 'status', 'updatedAt'];
     const orderBy: Prisma.ScenarioOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     const [data, total] = await Promise.all([
       this.prisma.scenario.findMany({
@@ -359,7 +349,16 @@ export class PlanningService {
   // ── LIST BASELINES ─────────────────────────────────────────────────────────
   async findAllBaselines(query: BaselineQueryDto) {
     const { skip, take, page, pageSize } = getPaginationParams(query);
-    const { companyId, customerId, productId, channel, periodYear, search, sortBy = 'createdAt', sortOrder = 'desc' } = query;
+    const {
+      companyId,
+      customerId,
+      productId,
+      channel,
+      periodYear,
+      search,
+      sortBy = 'createdAt',
+      sortOrder = 'desc',
+    } = query;
 
     const where: Prisma.BaselineWhereInput = {};
 
@@ -393,9 +392,7 @@ export class PlanningService {
 
     const validSortFields = ['createdAt', 'periodYear', 'baselineVolume', 'baselineRevenue'];
     const orderBy: Prisma.BaselineOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     const [data, total] = await Promise.all([
       this.prisma.baseline.findMany({

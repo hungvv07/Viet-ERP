@@ -1,10 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsEnum,
-  IsObject,
-  MaxLength,
-} from 'class-validator';
+import { IsString, IsOptional, IsEnum, IsObject, MaxLength } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { AuditActionEnum } from './audit-query.dto';
 
@@ -31,7 +25,10 @@ export class CreateAuditLogDto {
   @IsString()
   entityId?: string;
 
-  @ApiProperty({ description: 'Human-readable description of the action', example: 'Created promotion PROMO-2026-0001' })
+  @ApiProperty({
+    description: 'Human-readable description of the action',
+    example: 'Created promotion PROMO-2026-0001',
+  })
   @IsString()
   @MaxLength(1000)
   description: string;

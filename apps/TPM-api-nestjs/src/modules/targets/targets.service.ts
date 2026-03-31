@@ -10,10 +10,7 @@ import { CreateTargetDto } from './dto/create-target.dto';
 import { UpdateTargetDto } from './dto/update-target.dto';
 import { TargetQueryDto } from './dto/target-query.dto';
 import { CreateTargetAllocationDto } from './dto/create-target-allocation.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -79,9 +76,7 @@ export class TargetsService {
       'status',
     ];
     const orderBy: Prisma.TargetOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -349,9 +344,7 @@ export class TargetsService {
       },
     });
 
-    this.logger.log(
-      `Target achieved updated: ${target.code}, new value: ${totalAchieved}`,
-    );
+    this.logger.log(`Target achieved updated: ${target.code}, new value: ${totalAchieved}`);
 
     return this.transformTarget(updated);
   }
@@ -359,11 +352,7 @@ export class TargetsService {
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATE ALLOCATION
   // ═══════════════════════════════════════════════════════════════════════════
-  async createAllocation(
-    targetId: string,
-    dto: CreateTargetAllocationDto,
-    userId: string,
-  ) {
+  async createAllocation(targetId: string, dto: CreateTargetAllocationDto, userId: string) {
     // Validate target exists
     const target = await this.prisma.target.findUnique({
       where: { id: targetId },
@@ -380,9 +369,7 @@ export class TargetsService {
     });
 
     if (!geoUnit) {
-      throw new NotFoundException(
-        `Geographic unit with ID ${dto.geographicUnitId} not found`,
-      );
+      throw new NotFoundException(`Geographic unit with ID ${dto.geographicUnitId} not found`);
     }
 
     // Validate unique [targetId, geographicUnitId]
@@ -408,15 +395,11 @@ export class TargetsService {
       });
 
       if (!parent) {
-        throw new NotFoundException(
-          `Parent allocation with ID ${dto.parentId} not found`,
-        );
+        throw new NotFoundException(`Parent allocation with ID ${dto.parentId} not found`);
       }
 
       if (parent.targetId !== targetId) {
-        throw new BadRequestException(
-          'Parent allocation must belong to the same target',
-        );
+        throw new BadRequestException('Parent allocation must belong to the same target');
       }
     }
 
@@ -511,16 +494,9 @@ export class TargetsService {
     });
 
     // Calculate totals
-    const totalTargetSum = targets.reduce(
-      (sum, t) => sum + Number(t.totalTarget),
-      0,
-    );
-    const totalAchievedSum = targets.reduce(
-      (sum, t) => sum + Number(t.totalAchieved),
-      0,
-    );
-    const achievementRate =
-      totalTargetSum > 0 ? (totalAchievedSum / totalTargetSum) * 100 : 0;
+    const totalTargetSum = targets.reduce((sum, t) => sum + Number(t.totalTarget), 0);
+    const totalAchievedSum = targets.reduce((sum, t) => sum + Number(t.totalAchieved), 0);
+    const achievementRate = totalTargetSum > 0 ? (totalAchievedSum / totalTargetSum) * 100 : 0;
 
     // Count by status
     const byStatus: Record<string, number> = {};
@@ -563,8 +539,7 @@ export class TargetsService {
   private transformTarget(target: any) {
     const totalTarget = Number(target.totalTarget);
     const totalAchieved = Number(target.totalAchieved);
-    const achievementRate =
-      totalTarget > 0 ? (totalAchieved / totalTarget) * 100 : 0;
+    const achievementRate = totalTarget > 0 ? (totalAchieved / totalTarget) * 100 : 0;
 
     return {
       id: target.id,
@@ -595,8 +570,7 @@ export class TargetsService {
 
     return {
       ...base,
-      allocations:
-        target.allocations?.map((a: any) => this.transformAllocation(a)) || [],
+      allocations: target.allocations?.map((a: any) => this.transformAllocation(a)) || [],
     };
   }
 

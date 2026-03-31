@@ -6,13 +6,14 @@ import {
   Logger,
 } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
-import { CreateApprovalRuleDto, ApprovalRuleTypeEnum, ChannelEnum } from './dto/create-approval-rule.dto';
+import {
+  CreateApprovalRuleDto,
+  ApprovalRuleTypeEnum,
+  ChannelEnum,
+} from './dto/create-approval-rule.dto';
 import { UpdateApprovalRuleDto } from './dto/update-approval-rule.dto';
 import { WorkflowQueryDto } from './dto/workflow-query.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma, ApprovalRuleType, Channel } from '@prisma/client';
 
 @Injectable()
@@ -73,9 +74,7 @@ export class WorkflowsService {
       'isActive',
     ];
     const orderBy: Prisma.ApprovalRuleOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -131,9 +130,7 @@ export class WorkflowsService {
     // Validate minAmount <= maxAmount if both provided
     if (dto.maxAmount !== undefined && dto.maxAmount !== null) {
       if (dto.minAmount > dto.maxAmount) {
-        throw new BadRequestException(
-          'minAmount must be less than or equal to maxAmount',
-        );
+        throw new BadRequestException('minAmount must be less than or equal to maxAmount');
       }
     }
 
@@ -173,9 +170,7 @@ export class WorkflowsService {
       },
     });
 
-    this.logger.log(
-      `Approval rule created: "${rule.name}" (${rule.id}) by user ${userId}`,
-    );
+    this.logger.log(`Approval rule created: "${rule.name}" (${rule.id}) by user ${userId}`);
 
     return this.transformRule(rule);
   }
@@ -211,13 +206,15 @@ export class WorkflowsService {
     // Validate minAmount <= maxAmount
     const effectiveMin = dto.minAmount ?? Number(rule.minAmount);
     const effectiveMax =
-      dto.maxAmount !== undefined ? dto.maxAmount : rule.maxAmount !== null ? Number(rule.maxAmount) : null;
+      dto.maxAmount !== undefined
+        ? dto.maxAmount
+        : rule.maxAmount !== null
+          ? Number(rule.maxAmount)
+          : null;
 
     if (effectiveMax !== null && effectiveMax !== undefined) {
       if (effectiveMin > effectiveMax) {
-        throw new BadRequestException(
-          'minAmount must be less than or equal to maxAmount',
-        );
+        throw new BadRequestException('minAmount must be less than or equal to maxAmount');
       }
     }
 
@@ -309,16 +306,10 @@ export class WorkflowsService {
       minAmount: { lte: amount },
       AND: [
         {
-          OR: [
-            { maxAmount: null },
-            { maxAmount: { gte: amount } },
-          ],
+          OR: [{ maxAmount: null }, { maxAmount: { gte: amount } }],
         },
         {
-          OR: [
-            { channel: null },
-            ...(channel ? [{ channel: channel as any }] : []),
-          ],
+          OR: [{ channel: null }, ...(channel ? [{ channel: channel as any }] : [])],
         },
       ],
     };

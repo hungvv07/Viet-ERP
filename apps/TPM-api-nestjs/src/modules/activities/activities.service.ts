@@ -1,19 +1,11 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { CreateActivityDto } from './dto/create-activity.dto';
 import { UpdateActivityDto } from './dto/update-activity.dto';
 import { ActivityQueryDto } from './dto/activity-query.dto';
 import { RecordSpendingDto } from './dto/record-spending.dto';
 import { UpdateRoiDto } from './dto/update-roi.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -76,9 +68,7 @@ export class ActivitiesService {
       'status',
     ];
     const orderBy: Prisma.FundActivityOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -193,7 +183,7 @@ export class ActivitiesService {
     if (dto.allocatedAmount > remainingBudget) {
       throw new BadRequestException(
         `Allocated amount (${dto.allocatedAmount}) exceeds budget's remaining allocatable amount (${remainingBudget.toFixed(2)}). ` +
-        `Budget total: ${budgetTotal.toFixed(2)}, already allocated to activities: ${totalAllocated.toFixed(2)}`,
+          `Budget total: ${budgetTotal.toFixed(2)}, already allocated to activities: ${totalAllocated.toFixed(2)}`,
       );
     }
 
@@ -244,16 +234,12 @@ export class ActivitiesService {
 
     // Only PLANNED activities can have allocatedAmount changed
     if (dto.allocatedAmount !== undefined && activity.status !== 'PLANNED') {
-      throw new BadRequestException(
-        'Allocated amount can only be changed for PLANNED activities',
-      );
+      throw new BadRequestException('Allocated amount can only be changed for PLANNED activities');
     }
 
     // Validate dates if provided
     if (dto.startDate || dto.endDate) {
-      const startDate = dto.startDate
-        ? new Date(dto.startDate)
-        : activity.startDate;
+      const startDate = dto.startDate ? new Date(dto.startDate) : activity.startDate;
       const endDate = dto.endDate ? new Date(dto.endDate) : activity.endDate;
 
       if (endDate <= startDate) {
@@ -405,9 +391,7 @@ export class ActivitiesService {
 
     // Auto-calculate ROI if revenueGenerated and spentAmount are available
     const spentAmount = Number(activity.spentAmount || 0);
-    const revenueGenerated = activity.revenueGenerated
-      ? Number(activity.revenueGenerated)
-      : null;
+    const revenueGenerated = activity.revenueGenerated ? Number(activity.revenueGenerated) : null;
 
     let roi: number | null = null;
     if (revenueGenerated !== null && spentAmount > 0) {
@@ -465,15 +449,13 @@ export class ActivitiesService {
     if (newTotalSpent > allocatedAmount) {
       throw new BadRequestException(
         `Spending of ${dto.amount.toFixed(2)} would exceed allocated amount. ` +
-        `Current spent: ${currentSpent.toFixed(2)}, allocated: ${allocatedAmount.toFixed(2)}, ` +
-        `remaining: ${(allocatedAmount - currentSpent).toFixed(2)}`,
+          `Current spent: ${currentSpent.toFixed(2)}, allocated: ${allocatedAmount.toFixed(2)}, ` +
+          `remaining: ${(allocatedAmount - currentSpent).toFixed(2)}`,
       );
     }
 
     // Auto-recalculate ROI if revenueGenerated is set
-    const revenueGenerated = activity.revenueGenerated
-      ? Number(activity.revenueGenerated)
-      : null;
+    const revenueGenerated = activity.revenueGenerated ? Number(activity.revenueGenerated) : null;
 
     let roi: number | null = null;
     if (revenueGenerated !== null && newTotalSpent > 0) {
@@ -493,9 +475,7 @@ export class ActivitiesService {
       const existingNotes = activity.notes || '';
       const timestamp = new Date().toISOString();
       const spendNote = `[${timestamp}] Spent: ${dto.amount.toFixed(2)} - ${dto.description}`;
-      updateData.notes = existingNotes
-        ? `${existingNotes}\n${spendNote}`
-        : spendNote;
+      updateData.notes = existingNotes ? `${existingNotes}\n${spendNote}` : spendNote;
     }
 
     const updated = await this.prisma.fundActivity.update({
@@ -632,13 +612,8 @@ export class ActivitiesService {
         totalRevenue,
         activityCount: totals._count.id,
         utilizationRate:
-          totalAllocated > 0
-            ? Number(((totalSpent / totalAllocated) * 100).toFixed(2))
-            : 0,
-        overallROI:
-          totalSpent > 0
-            ? Number((totalRevenue / totalSpent).toFixed(4))
-            : 0,
+          totalAllocated > 0 ? Number(((totalSpent / totalAllocated) * 100).toFixed(2)) : 0,
+        overallROI: totalSpent > 0 ? Number((totalRevenue / totalSpent).toFixed(4)) : 0,
       },
       byType: byType.map((row) => {
         const allocated = Number(row._sum.allocatedAmount || 0);
@@ -649,10 +624,7 @@ export class ActivitiesService {
           totalSpent: spent,
           remaining: allocated - spent,
           activityCount: row._count.id,
-          utilizationRate:
-            allocated > 0
-              ? Number(((spent / allocated) * 100).toFixed(2))
-              : 0,
+          utilizationRate: allocated > 0 ? Number(((spent / allocated) * 100).toFixed(2)) : 0,
         };
       }),
       byStatus: byStatus.map((row) => {
@@ -688,16 +660,12 @@ export class ActivitiesService {
   private transformActivity(activity: any) {
     const allocatedAmount = Number(activity.allocatedAmount || 0);
     const spentAmount = Number(activity.spentAmount || 0);
-    const revenueGenerated = activity.revenueGenerated
-      ? Number(activity.revenueGenerated)
-      : null;
+    const revenueGenerated = activity.revenueGenerated ? Number(activity.revenueGenerated) : null;
     const roi = activity.roi ? Number(activity.roi) : null;
 
     const remainingAmount = allocatedAmount - spentAmount;
     const utilizationRate =
-      allocatedAmount > 0
-        ? Number(((spentAmount / allocatedAmount) * 100).toFixed(2))
-        : 0;
+      allocatedAmount > 0 ? Number(((spentAmount / allocatedAmount) * 100).toFixed(2)) : 0;
 
     return {
       id: activity.id,

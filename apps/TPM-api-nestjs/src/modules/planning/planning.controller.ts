@@ -60,10 +60,7 @@ export class PlanningController {
   @ApiQuery({ name: 'year', required: false, type: Number })
   @ApiQuery({ name: 'companyId', required: false, type: String })
   @ApiResponse({ status: 200, description: 'Fiscal period calendar data' })
-  async getCalendar(
-    @Query('year') year?: number,
-    @Query('companyId') companyId?: string,
-  ) {
+  async getCalendar(@Query('year') year?: number, @Query('companyId') companyId?: string) {
     return this.planningService.getCalendar(year ? Number(year) : undefined, companyId);
   }
 
@@ -109,10 +106,7 @@ export class PlanningController {
   })
   @ApiResponse({ status: 201, description: 'Scenario created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async createScenario(
-    @Body() dto: CreateScenarioDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async createScenario(@Body() dto: CreateScenarioDto, @CurrentUser('id') userId: string) {
     return this.planningService.createScenario(dto, userId);
   }
 
@@ -151,10 +145,7 @@ export class PlanningController {
   @ApiResponse({ status: 200, description: 'Scenario run started' })
   @ApiResponse({ status: 400, description: 'Scenario cannot be run in current status' })
   @ApiResponse({ status: 404, description: 'Scenario not found' })
-  async runScenario(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async runScenario(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.planningService.runScenario(id, userId);
   }
 
@@ -172,10 +163,7 @@ export class PlanningController {
   @ApiResponse({ status: 200, description: 'Scenario completed' })
   @ApiResponse({ status: 400, description: 'Scenario must be in RUNNING status' })
   @ApiResponse({ status: 404, description: 'Scenario not found' })
-  async completeScenario(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async completeScenario(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.planningService.completeScenario(id, userId);
   }
 
@@ -193,10 +181,7 @@ export class PlanningController {
   @ApiResponse({ status: 200, description: 'Scenario archived' })
   @ApiResponse({ status: 400, description: 'Scenario is already archived' })
   @ApiResponse({ status: 404, description: 'Scenario not found' })
-  async archiveScenario(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async archiveScenario(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.planningService.archiveScenario(id, userId);
   }
 
@@ -214,10 +199,7 @@ export class PlanningController {
   @ApiResponse({ status: 200, description: 'Scenario deleted successfully' })
   @ApiResponse({ status: 400, description: 'Scenario cannot be deleted in current status' })
   @ApiResponse({ status: 404, description: 'Scenario not found' })
-  async deleteScenario(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async deleteScenario(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.planningService.deleteScenario(id, userId);
   }
 
@@ -263,10 +245,7 @@ export class PlanningController {
   })
   @ApiResponse({ status: 201, description: 'Baseline created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async createBaseline(
-    @Body() dto: CreateBaselineDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async createBaseline(@Body() dto: CreateBaselineDto, @CurrentUser('id') userId: string) {
     return this.planningService.createBaseline(dto, userId);
   }
 

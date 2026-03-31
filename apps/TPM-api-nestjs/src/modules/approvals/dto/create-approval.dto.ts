@@ -1,11 +1,4 @@
-import {
-  IsString,
-  IsInt,
-  IsOptional,
-  Min,
-  Max,
-  MaxLength,
-} from 'class-validator';
+import { IsString, IsInt, IsOptional, Min, Max, MaxLength } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -37,7 +30,10 @@ export class CreateApprovalDto {
   @MaxLength(200)
   reviewerName?: string;
 
-  @ApiPropertyOptional({ example: 'Please review Q1 budget allocation', description: 'Submission comments' })
+  @ApiPropertyOptional({
+    example: 'Please review Q1 budget allocation',
+    description: 'Submission comments',
+  })
   @IsOptional()
   @IsString()
   @MaxLength(2000)

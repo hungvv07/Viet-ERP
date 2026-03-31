@@ -1,16 +1,8 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { CreateTransactionDto, TransactionTypeEnum } from './dto/create-transaction.dto';
 import { TransactionQueryDto } from './dto/transaction-query.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -66,17 +58,13 @@ export class PaymentsService {
     }
 
     if (search) {
-      where.OR = [
-        { description: { contains: search, mode: 'insensitive' } },
-      ];
+      where.OR = [{ description: { contains: search, mode: 'insensitive' } }];
     }
 
     // Build orderBy
     const validSortFields = ['createdAt', 'amount', 'type'];
     const orderBy: Prisma.TransactionOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -311,7 +299,14 @@ export class PaymentsService {
     // Validate fund exists
     const fund = await this.prisma.fund.findUnique({
       where: { id: fundId },
-      select: { id: true, code: true, name: true, totalBudget: true, committed: true, available: true },
+      select: {
+        id: true,
+        code: true,
+        name: true,
+        totalBudget: true,
+        committed: true,
+        available: true,
+      },
     });
 
     if (!fund) {
@@ -372,7 +367,10 @@ export class PaymentsService {
     }
 
     // Aggregate by fund
-    const fundMap: Record<string, { fundId: string; fundCode: string; fundName: string; totalAmount: number; count: number }> = {};
+    const fundMap: Record<
+      string,
+      { fundId: string; fundCode: string; fundName: string; totalAmount: number; count: number }
+    > = {};
     for (const txn of transactions) {
       const fid = txn.fundId;
       if (!fundMap[fid]) {

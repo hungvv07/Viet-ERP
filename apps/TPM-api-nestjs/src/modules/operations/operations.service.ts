@@ -1,14 +1,6 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 import { ImportQueryDto } from './dto/import-query.dto';
 import { CreateImportDto } from './dto/create-import.dto';
@@ -36,9 +28,7 @@ export class OperationsService {
 
     const validSortFields = ['createdAt', 'status', 'totalRecords', 'source'];
     const orderBy: Prisma.DeductionImportBatchOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     const [data, total] = await Promise.all([
       this.prisma.deductionImportBatch.findMany({
@@ -146,9 +136,7 @@ export class OperationsService {
 
     const validSortFields = ['startDate', 'endDate', 'year', 'month', 'status', 'createdAt'];
     const orderBy: Prisma.FiscalPeriodOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { startDate: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { startDate: 'desc' };
 
     const [data, total] = await Promise.all([
       this.prisma.fiscalPeriod.findMany({
@@ -216,7 +204,11 @@ export class OperationsService {
   // ═══════════════════════════════════════════════════════════════════════════
   // FISCAL PERIODS - CLOSE
   // ═══════════════════════════════════════════════════════════════════════════
-  async closeFiscalPeriod(id: string, userId: string, closeType: 'SOFT_CLOSE' | 'HARD_CLOSE' = 'SOFT_CLOSE') {
+  async closeFiscalPeriod(
+    id: string,
+    userId: string,
+    closeType: 'SOFT_CLOSE' | 'HARD_CLOSE' = 'SOFT_CLOSE',
+  ) {
     const period = await this.prisma.fiscalPeriod.findUnique({ where: { id } });
 
     if (!period) {
@@ -330,13 +322,16 @@ export class OperationsService {
     });
 
     const totalJobs = jobs.length;
-    const byStatus: Record<string, {
-      count: number;
-      totalRecords: number;
-      processedRecords: number;
-      successRecords: number;
-      failedRecords: number;
-    }> = {};
+    const byStatus: Record<
+      string,
+      {
+        count: number;
+        totalRecords: number;
+        processedRecords: number;
+        successRecords: number;
+        failedRecords: number;
+      }
+    > = {};
 
     jobs.forEach((j) => {
       if (!byStatus[j.status]) {

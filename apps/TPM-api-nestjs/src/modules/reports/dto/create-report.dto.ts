@@ -47,7 +47,10 @@ export class CreateReportDto {
   dataSource: string;
 
   @ApiProperty({
-    example: [{ field: 'name', label: 'Promotion Name' }, { field: 'budget', label: 'Budget' }],
+    example: [
+      { field: 'name', label: 'Promotion Name' },
+      { field: 'budget', label: 'Budget' },
+    ],
     description: 'Column definitions as JSON',
   })
   @IsObject()
@@ -91,7 +94,10 @@ export class CreateReportDto {
   @IsEnum(ReportFormatEnum)
   defaultFormat?: ReportFormatEnum;
 
-  @ApiPropertyOptional({ default: false, description: 'Whether this report is a reusable template' })
+  @ApiPropertyOptional({
+    default: false,
+    description: 'Whether this report is a reusable template',
+  })
   @IsOptional()
   @IsBoolean()
   isTemplate?: boolean;

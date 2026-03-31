@@ -1,14 +1,6 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 import { ConnectionQueryDto } from './dto/connection-query.dto';
 import { CreateConnectionDto } from './dto/create-connection.dto';
@@ -40,9 +32,7 @@ export class IntegrationsService {
 
     const validSortFields = ['createdAt', 'name', 'status', 'erpType', 'lastPingAt'];
     const orderBy: Prisma.ERPConnectionOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     const [data, total] = await Promise.all([
       this.prisma.eRPConnection.findMany({
@@ -278,7 +268,9 @@ export class IntegrationsService {
       },
     });
 
-    this.logger.log(`Sync config created: ${config.entityType}/${config.direction} for connection ${connection.name}`);
+    this.logger.log(
+      `Sync config created: ${config.entityType}/${config.direction} for connection ${connection.name}`,
+    );
 
     return config;
   }

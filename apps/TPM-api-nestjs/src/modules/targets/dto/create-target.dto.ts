@@ -42,7 +42,12 @@ export class CreateTargetDto {
   @Max(2030)
   year: number;
 
-  @ApiPropertyOptional({ example: 1, minimum: 1, maximum: 4, description: 'Quarter (1-4), null for annual' })
+  @ApiPropertyOptional({
+    example: 1,
+    minimum: 1,
+    maximum: 4,
+    description: 'Quarter (1-4), null for annual',
+  })
   @IsOptional()
   @Type(() => Number)
   @IsInt()
@@ -50,7 +55,12 @@ export class CreateTargetDto {
   @Max(4)
   quarter?: number;
 
-  @ApiPropertyOptional({ example: 3, minimum: 1, maximum: 12, description: 'Month (1-12), null for quarterly/annual' })
+  @ApiPropertyOptional({
+    example: 3,
+    minimum: 1,
+    maximum: 12,
+    description: 'Month (1-12), null for quarterly/annual',
+  })
   @IsOptional()
   @Type(() => Number)
   @IsInt()

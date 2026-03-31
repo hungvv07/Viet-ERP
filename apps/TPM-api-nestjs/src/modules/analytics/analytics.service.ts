@@ -50,23 +50,12 @@ export class AnalyticsService {
     });
 
     const count = budgets.length;
-    const totalAmount = budgets.reduce(
-      (sum, b) => sum + Number(b.totalAmount),
-      0,
-    );
-    const allocatedAmount = budgets.reduce(
-      (sum, b) => sum + Number(b.allocatedAmount),
-      0,
-    );
-    const spentAmount = budgets.reduce(
-      (sum, b) => sum + Number(b.spentAmount),
-      0,
-    );
+    const totalAmount = budgets.reduce((sum, b) => sum + Number(b.totalAmount), 0);
+    const allocatedAmount = budgets.reduce((sum, b) => sum + Number(b.allocatedAmount), 0);
+    const spentAmount = budgets.reduce((sum, b) => sum + Number(b.spentAmount), 0);
     const remainingAmount = totalAmount - spentAmount;
-    const utilizationRate =
-      totalAmount > 0 ? (spentAmount / totalAmount) * 100 : 0;
-    const allocationRate =
-      totalAmount > 0 ? (allocatedAmount / totalAmount) * 100 : 0;
+    const utilizationRate = totalAmount > 0 ? (spentAmount / totalAmount) * 100 : 0;
+    const allocationRate = totalAmount > 0 ? (allocatedAmount / totalAmount) * 100 : 0;
 
     // Group by status
     const byStatus: Record<string, number> = {};
@@ -77,8 +66,7 @@ export class AnalyticsService {
     // Group by approval status
     const byApprovalStatus: Record<string, number> = {};
     for (const b of budgets) {
-      byApprovalStatus[b.approvalStatus] =
-        (byApprovalStatus[b.approvalStatus] || 0) + 1;
+      byApprovalStatus[b.approvalStatus] = (byApprovalStatus[b.approvalStatus] || 0) + 1;
     }
 
     return {
@@ -127,14 +115,8 @@ export class AnalyticsService {
     });
 
     const count = promotions.length;
-    const totalBudget = promotions.reduce(
-      (sum, p) => sum + Number(p.budget),
-      0,
-    );
-    const totalActualSpend = promotions.reduce(
-      (sum, p) => sum + Number(p.actualSpend || 0),
-      0,
-    );
+    const totalBudget = promotions.reduce((sum, p) => sum + Number(p.budget), 0);
+    const totalActualSpend = promotions.reduce((sum, p) => sum + Number(p.actualSpend || 0), 0);
 
     // Group by status: DRAFT, PLANNED, CONFIRMED, EXECUTING, COMPLETED, CANCELLED
     const byStatus: Record<string, number> = {};
@@ -185,10 +167,7 @@ export class AnalyticsService {
     });
 
     const count = claims.length;
-    const totalAmount = claims.reduce(
-      (sum, c) => sum + Number(c.amount),
-      0,
-    );
+    const totalAmount = claims.reduce((sum, c) => sum + Number(c.amount), 0);
     const approvedAmount = claims
       .filter((c) => c.status === 'APPROVED' || c.status === 'SETTLED')
       .reduce((sum, c) => sum + Number(c.amount), 0);
@@ -238,16 +217,9 @@ export class AnalyticsService {
     });
 
     const count = targets.length;
-    const totalTarget = targets.reduce(
-      (sum, t) => sum + Number(t.totalTarget),
-      0,
-    );
-    const totalAchieved = targets.reduce(
-      (sum, t) => sum + Number(t.totalAchieved),
-      0,
-    );
-    const achievementRate =
-      totalTarget > 0 ? (totalAchieved / totalTarget) * 100 : 0;
+    const totalTarget = targets.reduce((sum, t) => sum + Number(t.totalTarget), 0);
+    const totalAchieved = targets.reduce((sum, t) => sum + Number(t.totalAchieved), 0);
+    const achievementRate = totalTarget > 0 ? (totalAchieved / totalTarget) * 100 : 0;
 
     // Group by status
     const byStatus: Record<string, number> = {};
@@ -293,14 +265,8 @@ export class AnalyticsService {
             select: { budget: true, actualSpend: true },
           });
 
-          const totalBudget = promotions.reduce(
-            (sum, p) => sum + Number(p.budget),
-            0,
-          );
-          const totalSpend = promotions.reduce(
-            (sum, p) => sum + Number(p.actualSpend || 0),
-            0,
-          );
+          const totalBudget = promotions.reduce((sum, p) => sum + Number(p.budget), 0);
+          const totalSpend = promotions.reduce((sum, p) => sum + Number(p.actualSpend || 0), 0);
 
           return {
             month,
@@ -331,10 +297,7 @@ export class AnalyticsService {
           });
 
           const count = claims.length;
-          const totalAmount = claims.reduce(
-            (sum, c) => sum + Number(c.amount),
-            0,
-          );
+          const totalAmount = claims.reduce((sum, c) => sum + Number(c.amount), 0);
           const approvedCount = claims.filter(
             (c) => c.status === 'APPROVED' || c.status === 'SETTLED',
           ).length;
@@ -354,7 +317,12 @@ export class AnalyticsService {
       return { entityType, year, trends };
     }
 
-    return { entityType, year, trends: [], message: 'Unsupported entity type. Use "promotions" or "claims".' };
+    return {
+      entityType,
+      year,
+      trends: [],
+      message: 'Unsupported entity type. Use "promotions" or "claims".',
+    };
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -496,17 +464,13 @@ export class AnalyticsService {
       },
     });
 
-    const totalBudget = completedPromotions.reduce(
-      (sum, p) => sum + Number(p.budget),
-      0,
-    );
+    const totalBudget = completedPromotions.reduce((sum, p) => sum + Number(p.budget), 0);
     const totalActualSpend = completedPromotions.reduce(
       (sum, p) => sum + Number(p.actualSpend || 0),
       0,
     );
     const totalSavings = totalBudget - totalActualSpend;
-    const savingsRate =
-      totalBudget > 0 ? (totalSavings / totalBudget) * 100 : 0;
+    const savingsRate = totalBudget > 0 ? (totalSavings / totalBudget) * 100 : 0;
 
     const promotionDetails = completedPromotions.map((p) => {
       const budget = Number(p.budget);

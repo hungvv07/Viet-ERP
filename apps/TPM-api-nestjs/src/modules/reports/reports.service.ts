@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { CreateReportDto, ReportFormatEnum } from './dto/create-report.dto';
 import { UpdateReportDto } from './dto/update-report.dto';
@@ -68,9 +63,7 @@ export class ReportsService {
     // Build orderBy
     const validSortFields = ['createdAt', 'name', 'category', 'dataSource', 'updatedAt'];
     const orderBy: Prisma.ReportDefinitionOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -202,7 +195,8 @@ export class ReportsService {
     if (dto.filters !== undefined) updateData.filters = dto.filters as Prisma.InputJsonValue;
     if (dto.groupBy !== undefined) updateData.groupBy = dto.groupBy;
     if (dto.sortBy !== undefined) updateData.sortBy = dto.sortBy as Prisma.InputJsonValue;
-    if (dto.calculations !== undefined) updateData.calculations = dto.calculations as Prisma.InputJsonValue;
+    if (dto.calculations !== undefined)
+      updateData.calculations = dto.calculations as Prisma.InputJsonValue;
     if (dto.defaultFormat !== undefined) updateData.defaultFormat = dto.defaultFormat;
     if (dto.isTemplate !== undefined) updateData.isTemplate = dto.isTemplate;
 
@@ -430,9 +424,7 @@ export class ReportsService {
       orderBy: { category: 'asc' },
     });
 
-    const categories = results
-      .map((r) => r.category)
-      .filter((c): c is string => c !== null);
+    const categories = results.map((r) => r.category).filter((c): c is string => c !== null);
 
     return { categories };
   }

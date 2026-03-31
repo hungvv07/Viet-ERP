@@ -1,20 +1,5 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Query,
-  HttpCode,
-  HttpStatus,
-} from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Param, Query, HttpCode, HttpStatus } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { ApprovalsService } from './approvals.service';
 import { CreateApprovalDto } from './dto/create-approval.dto';
 import { ApprovalQueryDto } from './dto/approval-query.dto';
@@ -35,7 +20,8 @@ export class ApprovalsController {
   @Get()
   @ApiOperation({
     summary: 'List all approvals',
-    description: 'Get paginated list of budget approvals with optional filtering by status, budgetId, reviewerId, and level',
+    description:
+      'Get paginated list of budget approvals with optional filtering by status, budgetId, reviewerId, and level',
   })
   @ApiResponse({ status: 200, description: 'Approval list with pagination' })
   async findAll(@Query() query: ApprovalQueryDto) {
@@ -63,7 +49,8 @@ export class ApprovalsController {
   @Get('pending/:reviewerId')
   @ApiOperation({
     summary: 'Get pending approvals for a reviewer',
-    description: 'Get all approvals in UNDER_REVIEW or SUBMITTED status assigned to a specific reviewer',
+    description:
+      'Get all approvals in UNDER_REVIEW or SUBMITTED status assigned to a specific reviewer',
   })
   @ApiParam({ name: 'reviewerId', description: 'Reviewer user ID' })
   @ApiResponse({ status: 200, description: 'List of pending approvals for the reviewer' })
@@ -130,7 +117,8 @@ export class ApprovalsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Approve an approval request',
-    description: 'Set approval status to APPROVED with reviewedAt timestamp. Requires ADMIN or MANAGER role.',
+    description:
+      'Set approval status to APPROVED with reviewedAt timestamp. Requires ADMIN or MANAGER role.',
   })
   @ApiParam({ name: 'id', description: 'Approval ID' })
   @ApiResponse({ status: 200, description: 'Approval approved successfully' })
@@ -153,7 +141,8 @@ export class ApprovalsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Reject an approval request',
-    description: 'Set approval status to REJECTED with reviewedAt timestamp and comments. Requires ADMIN or MANAGER role.',
+    description:
+      'Set approval status to REJECTED with reviewedAt timestamp and comments. Requires ADMIN or MANAGER role.',
   })
   @ApiParam({ name: 'id', description: 'Approval ID' })
   @ApiResponse({ status: 200, description: 'Approval rejected successfully' })

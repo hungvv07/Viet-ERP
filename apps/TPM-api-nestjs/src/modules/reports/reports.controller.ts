@@ -10,13 +10,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { ReportsService } from './reports.service';
 import { CreateReportDto } from './dto/create-report.dto';
 import { UpdateReportDto } from './dto/update-report.dto';
@@ -100,14 +94,12 @@ export class ReportsController {
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary: 'Create a new report definition',
-    description: 'Create a new report definition with data source, columns, and filters. Requires ADMIN or MANAGER role.',
+    description:
+      'Create a new report definition with data source, columns, and filters. Requires ADMIN or MANAGER role.',
   })
   @ApiResponse({ status: 201, description: 'Report definition created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async create(
-    @Body() createReportDto: CreateReportDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async create(@Body() createReportDto: CreateReportDto, @CurrentUser('id') userId: string) {
     return this.reportsService.create(createReportDto, userId);
   }
 
@@ -124,10 +116,7 @@ export class ReportsController {
   @ApiParam({ name: 'id', description: 'Report Definition ID' })
   @ApiResponse({ status: 200, description: 'Report definition updated successfully' })
   @ApiResponse({ status: 404, description: 'Report definition not found' })
-  async update(
-    @Param('id') id: string,
-    @Body() updateReportDto: UpdateReportDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateReportDto: UpdateReportDto) {
     return this.reportsService.update(id, updateReportDto);
   }
 
@@ -140,7 +129,8 @@ export class ReportsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Delete a report definition',
-    description: 'Delete a report definition and all related schedules and executions (cascade). Requires ADMIN role.',
+    description:
+      'Delete a report definition and all related schedules and executions (cascade). Requires ADMIN role.',
   })
   @ApiParam({ name: 'id', description: 'Report Definition ID' })
   @ApiResponse({ status: 200, description: 'Report definition deleted successfully' })
@@ -157,7 +147,8 @@ export class ReportsController {
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary: 'Execute a report',
-    description: 'Trigger report generation. Creates a new execution record and simulates generation.',
+    description:
+      'Trigger report generation. Creates a new execution record and simulates generation.',
   })
   @ApiParam({ name: 'id', description: 'Report Definition ID' })
   @ApiResponse({ status: 201, description: 'Report execution started' })
@@ -205,10 +196,7 @@ export class ReportsController {
   @ApiParam({ name: 'scheduleId', description: 'Report Schedule ID' })
   @ApiResponse({ status: 200, description: 'Report schedule deleted successfully' })
   @ApiResponse({ status: 404, description: 'Report schedule not found' })
-  async deleteSchedule(
-    @Param('id') id: string,
-    @Param('scheduleId') scheduleId: string,
-  ) {
+  async deleteSchedule(@Param('id') id: string, @Param('scheduleId') scheduleId: string) {
     return this.reportsService.deleteSchedule(id, scheduleId);
   }
 
@@ -224,10 +212,7 @@ export class ReportsController {
   @ApiParam({ name: 'id', description: 'Report Definition ID' })
   @ApiResponse({ status: 200, description: 'Execution history with pagination' })
   @ApiResponse({ status: 404, description: 'Report definition not found' })
-  async getExecutions(
-    @Param('id') id: string,
-    @Query() query: PaginationDto,
-  ) {
+  async getExecutions(@Param('id') id: string, @Query() query: PaginationDto) {
     return this.reportsService.getExecutions(id, query);
   }
 }

@@ -1,10 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { CategoriesService } from './categories.service';
 
 @ApiTags('Categories')
@@ -20,7 +15,8 @@ export class CategoriesController {
   @Get()
   @ApiOperation({
     summary: 'List all category types',
-    description: 'Get a list of all available category types with their descriptions and value counts',
+    description:
+      'Get a list of all available category types with their descriptions and value counts',
   })
   @ApiResponse({ status: 200, description: 'List of category types' })
   getAllCategoryTypes() {
@@ -48,7 +44,8 @@ export class CategoriesController {
   @Get('templates')
   @ApiOperation({
     summary: 'Get TemplateCategory enum values',
-    description: 'Get all TemplateCategory enum values with labels (SEASONAL, DISPLAY, LISTING, REBATE, CUSTOM)',
+    description:
+      'Get all TemplateCategory enum values with labels (SEASONAL, DISPLAY, LISTING, REBATE, CUSTOM)',
   })
   @ApiResponse({ status: 200, description: 'TemplateCategory enum values' })
   getTemplates() {
@@ -62,7 +59,8 @@ export class CategoriesController {
   @Get('deductions')
   @ApiOperation({
     summary: 'Get DeductionCategory enum values',
-    description: 'Get all DeductionCategory enum values with labels (TRADE_PROMOTION, PRICING, LOGISTICS, QUALITY, ADVERTISING, OTHER)',
+    description:
+      'Get all DeductionCategory enum values with labels (TRADE_PROMOTION, PRICING, LOGISTICS, QUALITY, ADVERTISING, OTHER)',
   })
   @ApiResponse({ status: 200, description: 'DeductionCategory enum values' })
   getDeductions() {
@@ -76,7 +74,8 @@ export class CategoriesController {
   @Get('files')
   @ApiOperation({
     summary: 'Get FileCategory enum values',
-    description: 'Get all FileCategory enum values with labels (POA, POP, INVOICE, CONTRACT, REPORT, OTHER)',
+    description:
+      'Get all FileCategory enum values with labels (POA, POP, INVOICE, CONTRACT, REPORT, OTHER)',
   })
   @ApiResponse({ status: 200, description: 'FileCategory enum values' })
   getFiles() {
@@ -90,7 +89,8 @@ export class CategoriesController {
   @Get('accounts')
   @ApiOperation({
     summary: 'Get GLAccountType enum values',
-    description: 'Get all GLAccountType enum values with labels (ASSET, LIABILITY, EQUITY, REVENUE, EXPENSE)',
+    description:
+      'Get all GLAccountType enum values with labels (ASSET, LIABILITY, EQUITY, REVENUE, EXPENSE)',
   })
   @ApiResponse({ status: 200, description: 'GLAccountType enum values' })
   getAccounts() {

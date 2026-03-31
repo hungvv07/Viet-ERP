@@ -10,13 +10,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { PromotionsService } from './promotions.service';
 import { CreatePromotionDto } from './dto/create-promotion.dto';
 import { UpdatePromotionDto } from './dto/update-promotion.dto';
@@ -83,14 +77,12 @@ export class PromotionsController {
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary: 'Create a new promotion',
-    description: 'Create a new promotion in DRAFT status. Requires ADMIN, MANAGER, or FINANCE role.',
+    description:
+      'Create a new promotion in DRAFT status. Requires ADMIN, MANAGER, or FINANCE role.',
   })
   @ApiResponse({ status: 201, description: 'Promotion created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async create(
-    @Body() createPromotionDto: CreatePromotionDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async create(@Body() createPromotionDto: CreatePromotionDto, @CurrentUser('id') userId: string) {
     return this.promotionsService.create(createPromotionDto, userId);
   }
 
@@ -125,16 +117,14 @@ export class PromotionsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Delete a promotion',
-    description: 'Delete a promotion. Only DRAFT promotions with no claims can be deleted. Requires ADMIN role.',
+    description:
+      'Delete a promotion. Only DRAFT promotions with no claims can be deleted. Requires ADMIN role.',
   })
   @ApiParam({ name: 'id', description: 'Promotion ID' })
   @ApiResponse({ status: 200, description: 'Promotion deleted successfully' })
   @ApiResponse({ status: 400, description: 'Promotion cannot be deleted in current status' })
   @ApiResponse({ status: 404, description: 'Promotion not found' })
-  async remove(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async remove(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.promotionsService.remove(id, userId);
   }
 
@@ -152,10 +142,7 @@ export class PromotionsController {
   @ApiParam({ name: 'id', description: 'Promotion ID' })
   @ApiResponse({ status: 200, description: 'Promotion confirmed successfully' })
   @ApiResponse({ status: 400, description: 'Promotion cannot be confirmed in current status' })
-  async confirm(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async confirm(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.promotionsService.confirm(id, userId);
   }
 
@@ -173,10 +160,7 @@ export class PromotionsController {
   @ApiParam({ name: 'id', description: 'Promotion ID' })
   @ApiResponse({ status: 200, description: 'Promotion execution started' })
   @ApiResponse({ status: 400, description: 'Promotion cannot be executed in current status' })
-  async execute(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async execute(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.promotionsService.execute(id, userId);
   }
 
@@ -194,10 +178,7 @@ export class PromotionsController {
   @ApiParam({ name: 'id', description: 'Promotion ID' })
   @ApiResponse({ status: 200, description: 'Promotion completed successfully' })
   @ApiResponse({ status: 400, description: 'Promotion cannot be completed in current status' })
-  async complete(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async complete(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.promotionsService.complete(id, userId);
   }
 
@@ -215,10 +196,7 @@ export class PromotionsController {
   @ApiParam({ name: 'id', description: 'Promotion ID' })
   @ApiResponse({ status: 200, description: 'Promotion cancelled successfully' })
   @ApiResponse({ status: 400, description: 'Promotion cannot be cancelled in current status' })
-  async cancel(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async cancel(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.promotionsService.cancel(id, userId);
   }
 }

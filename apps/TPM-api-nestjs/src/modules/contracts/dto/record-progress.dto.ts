@@ -1,12 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsNumber,
-  IsInt,
-  Min,
-  Max,
-  MaxLength,
-} from 'class-validator';
+import { IsString, IsOptional, IsNumber, IsInt, Min, Max, MaxLength } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -44,7 +36,11 @@ export class RecordProgressDto {
   @Min(0)
   target?: number;
 
-  @ApiPropertyOptional({ example: 'Strong performance in modern trade', description: 'Notes', maxLength: 1000 })
+  @ApiPropertyOptional({
+    example: 'Strong performance in modern trade',
+    description: 'Notes',
+    maxLength: 1000,
+  })
   @IsOptional()
   @IsString()
   @MaxLength(1000)

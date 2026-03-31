@@ -10,13 +10,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { SettlementsService } from './settlements.service';
 import { CreateSettlementDto } from './dto/create-settlement.dto';
 import { UpdateSettlementDto } from './dto/update-settlement.dto';
@@ -37,8 +31,7 @@ export class SettlementsController {
   @Get()
   @ApiOperation({
     summary: 'List all settlements',
-    description:
-      'Get paginated list of settlements with optional date filtering and search',
+    description: 'Get paginated list of settlements with optional date filtering and search',
   })
   @ApiResponse({ status: 200, description: 'Settlement list with pagination' })
   async findAll(@Query() query: SettlementQueryDto) {
@@ -120,10 +113,7 @@ export class SettlementsController {
   @ApiParam({ name: 'id', description: 'Settlement ID' })
   @ApiResponse({ status: 200, description: 'Settlement updated successfully' })
   @ApiResponse({ status: 404, description: 'Settlement not found' })
-  async update(
-    @Param('id') id: string,
-    @Body() updateSettlementDto: UpdateSettlementDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateSettlementDto: UpdateSettlementDto) {
     return this.settlementsService.update(id, updateSettlementDto);
   }
 

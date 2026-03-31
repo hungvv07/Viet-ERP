@@ -11,13 +11,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { ActivitiesService } from './activities.service';
 import { CreateActivityDto } from './dto/create-activity.dto';
 import { UpdateActivityDto } from './dto/update-activity.dto';
@@ -106,10 +100,7 @@ export class ActivitiesController {
   })
   @ApiResponse({ status: 201, description: 'Activity created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async create(
-    @Body() createActivityDto: CreateActivityDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async create(@Body() createActivityDto: CreateActivityDto, @CurrentUser('id') userId: string) {
     return this.activitiesService.create(createActivityDto, userId);
   }
 
@@ -126,10 +117,7 @@ export class ActivitiesController {
   @ApiParam({ name: 'id', description: 'Activity ID' })
   @ApiResponse({ status: 200, description: 'Activity updated successfully' })
   @ApiResponse({ status: 404, description: 'Activity not found' })
-  async update(
-    @Param('id') id: string,
-    @Body() updateActivityDto: UpdateActivityDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateActivityDto: UpdateActivityDto) {
     return this.activitiesService.update(id, updateActivityDto);
   }
 
@@ -178,7 +166,8 @@ export class ActivitiesController {
   @Roles('ADMIN', 'MANAGER', 'FINANCE')
   @ApiOperation({
     summary: 'Complete an activity',
-    description: 'Transition activity from ACTIVE to COMPLETED. Auto-calculates ROI if data available.',
+    description:
+      'Transition activity from ACTIVE to COMPLETED. Auto-calculates ROI if data available.',
   })
   @ApiParam({ name: 'id', description: 'Activity ID' })
   @ApiResponse({ status: 200, description: 'Activity completed successfully' })
@@ -200,12 +189,12 @@ export class ActivitiesController {
   })
   @ApiParam({ name: 'id', description: 'Activity ID' })
   @ApiResponse({ status: 200, description: 'Spending recorded successfully' })
-  @ApiResponse({ status: 400, description: 'Spending exceeds allocated amount or activity not active' })
+  @ApiResponse({
+    status: 400,
+    description: 'Spending exceeds allocated amount or activity not active',
+  })
   @ApiResponse({ status: 404, description: 'Activity not found' })
-  async recordSpending(
-    @Param('id') id: string,
-    @Body() recordSpendingDto: RecordSpendingDto,
-  ) {
+  async recordSpending(@Param('id') id: string, @Body() recordSpendingDto: RecordSpendingDto) {
     return this.activitiesService.recordSpending(id, recordSpendingDto);
   }
 
@@ -222,10 +211,7 @@ export class ActivitiesController {
   @ApiParam({ name: 'id', description: 'Activity ID' })
   @ApiResponse({ status: 200, description: 'ROI metrics updated successfully' })
   @ApiResponse({ status: 404, description: 'Activity not found' })
-  async updateROI(
-    @Param('id') id: string,
-    @Body() updateRoiDto: UpdateRoiDto,
-  ) {
+  async updateROI(@Param('id') id: string, @Body() updateRoiDto: UpdateRoiDto) {
     return this.activitiesService.updateROI(id, updateRoiDto);
   }
 }

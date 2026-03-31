@@ -1,11 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsDateString,
-  IsNumber,
-  Min,
-  MaxLength,
-} from 'class-validator';
+import { IsString, IsOptional, IsDateString, IsNumber, Min, MaxLength } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -44,7 +37,11 @@ export class CreateChequeDto {
   @MaxLength(100)
   bankAccount?: string;
 
-  @ApiPropertyOptional({ example: 'Payment for Q2 promotion', description: 'Memo note', maxLength: 500 })
+  @ApiPropertyOptional({
+    example: 'Payment for Q2 promotion',
+    description: 'Memo note',
+    maxLength: 500,
+  })
   @IsOptional()
   @IsString()
   @MaxLength(500)

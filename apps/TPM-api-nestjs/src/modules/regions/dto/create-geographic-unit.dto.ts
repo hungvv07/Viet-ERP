@@ -1,12 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsNumber,
-  IsBoolean,
-  IsEnum,
-  MaxLength,
-  Min,
-} from 'class-validator';
+import { IsString, IsOptional, IsNumber, IsBoolean, IsEnum, MaxLength, Min } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -19,12 +11,20 @@ export enum GeographicLevelEnum {
 }
 
 export class CreateGeographicUnitDto {
-  @ApiProperty({ example: 'VN-HCM', maxLength: 50, description: 'Unique code for the geographic unit' })
+  @ApiProperty({
+    example: 'VN-HCM',
+    maxLength: 50,
+    description: 'Unique code for the geographic unit',
+  })
   @IsString()
   @MaxLength(50)
   code: string;
 
-  @ApiProperty({ example: 'Ho Chi Minh City', maxLength: 200, description: 'Name of the geographic unit' })
+  @ApiProperty({
+    example: 'Ho Chi Minh City',
+    maxLength: 200,
+    description: 'Name of the geographic unit',
+  })
   @IsString()
   @MaxLength(200)
   name: string;

@@ -122,10 +122,7 @@ export class ReconciliationController {
   })
   @ApiResponse({ status: 201, description: 'Accrual entry created' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async createAccrual(
-    @Body() dto: CreateAccrualDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async createAccrual(@Body() dto: CreateAccrualDto, @CurrentUser('id') userId: string) {
     return this.reconciliationService.createAccrual(dto, userId);
   }
 
@@ -144,10 +141,7 @@ export class ReconciliationController {
   @ApiResponse({ status: 200, description: 'Accrual entry posted' })
   @ApiResponse({ status: 400, description: 'Accrual must be in PENDING status' })
   @ApiResponse({ status: 404, description: 'Accrual entry not found' })
-  async postAccrual(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async postAccrual(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.reconciliationService.postAccrual(id, userId);
   }
 
@@ -166,10 +160,7 @@ export class ReconciliationController {
   @ApiResponse({ status: 200, description: 'Accrual entry reversed' })
   @ApiResponse({ status: 400, description: 'Accrual must be in POSTED status' })
   @ApiResponse({ status: 404, description: 'Accrual entry not found' })
-  async reverseAccrual(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async reverseAccrual(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.reconciliationService.reverseAccrual(id, userId);
   }
 
@@ -216,10 +207,7 @@ export class ReconciliationController {
   })
   @ApiResponse({ status: 201, description: 'Journal created with lines' })
   @ApiResponse({ status: 400, description: 'Validation error or debit/credit mismatch' })
-  async createJournal(
-    @Body() dto: CreateJournalDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async createJournal(@Body() dto: CreateJournalDto, @CurrentUser('id') userId: string) {
     return this.reconciliationService.createJournal(dto, userId);
   }
 
@@ -238,10 +226,7 @@ export class ReconciliationController {
   @ApiResponse({ status: 200, description: 'Journal posted' })
   @ApiResponse({ status: 400, description: 'Journal cannot be posted in current status' })
   @ApiResponse({ status: 404, description: 'Journal not found' })
-  async postJournal(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async postJournal(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.reconciliationService.postJournal(id, userId);
   }
 
@@ -260,10 +245,7 @@ export class ReconciliationController {
   @ApiResponse({ status: 200, description: 'Journal reversed' })
   @ApiResponse({ status: 400, description: 'Journal must be in POSTED status' })
   @ApiResponse({ status: 404, description: 'Journal not found' })
-  async reverseJournal(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async reverseJournal(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.reconciliationService.reverseJournal(id, userId);
   }
 

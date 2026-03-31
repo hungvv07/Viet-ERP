@@ -250,7 +250,9 @@ export class UsersService {
 
     const validRoles = ['ADMIN', 'MANAGER', 'KAM', 'FINANCE'];
     if (!validRoles.includes(role)) {
-      throw new BadRequestException(`Invalid role: ${role}. Must be one of: ${validRoles.join(', ')}`);
+      throw new BadRequestException(
+        `Invalid role: ${role}. Must be one of: ${validRoles.join(', ')}`,
+      );
     }
 
     const user = await this.prisma.user.update({

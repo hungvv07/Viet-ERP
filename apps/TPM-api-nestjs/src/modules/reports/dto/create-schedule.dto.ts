@@ -1,11 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsBoolean,
-  IsEnum,
-  IsArray,
-  IsObject,
-} from 'class-validator';
+import { IsString, IsOptional, IsBoolean, IsEnum, IsArray, IsObject } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { ReportFormatEnum, ReportFrequencyEnum } from './create-report.dto';
 
@@ -14,7 +7,10 @@ export class CreateScheduleDto {
   @IsEnum(ReportFrequencyEnum)
   frequency: ReportFrequencyEnum;
 
-  @ApiPropertyOptional({ example: '0 8 * * 1', description: 'Cron expression for custom schedules' })
+  @ApiPropertyOptional({
+    example: '0 8 * * 1',
+    description: 'Cron expression for custom schedules',
+  })
   @IsOptional()
   @IsString()
   cronExpression?: string;

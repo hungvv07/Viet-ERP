@@ -12,7 +12,10 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
 export class UpdateContractDto {
-  @ApiPropertyOptional({ example: 'Annual Volume Agreement - Carrefour', description: 'Contract name' })
+  @ApiPropertyOptional({
+    example: 'Annual Volume Agreement - Carrefour',
+    description: 'Contract name',
+  })
   @IsOptional()
   @IsString()
   @MaxLength(200)
@@ -23,12 +26,18 @@ export class UpdateContractDto {
   @IsString()
   customerId?: string;
 
-  @ApiPropertyOptional({ example: '2024-01-01', description: 'Contract start date (ISO date string)' })
+  @ApiPropertyOptional({
+    example: '2024-01-01',
+    description: 'Contract start date (ISO date string)',
+  })
   @IsOptional()
   @IsDateString()
   startDate?: string;
 
-  @ApiPropertyOptional({ example: '2024-12-31', description: 'Contract end date (ISO date string)' })
+  @ApiPropertyOptional({
+    example: '2024-12-31',
+    description: 'Contract end date (ISO date string)',
+  })
   @IsOptional()
   @IsDateString()
   endDate?: string;
@@ -40,7 +49,11 @@ export class UpdateContractDto {
   @Min(0.01)
   targetVolume?: number;
 
-  @ApiPropertyOptional({ example: 'PERCENTAGE', enum: ['FIXED', 'PERCENTAGE', 'TIERED'], description: 'Bonus type' })
+  @ApiPropertyOptional({
+    example: 'PERCENTAGE',
+    enum: ['FIXED', 'PERCENTAGE', 'TIERED'],
+    description: 'Bonus type',
+  })
   @IsOptional()
   @IsEnum({ FIXED: 'FIXED', PERCENTAGE: 'PERCENTAGE', TIERED: 'TIERED' })
   bonusType?: string;
@@ -76,7 +89,11 @@ export class UpdateContractDto {
   @IsString({ each: true })
   categories?: string[];
 
-  @ApiPropertyOptional({ example: 'Updated notes', description: 'Additional notes', maxLength: 2000 })
+  @ApiPropertyOptional({
+    example: 'Updated notes',
+    description: 'Additional notes',
+    maxLength: 2000,
+  })
   @IsOptional()
   @IsString()
   @MaxLength(2000)

@@ -1,10 +1,5 @@
 import { Controller, Get, Query } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiBearerAuth,
-  ApiOperation,
-  ApiQuery,
-} from '@nestjs/swagger';
+import { ApiTags, ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
 import { MonitoringService } from './monitoring.service';
 
 @ApiTags('Monitoring')
@@ -20,7 +15,9 @@ export class MonitoringController {
   }
 
   @Get('alerts')
-  @ApiOperation({ summary: 'Get active alerts (budget overruns, expiring promotions, stale claims)' })
+  @ApiOperation({
+    summary: 'Get active alerts (budget overruns, expiring promotions, stale claims)',
+  })
   async getAlerts() {
     return this.monitoringService.getAlerts();
   }

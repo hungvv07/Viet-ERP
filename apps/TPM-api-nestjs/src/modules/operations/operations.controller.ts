@@ -1,13 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Param,
-  Query,
-  HttpCode,
-  HttpStatus,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Query, HttpCode, HttpStatus } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
@@ -66,10 +57,7 @@ export class OperationsController {
   })
   @ApiResponse({ status: 201, description: 'Import batch created' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async createImport(
-    @Body() dto: CreateImportDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async createImport(@Body() dto: CreateImportDto, @CurrentUser('id') userId: string) {
     return this.operationsService.createImport(dto, userId);
   }
 
@@ -78,7 +66,8 @@ export class OperationsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Start processing import batch',
-    description: 'Start processing a PENDING import batch. Updates status to PROCESSING. Requires ADMIN role.',
+    description:
+      'Start processing a PENDING import batch. Updates status to PROCESSING. Requires ADMIN role.',
   })
   @ApiParam({ name: 'id', description: 'Import Batch ID' })
   @ApiResponse({ status: 200, description: 'Processing started' })
@@ -135,7 +124,12 @@ export class OperationsController {
     description: 'Close a fiscal period (SOFT_CLOSE or HARD_CLOSE). Requires ADMIN role.',
   })
   @ApiParam({ name: 'id', description: 'Fiscal Period ID' })
-  @ApiQuery({ name: 'type', required: false, enum: ['SOFT_CLOSE', 'HARD_CLOSE'], description: 'Close type (default: SOFT_CLOSE)' })
+  @ApiQuery({
+    name: 'type',
+    required: false,
+    enum: ['SOFT_CLOSE', 'HARD_CLOSE'],
+    description: 'Close type (default: SOFT_CLOSE)',
+  })
   @ApiResponse({ status: 200, description: 'Period closed' })
   @ApiResponse({ status: 400, description: 'Period cannot be closed in current status' })
   @ApiResponse({ status: 404, description: 'Fiscal period not found' })
@@ -156,12 +150,12 @@ export class OperationsController {
   })
   @ApiParam({ name: 'id', description: 'Fiscal Period ID' })
   @ApiResponse({ status: 200, description: 'Period reopened' })
-  @ApiResponse({ status: 400, description: 'Period cannot be reopened (already open or hard-closed)' })
+  @ApiResponse({
+    status: 400,
+    description: 'Period cannot be reopened (already open or hard-closed)',
+  })
   @ApiResponse({ status: 404, description: 'Fiscal period not found' })
-  async reopenFiscalPeriod(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async reopenFiscalPeriod(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.operationsService.reopenFiscalPeriod(id, userId);
   }
 

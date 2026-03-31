@@ -45,7 +45,8 @@ export class CreateInsightDto {
   title: string;
 
   @ApiProperty({
-    example: 'Analysis shows that increasing the discount by 5% on beverage promotions during Q2 could improve ROI by 18%.',
+    example:
+      'Analysis shows that increasing the discount by 5% on beverage promotions during Q2 could improve ROI by 18%.',
     description: 'Detailed description of the insight',
   })
   @IsString()

@@ -84,7 +84,11 @@ export class CreateApprovalRuleDto {
   @IsEnum(RoleEnum, { each: true })
   approverRoles: RoleEnum[];
 
-  @ApiPropertyOptional({ example: 0, default: 0, description: 'Rule priority (higher = more priority)' })
+  @ApiPropertyOptional({
+    example: 0,
+    default: 0,
+    description: 'Rule priority (higher = more priority)',
+  })
   @IsOptional()
   @Type(() => Number)
   @IsInt()

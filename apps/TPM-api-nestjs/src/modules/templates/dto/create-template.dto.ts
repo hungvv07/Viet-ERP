@@ -31,21 +31,35 @@ export class CreateTemplateDto {
   @MaxLength(200)
   name: string;
 
-  @ApiPropertyOptional({ example: 'Template for summer seasonal promotions', description: 'Template description' })
+  @ApiPropertyOptional({
+    example: 'Template for summer seasonal promotions',
+    description: 'Template description',
+  })
   @IsOptional()
   @IsString()
   description?: string;
 
-  @ApiProperty({ description: 'Template configuration (JSON object)', example: { type: 'discount', rules: [] } })
+  @ApiProperty({
+    description: 'Template configuration (JSON object)',
+    example: { type: 'discount', rules: [] },
+  })
   @IsObject()
   template: Record<string, any>;
 
-  @ApiPropertyOptional({ enum: TemplateCategoryEnum, default: TemplateCategoryEnum.CUSTOM, description: 'Template category' })
+  @ApiPropertyOptional({
+    enum: TemplateCategoryEnum,
+    default: TemplateCategoryEnum.CUSTOM,
+    description: 'Template category',
+  })
   @IsOptional()
   @IsEnum(TemplateCategoryEnum)
   category?: TemplateCategoryEnum;
 
-  @ApiPropertyOptional({ enum: ChannelEnum, isArray: true, description: 'Applicable sales channels' })
+  @ApiPropertyOptional({
+    enum: ChannelEnum,
+    isArray: true,
+    description: 'Applicable sales channels',
+  })
   @IsOptional()
   @IsArray()
   @IsEnum(ChannelEnum, { each: true })

@@ -1,10 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsInt,
-  IsNumber,
-  Min,
-} from 'class-validator';
+import { IsString, IsOptional, IsInt, IsNumber, Min } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -28,7 +22,7 @@ export class CreateTrackingDto {
   @Min(0)
   sellInQty?: number;
 
-  @ApiPropertyOptional({ example: 5000.00, description: 'Sell-in value', default: 0 })
+  @ApiPropertyOptional({ example: 5000.0, description: 'Sell-in value', default: 0 })
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
@@ -42,7 +36,7 @@ export class CreateTrackingDto {
   @Min(0)
   sellOutQty?: number;
 
-  @ApiPropertyOptional({ example: 4000.00, description: 'Sell-out value', default: 0 })
+  @ApiPropertyOptional({ example: 4000.0, description: 'Sell-out value', default: 0 })
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
@@ -56,7 +50,7 @@ export class CreateTrackingDto {
   @Min(0)
   stockQty?: number;
 
-  @ApiPropertyOptional({ example: 1000.00, description: 'Stock value', default: 0 })
+  @ApiPropertyOptional({ example: 1000.0, description: 'Stock value', default: 0 })
   @IsOptional()
   @Type(() => Number)
   @IsNumber()

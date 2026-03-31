@@ -38,10 +38,15 @@ export class ChequesController {
   @Get()
   @ApiOperation({
     summary: 'List all cheques',
-    description: 'Get paginated list of cheques with optional filtering by status, payee, claim, date range, and search',
+    description:
+      'Get paginated list of cheques with optional filtering by status, payee, claim, date range, and search',
   })
   @ApiResponse({ status: 200, description: 'Cheque list with pagination' })
-  @ApiQuery({ name: 'status', required: false, enum: ['ISSUED', 'CLEARED', 'BOUNCED', 'VOIDED', 'EXPIRED'] })
+  @ApiQuery({
+    name: 'status',
+    required: false,
+    enum: ['ISSUED', 'CLEARED', 'BOUNCED', 'VOIDED', 'EXPIRED'],
+  })
   @ApiQuery({ name: 'payeeId', required: false, description: 'Filter by payee (Customer) ID' })
   @ApiQuery({ name: 'claimId', required: false, description: 'Filter by linked Claim ID' })
   @ApiQuery({ name: 'search', required: false, description: 'Search by cheque number or memo' })
@@ -126,10 +131,7 @@ export class ChequesController {
   @ApiResponse({ status: 200, description: 'Cheque updated successfully' })
   @ApiResponse({ status: 400, description: 'Cheque cannot be modified in current status' })
   @ApiResponse({ status: 404, description: 'Cheque not found' })
-  async update(
-    @Param('id') id: string,
-    @Body() updateChequeDto: UpdateChequeDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateChequeDto: UpdateChequeDto) {
     return this.chequesService.update(id, updateChequeDto);
   }
 
@@ -186,10 +188,7 @@ export class ChequesController {
   @ApiResponse({ status: 200, description: 'Cheque voided successfully' })
   @ApiResponse({ status: 400, description: 'Cheque cannot be voided in current status' })
   @ApiResponse({ status: 404, description: 'Cheque not found' })
-  async voidCheque(
-    @Param('id') id: string,
-    @Body() voidChequeDto: VoidChequeDto,
-  ) {
+  async voidCheque(@Param('id') id: string, @Body() voidChequeDto: VoidChequeDto) {
     return this.chequesService.void(id, voidChequeDto);
   }
 }

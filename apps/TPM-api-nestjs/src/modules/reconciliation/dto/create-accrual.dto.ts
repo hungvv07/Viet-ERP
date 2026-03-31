@@ -1,11 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsNumber,
-  IsEnum,
-  IsDateString,
-  IsObject,
-} from 'class-validator';
+import { IsString, IsOptional, IsNumber, IsEnum, IsDateString, IsObject } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -61,7 +54,10 @@ export class CreateAccrualDto {
   @IsNumber()
   cumulativeAmount: number;
 
-  @ApiPropertyOptional({ enum: AccrualCalculationMethodEnum, default: AccrualCalculationMethodEnum.TIME_BASED })
+  @ApiPropertyOptional({
+    enum: AccrualCalculationMethodEnum,
+    default: AccrualCalculationMethodEnum.TIME_BASED,
+  })
   @IsOptional()
   @IsEnum(AccrualCalculationMethodEnum)
   calculationMethod?: AccrualCalculationMethodEnum;

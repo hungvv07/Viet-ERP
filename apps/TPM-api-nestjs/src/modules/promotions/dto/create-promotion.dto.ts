@@ -1,11 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsDateString,
-  IsNumber,
-  MaxLength,
-  Min,
-} from 'class-validator';
+import { IsString, IsOptional, IsDateString, IsNumber, MaxLength, Min } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -53,7 +46,10 @@ export class CreatePromotionDto {
   @IsString()
   templateId?: string;
 
-  @ApiPropertyOptional({ example: 'cuid_promotion_id', description: 'ID of promotion this was cloned from' })
+  @ApiPropertyOptional({
+    example: 'cuid_promotion_id',
+    description: 'ID of promotion this was cloned from',
+  })
   @IsOptional()
   @IsString()
   clonedFromId?: string;

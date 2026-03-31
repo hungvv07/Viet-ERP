@@ -44,7 +44,11 @@ export class CreateContractDto {
   @Min(0.01)
   targetVolume: number;
 
-  @ApiPropertyOptional({ example: 'PERCENTAGE', enum: ['FIXED', 'PERCENTAGE', 'TIERED'], description: 'Bonus type' })
+  @ApiPropertyOptional({
+    example: 'PERCENTAGE',
+    enum: ['FIXED', 'PERCENTAGE', 'TIERED'],
+    description: 'Bonus type',
+  })
   @IsOptional()
   @IsEnum({ FIXED: 'FIXED', PERCENTAGE: 'PERCENTAGE', TIERED: 'TIERED' })
   bonusType?: string;
@@ -79,7 +83,11 @@ export class CreateContractDto {
   @IsString({ each: true })
   categories?: string[];
 
-  @ApiPropertyOptional({ example: 'Volume agreement notes', description: 'Additional notes', maxLength: 2000 })
+  @ApiPropertyOptional({
+    example: 'Volume agreement notes',
+    description: 'Additional notes',
+    maxLength: 2000,
+  })
   @IsOptional()
   @IsString()
   @MaxLength(2000)

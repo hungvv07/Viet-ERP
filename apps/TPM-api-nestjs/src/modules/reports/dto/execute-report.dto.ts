@@ -3,7 +3,10 @@ import { ApiPropertyOptional } from '@nestjs/swagger';
 import { ReportFormatEnum } from './create-report.dto';
 
 export class ExecuteReportDto {
-  @ApiPropertyOptional({ enum: ReportFormatEnum, description: 'Override the default report format' })
+  @ApiPropertyOptional({
+    enum: ReportFormatEnum,
+    description: 'Override the default report format',
+  })
   @IsOptional()
   @IsEnum(ReportFormatEnum)
   format?: ReportFormatEnum;

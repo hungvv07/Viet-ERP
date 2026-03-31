@@ -1,14 +1,6 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 import { DeductionQueryDto } from './dto/deduction-query.dto';
 import { CreateDeductionDto } from './dto/create-deduction.dto';
@@ -95,9 +87,7 @@ export class DeductionsService {
       'daysOutstanding',
     ];
     const orderBy: Prisma.DeductionOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -249,7 +239,14 @@ export class DeductionsService {
           select: { id: true, name: true, code: true },
         },
         matchedPromotion: {
-          select: { id: true, name: true, code: true, status: true, startDate: true, endDate: true },
+          select: {
+            id: true,
+            name: true,
+            code: true,
+            status: true,
+            startDate: true,
+            endDate: true,
+          },
         },
         matchedClaim: {
           select: { id: true, code: true, status: true, amount: true },
@@ -482,7 +479,9 @@ export class DeductionsService {
       newValue: { status: 'MATCHED', matchedPromotionId: dto.matchedPromotionId },
     });
 
-    this.logger.log(`Deduction matched: ${deduction.deductionNumber} to promotion ${promotion.code}`);
+    this.logger.log(
+      `Deduction matched: ${deduction.deductionNumber} to promotion ${promotion.code}`,
+    );
 
     return this.transformDeduction(updated);
   }
@@ -595,9 +594,7 @@ export class DeductionsService {
     }
 
     if (['RESOLVED', 'WRITTEN_OFF'].includes(deduction.status)) {
-      throw new BadRequestException(
-        `Cannot write off deduction in ${deduction.status} status.`,
-      );
+      throw new BadRequestException(`Cannot write off deduction in ${deduction.status} status.`);
     }
 
     const updated = await this.prisma.deduction.update({
@@ -665,7 +662,12 @@ export class DeductionsService {
       },
     });
 
-    await this.createActivity(deductionId, userId, 'DISPUTE_CREATED', `Dispute ${disputeNumber} created`);
+    await this.createActivity(
+      deductionId,
+      userId,
+      'DISPUTE_CREATED',
+      `Dispute ${disputeNumber} created`,
+    );
 
     this.logger.log(`Dispute created: ${disputeNumber} for deduction ${deduction.deductionNumber}`);
 
@@ -675,7 +677,12 @@ export class DeductionsService {
   // ═══════════════════════════════════════════════════════════════════════════
   // UPDATE DISPUTE
   // ═══════════════════════════════════════════════════════════════════════════
-  async updateDispute(deductionId: string, disputeId: string, dto: UpdateDisputeDto, userId: string) {
+  async updateDispute(
+    deductionId: string,
+    disputeId: string,
+    dto: UpdateDisputeDto,
+    userId: string,
+  ) {
     // Verify deduction exists
     const deduction = await this.prisma.deduction.findUnique({
       where: { id: deductionId },
@@ -693,9 +700,7 @@ export class DeductionsService {
     }
 
     if (['RESOLVED', 'CLOSED'].includes(dispute.status)) {
-      throw new BadRequestException(
-        `Cannot update dispute in ${dispute.status} status.`,
-      );
+      throw new BadRequestException(`Cannot update dispute in ${dispute.status} status.`);
     }
 
     const updated = await this.prisma.deductionDispute.update({
@@ -711,7 +716,12 @@ export class DeductionsService {
       },
     });
 
-    await this.createActivity(deductionId, userId, 'DISPUTE_UPDATED', `Dispute ${dispute.disputeNumber} updated`);
+    await this.createActivity(
+      deductionId,
+      userId,
+      'DISPUTE_UPDATED',
+      `Dispute ${dispute.disputeNumber} updated`,
+    );
 
     this.logger.log(`Dispute updated: ${dispute.disputeNumber}`);
 
@@ -721,7 +731,12 @@ export class DeductionsService {
   // ═══════════════════════════════════════════════════════════════════════════
   // RESOLVE DISPUTE
   // ═══════════════════════════════════════════════════════════════════════════
-  async resolveDispute(deductionId: string, disputeId: string, dto: ResolveDisputeDto, userId: string) {
+  async resolveDispute(
+    deductionId: string,
+    disputeId: string,
+    dto: ResolveDisputeDto,
+    userId: string,
+  ) {
     // Verify deduction exists
     const deduction = await this.prisma.deduction.findUnique({
       where: { id: deductionId },
@@ -739,9 +754,7 @@ export class DeductionsService {
     }
 
     if (['RESOLVED', 'CLOSED'].includes(dispute.status)) {
-      throw new BadRequestException(
-        `Dispute is already ${dispute.status}.`,
-      );
+      throw new BadRequestException(`Dispute is already ${dispute.status}.`);
     }
 
     const updated = await this.prisma.deductionDispute.update({
@@ -864,7 +877,12 @@ export class DeductionsService {
       },
     });
 
-    await this.createActivity(deductionId, userId, 'DOCUMENT_ADDED', `Document uploaded: ${dto.fileName}`);
+    await this.createActivity(
+      deductionId,
+      userId,
+      'DOCUMENT_ADDED',
+      `Document uploaded: ${dto.fileName}`,
+    );
 
     this.logger.log(`Document added to deduction ${deduction.deductionNumber}: ${dto.fileName}`);
 
@@ -1061,9 +1079,7 @@ export class DeductionsService {
       matchedClaim: deduction.matchedClaim
         ? {
             ...deduction.matchedClaim,
-            amount: deduction.matchedClaim.amount
-              ? Number(deduction.matchedClaim.amount)
-              : null,
+            amount: deduction.matchedClaim.amount ? Number(deduction.matchedClaim.amount) : null,
           }
         : null,
       matchScore: deduction.matchScore,
@@ -1096,8 +1112,7 @@ export class DeductionsService {
       ...base,
       writeOffReason: deduction.writeOffReason,
       writeOffApprovedBy: deduction.writeOffApprovedBy || null,
-      disputes:
-        deduction.disputes?.map((d: any) => this.transformDispute(d)) || [],
+      disputes: deduction.disputes?.map((d: any) => this.transformDispute(d)) || [],
       documents: deduction.documents || [],
       comments: deduction.comments || [],
       activities: deduction.activities || [],

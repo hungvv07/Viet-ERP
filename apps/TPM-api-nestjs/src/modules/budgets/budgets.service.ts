@@ -11,10 +11,7 @@ import { UpdateBudgetDto } from './dto/update-budget.dto';
 import { BudgetQueryDto } from './dto/budget-query.dto';
 import { CreateAllocationDto } from './dto/create-allocation.dto';
 import { ApproveBudgetDto, RejectBudgetDto } from './dto/approve-budget.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -78,9 +75,7 @@ export class BudgetsService {
     // Build orderBy
     const validSortFields = ['createdAt', 'name', 'totalAmount', 'startDate', 'year', 'status'];
     const orderBy: Prisma.BudgetOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -232,12 +227,8 @@ export class BudgetsService {
 
     // Validate dates if provided
     if (dto.startDate || dto.endDate) {
-      const startDate = dto.startDate
-        ? new Date(dto.startDate)
-        : budget.startDate || new Date();
-      const endDate = dto.endDate
-        ? new Date(dto.endDate)
-        : budget.endDate || new Date();
+      const startDate = dto.startDate ? new Date(dto.startDate) : budget.startDate || new Date();
+      const endDate = dto.endDate ? new Date(dto.endDate) : budget.endDate || new Date();
 
       if (endDate <= startDate) {
         throw new BadRequestException('End date must be after start date');
@@ -389,7 +380,8 @@ export class BudgetsService {
     }
 
     // Determine next status
-    const isFullyApproved = budget.currentLevel >= budget.approvalLevel || budget.approvalLevel === 0;
+    const isFullyApproved =
+      budget.currentLevel >= budget.approvalLevel || budget.approvalLevel === 0;
     const now = new Date();
     const startDate = budget.startDate;
 
@@ -534,9 +526,7 @@ export class BudgetsService {
 
     // Only allow allocations in DRAFT status
     if (budget.status !== 'DRAFT') {
-      throw new BadRequestException(
-        `Cannot add allocations to budget in ${budget.status} status`,
-      );
+      throw new BadRequestException(`Cannot add allocations to budget in ${budget.status} status`);
     }
 
     // Check total allocations don't exceed budget
@@ -663,7 +653,10 @@ export class BudgetsService {
         where: { id: allocation.parentId },
       });
       if (parentAlloc) {
-        const newChildrenAllocated = Math.max(0, Number(parentAlloc.childrenAllocated) - allocAmount);
+        const newChildrenAllocated = Math.max(
+          0,
+          Number(parentAlloc.childrenAllocated) - allocAmount,
+        );
         await this.prisma.budgetAllocation.update({
           where: { id: allocation.parentId },
           data: {
@@ -864,11 +857,12 @@ export class BudgetsService {
       constraints: budget.constraints,
       allocations: budget.allocations?.map((a: any) => this.transformAllocation(a)) || [],
       approvals: budget.approvals || [],
-      activities: budget.activities?.map((act: any) => ({
-        ...act,
-        allocatedAmount: Number(act.allocatedAmount),
-        spentAmount: Number(act.spentAmount),
-      })) || [],
+      activities:
+        budget.activities?.map((act: any) => ({
+          ...act,
+          allocatedAmount: Number(act.allocatedAmount),
+          spentAmount: Number(act.spentAmount),
+        })) || [],
     };
   }
 
@@ -894,10 +888,11 @@ export class BudgetsService {
       createdAt: allocation.createdAt,
       updatedAt: allocation.updatedAt,
       createdBy: allocation.createdBy,
-      children: allocation.children?.map((c: any) => ({
-        ...c,
-        allocatedAmount: Number(c.allocatedAmount),
-      })) || [],
+      children:
+        allocation.children?.map((c: any) => ({
+          ...c,
+          allocatedAmount: Number(c.allocatedAmount),
+        })) || [],
     };
   }
 }

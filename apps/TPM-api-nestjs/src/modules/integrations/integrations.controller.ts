@@ -10,13 +10,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { IntegrationsService } from './integrations.service';
 import { ConnectionQueryDto } from './dto/connection-query.dto';
 import { CreateConnectionDto } from './dto/create-connection.dto';
@@ -71,10 +65,7 @@ export class IntegrationsController {
   })
   @ApiResponse({ status: 201, description: 'Connection created' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async createConnection(
-    @Body() dto: CreateConnectionDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async createConnection(@Body() dto: CreateConnectionDto, @CurrentUser('id') userId: string) {
     return this.integrationsService.createConnection(dto, userId);
   }
 
@@ -87,10 +78,7 @@ export class IntegrationsController {
   @ApiParam({ name: 'id', description: 'Connection ID' })
   @ApiResponse({ status: 200, description: 'Connection updated' })
   @ApiResponse({ status: 404, description: 'Connection not found' })
-  async updateConnection(
-    @Param('id') id: string,
-    @Body() dto: UpdateConnectionDto,
-  ) {
+  async updateConnection(@Param('id') id: string, @Body() dto: UpdateConnectionDto) {
     return this.integrationsService.updateConnection(id, dto);
   }
 
@@ -99,7 +87,8 @@ export class IntegrationsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Test ERP connection',
-    description: 'Test an ERP connection (mock ping). Updates lastPingAt and lastPingStatus. Requires ADMIN role.',
+    description:
+      'Test an ERP connection (mock ping). Updates lastPingAt and lastPingStatus. Requires ADMIN role.',
   })
   @ApiParam({ name: 'id', description: 'Connection ID' })
   @ApiResponse({ status: 200, description: 'Connection test result' })
@@ -175,10 +164,7 @@ export class IntegrationsController {
   @ApiResponse({ status: 201, description: 'Sync job triggered' })
   @ApiResponse({ status: 400, description: 'Sync config is not active' })
   @ApiResponse({ status: 404, description: 'Sync config not found' })
-  async triggerSyncJob(
-    @Param('configId') configId: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async triggerSyncJob(@Param('configId') configId: string, @CurrentUser('id') userId: string) {
     return this.integrationsService.triggerSyncJob(configId, userId);
   }
 
@@ -205,10 +191,7 @@ export class IntegrationsController {
   })
   @ApiResponse({ status: 201, description: 'Webhook created' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async createWebhook(
-    @Body() dto: CreateWebhookDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async createWebhook(@Body() dto: CreateWebhookDto, @CurrentUser('id') userId: string) {
     return this.integrationsService.createWebhook(dto, userId);
   }
 
@@ -221,10 +204,7 @@ export class IntegrationsController {
   @ApiParam({ name: 'id', description: 'Webhook ID' })
   @ApiResponse({ status: 200, description: 'Webhook updated' })
   @ApiResponse({ status: 404, description: 'Webhook not found' })
-  async updateWebhook(
-    @Param('id') id: string,
-    @Body() dto: UpdateWebhookDto,
-  ) {
+  async updateWebhook(@Param('id') id: string, @Body() dto: UpdateWebhookDto) {
     return this.integrationsService.updateWebhook(id, dto);
   }
 

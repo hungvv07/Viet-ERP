@@ -11,13 +11,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
@@ -38,7 +32,8 @@ export class CustomersController {
   @Get()
   @ApiOperation({
     summary: 'List all customers',
-    description: 'Get paginated list of customers with optional filtering by channel, active status, and search',
+    description:
+      'Get paginated list of customers with optional filtering by channel, active status, and search',
   })
   @ApiResponse({ status: 200, description: 'Customer list with pagination' })
   async findAll(@Query() query: CustomerQueryDto) {
@@ -70,7 +65,8 @@ export class CustomersController {
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary: 'Create a new customer',
-    description: 'Create a new customer. Requires ADMIN or MANAGER role. Code must be unique within the company.',
+    description:
+      'Create a new customer. Requires ADMIN or MANAGER role. Code must be unique within the company.',
   })
   @ApiResponse({ status: 201, description: 'Customer created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error or company not found' })
@@ -93,10 +89,7 @@ export class CustomersController {
   @ApiResponse({ status: 200, description: 'Customer updated successfully' })
   @ApiResponse({ status: 404, description: 'Customer not found' })
   @ApiResponse({ status: 409, description: 'Customer name already exists in this company' })
-  async update(
-    @Param('id') id: string,
-    @Body() updateCustomerDto: UpdateCustomerDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerDto) {
     return this.customersService.update(id, updateCustomerDto);
   }
 
@@ -109,7 +102,8 @@ export class CustomersController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Deactivate a customer (soft delete)',
-    description: 'Sets customer isActive to false. Cannot deactivate if customer has active promotions. Requires ADMIN role.',
+    description:
+      'Sets customer isActive to false. Cannot deactivate if customer has active promotions. Requires ADMIN role.',
   })
   @ApiParam({ name: 'id', description: 'Customer ID' })
   @ApiResponse({ status: 200, description: 'Customer deactivated successfully' })

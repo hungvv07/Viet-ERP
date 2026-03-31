@@ -38,7 +38,8 @@ export class RegionsController {
   @Get()
   @ApiOperation({
     summary: 'List all geographic units',
-    description: 'Get paginated list of geographic units with optional filtering by level, parent, and active status',
+    description:
+      'Get paginated list of geographic units with optional filtering by level, parent, and active status',
   })
   @ApiResponse({ status: 200, description: 'Geographic unit list with pagination' })
   async findAll(@Query() query: GeographicUnitQueryDto) {
@@ -80,7 +81,8 @@ export class RegionsController {
   @Get(':id')
   @ApiOperation({
     summary: 'Get geographic unit by ID',
-    description: 'Get detailed geographic unit information including parent, children, and relation counts',
+    description:
+      'Get detailed geographic unit information including parent, children, and relation counts',
   })
   @ApiParam({ name: 'id', description: 'Geographic Unit ID' })
   @ApiResponse({ status: 200, description: 'Geographic unit details' })
@@ -115,16 +117,14 @@ export class RegionsController {
   @Roles('ADMIN', 'MANAGER')
   @ApiOperation({
     summary: 'Update a geographic unit',
-    description: 'Update geographic unit details. Code is immutable. Requires ADMIN or MANAGER role.',
+    description:
+      'Update geographic unit details. Code is immutable. Requires ADMIN or MANAGER role.',
   })
   @ApiParam({ name: 'id', description: 'Geographic Unit ID' })
   @ApiResponse({ status: 200, description: 'Geographic unit updated successfully' })
   @ApiResponse({ status: 400, description: 'Invalid parent level constraint' })
   @ApiResponse({ status: 404, description: 'Geographic unit not found' })
-  async update(
-    @Param('id') id: string,
-    @Body() updateDto: UpdateGeographicUnitDto,
-  ) {
+  async update(@Param('id') id: string, @Body() updateDto: UpdateGeographicUnitDto) {
     return this.regionsService.update(id, updateDto);
   }
 
@@ -137,11 +137,15 @@ export class RegionsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Delete a geographic unit',
-    description: 'Delete a geographic unit. Cannot delete if it has children or budget allocations. Requires ADMIN role.',
+    description:
+      'Delete a geographic unit. Cannot delete if it has children or budget allocations. Requires ADMIN role.',
   })
   @ApiParam({ name: 'id', description: 'Geographic Unit ID' })
   @ApiResponse({ status: 200, description: 'Geographic unit deleted successfully' })
-  @ApiResponse({ status: 400, description: 'Cannot delete unit with children or budget allocations' })
+  @ApiResponse({
+    status: 400,
+    description: 'Cannot delete unit with children or budget allocations',
+  })
   @ApiResponse({ status: 404, description: 'Geographic unit not found' })
   async remove(@Param('id') id: string) {
     return this.regionsService.remove(id);

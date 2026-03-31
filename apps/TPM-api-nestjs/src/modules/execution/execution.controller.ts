@@ -1,19 +1,5 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Query,
-  HttpCode,
-  HttpStatus,
-} from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiQuery,
-} from '@nestjs/swagger';
+import { Controller, Get, Post, Body, Query, HttpCode, HttpStatus } from '@nestjs/common';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiQuery } from '@nestjs/swagger';
 import { ExecutionService } from './execution.service';
 import { TrackingQueryDto } from './dto/tracking-query.dto';
 import { CreateTrackingDto } from './dto/create-tracking.dto';
@@ -61,7 +47,8 @@ export class ExecutionController {
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary: 'Create or upsert sell tracking record',
-    description: 'Create or update a sell tracking record. Upserts on (customerId, productId, period).',
+    description:
+      'Create or update a sell tracking record. Upserts on (customerId, productId, period).',
   })
   @ApiResponse({ status: 201, description: 'Tracking record created/updated' })
   @ApiResponse({ status: 400, description: 'Validation error' })
@@ -102,10 +89,7 @@ export class ExecutionController {
   })
   @ApiResponse({ status: 201, description: 'Sell-in record created' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async createSellIn(
-    @Body() dto: CreateSellInDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async createSellIn(@Body() dto: CreateSellInDto, @CurrentUser('id') userId: string) {
     return this.executionService.createSellIn(dto, userId);
   }
 
@@ -142,10 +126,7 @@ export class ExecutionController {
   })
   @ApiResponse({ status: 201, description: 'Sell-out record created' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async createSellOut(
-    @Body() dto: CreateSellOutDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async createSellOut(@Body() dto: CreateSellOutDto, @CurrentUser('id') userId: string) {
     return this.executionService.createSellOut(dto, userId);
   }
 

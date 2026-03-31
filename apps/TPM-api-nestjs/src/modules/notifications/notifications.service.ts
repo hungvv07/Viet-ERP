@@ -1,17 +1,9 @@
-import {
-  Injectable,
-  NotFoundException,
-  ForbiddenException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, ForbiddenException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { CreateNotificationDto } from './dto/create-notification.dto';
 import { NotificationQueryDto } from './dto/notification-query.dto';
 import { UpdatePreferencesDto } from './dto/update-preferences.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -25,14 +17,7 @@ export class NotificationsService {
   // ═══════════════════════════════════════════════════════════════════════════
   async findAll(query: NotificationQueryDto, userId: string) {
     const { skip, take, page, pageSize } = getPaginationParams(query);
-    const {
-      type,
-      status,
-      channel,
-      search,
-      sortBy = 'createdAt',
-      sortOrder = 'desc',
-    } = query;
+    const { type, status, channel, search, sortBy = 'createdAt', sortOrder = 'desc' } = query;
 
     // Build where clause - always scoped to current user
     const where: Prisma.NotificationWhereInput = { userId };
@@ -59,9 +44,7 @@ export class NotificationsService {
     // Build orderBy
     const validSortFields = ['createdAt', 'type', 'status', 'title'];
     const orderBy: Prisma.NotificationOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([

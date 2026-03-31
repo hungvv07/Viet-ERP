@@ -1,12 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsNumber,
-  IsEnum,
-  IsInt,
-  MaxLength,
-  Min,
-} from 'class-validator';
+import { IsString, IsOptional, IsNumber, IsEnum, IsInt, MaxLength, Min } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -50,7 +42,10 @@ export class CreateFundDto {
   @IsString()
   companyId: string;
 
-  @ApiPropertyOptional({ example: 'clxyz0987654321', description: 'Customer ID (for customer-specific funds)' })
+  @ApiPropertyOptional({
+    example: 'clxyz0987654321',
+    description: 'Customer ID (for customer-specific funds)',
+  })
   @IsOptional()
   @IsString()
   customerId?: string;

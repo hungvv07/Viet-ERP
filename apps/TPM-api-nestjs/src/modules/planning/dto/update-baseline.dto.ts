@@ -1,11 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsInt,
-  IsNumber,
-  IsEnum,
-  IsArray,
-} from 'class-validator';
+import { IsString, IsOptional, IsInt, IsNumber, IsEnum, IsArray } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { ChannelEnum, PeriodTypeEnum, BaselineSourceTypeEnum } from './create-baseline.dto';
@@ -94,13 +87,13 @@ export class UpdateBaselineDto {
   @IsNumber()
   baselineCases?: number;
 
-  @ApiPropertyOptional({ example: 25.00 })
+  @ApiPropertyOptional({ example: 25.0 })
   @IsOptional()
   @Type(() => Number)
   @IsNumber()
   avgPricePerUnit?: number;
 
-  @ApiPropertyOptional({ example: 125.00 })
+  @ApiPropertyOptional({ example: 125.0 })
   @IsOptional()
   @Type(() => Number)
   @IsNumber()

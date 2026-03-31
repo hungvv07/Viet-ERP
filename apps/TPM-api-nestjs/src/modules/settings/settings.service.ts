@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { SOXControlQueryDto } from './dto/sox-control-query.dto';
 import { CreateSOXControlDto } from './dto/create-sox-control.dto';
@@ -12,10 +7,7 @@ import { SOXViolationQueryDto } from './dto/sox-violation-query.dto';
 import { ReviewViolationDto } from './dto/review-violation.dto';
 import { CreateClashRuleDto } from './dto/create-clash-rule.dto';
 import { UpdateClashRuleDto } from './dto/update-clash-rule.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -49,9 +41,7 @@ export class SettingsService {
 
     const validSortFields = ['createdAt', 'name', 'code', 'type', 'status', 'severity'];
     const orderBy: Prisma.SOXControlOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     const [data, total] = await Promise.all([
       this.prisma.sOXControl.findMany({
@@ -201,7 +191,16 @@ export class SettingsService {
   // ── LIST SOX VIOLATIONS ────────────────────────────────────────────────────
   async findAllSOXViolations(query: SOXViolationQueryDto) {
     const { skip, take, page, pageSize } = getPaginationParams(query);
-    const { companyId, controlId, userId, entityType, reviewed, isExcepted, sortBy = 'createdAt', sortOrder = 'desc' } = query;
+    const {
+      companyId,
+      controlId,
+      userId,
+      entityType,
+      reviewed,
+      isExcepted,
+      sortBy = 'createdAt',
+      sortOrder = 'desc',
+    } = query;
 
     const where: Prisma.SOXViolationWhereInput = {};
 
@@ -221,9 +220,7 @@ export class SettingsService {
 
     const validSortFields = ['createdAt', 'action', 'entityType'];
     const orderBy: Prisma.SOXViolationOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     const [data, total] = await Promise.all([
       this.prisma.sOXViolation.findMany({

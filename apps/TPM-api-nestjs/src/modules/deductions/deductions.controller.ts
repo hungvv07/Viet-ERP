@@ -47,7 +47,8 @@ export class DeductionsController {
   @Get()
   @ApiOperation({
     summary: 'List all deductions',
-    description: 'Get paginated list of deductions with optional filtering by status, category, source, customer, and date range',
+    description:
+      'Get paginated list of deductions with optional filtering by status, category, source, customer, and date range',
   })
   @ApiResponse({ status: 200, description: 'Deduction list with pagination' })
   async findAll(@Query() query: DeductionQueryDto) {
@@ -109,10 +110,7 @@ export class DeductionsController {
   })
   @ApiResponse({ status: 201, description: 'Write-off rule created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async createWriteOffRule(
-    @Body() dto: CreateWriteOffRuleDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async createWriteOffRule(@Body() dto: CreateWriteOffRuleDto, @CurrentUser('id') userId: string) {
     return this.deductionsService.createWriteOffRule(dto, userId);
   }
 
@@ -129,10 +127,7 @@ export class DeductionsController {
   @ApiParam({ name: 'ruleId', description: 'Write-off rule ID' })
   @ApiResponse({ status: 200, description: 'Write-off rule updated successfully' })
   @ApiResponse({ status: 404, description: 'Write-off rule not found' })
-  async updateWriteOffRule(
-    @Param('ruleId') ruleId: string,
-    @Body() dto: UpdateWriteOffRuleDto,
-  ) {
+  async updateWriteOffRule(@Param('ruleId') ruleId: string, @Body() dto: UpdateWriteOffRuleDto) {
     return this.deductionsService.updateWriteOffRule(ruleId, dto);
   }
 
@@ -143,7 +138,8 @@ export class DeductionsController {
   @Get(':id')
   @ApiOperation({
     summary: 'Get deduction by ID',
-    description: 'Get detailed deduction information including customer, disputes, documents, comments, and activities',
+    description:
+      'Get detailed deduction information including customer, disputes, documents, comments, and activities',
   })
   @ApiParam({ name: 'id', description: 'Deduction ID' })
   @ApiResponse({ status: 200, description: 'Deduction details' })
@@ -165,10 +161,7 @@ export class DeductionsController {
   })
   @ApiResponse({ status: 201, description: 'Deduction created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async create(
-    @Body() dto: CreateDeductionDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async create(@Body() dto: CreateDeductionDto, @CurrentUser('id') userId: string) {
     return this.deductionsService.create(dto, userId);
   }
 
@@ -203,7 +196,8 @@ export class DeductionsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Match deduction to promotion and claim',
-    description: 'Match a deduction to a promotion and optionally a claim. Sets match method, score, and timestamp.',
+    description:
+      'Match a deduction to a promotion and optionally a claim. Sets match method, score, and timestamp.',
   })
   @ApiParam({ name: 'id', description: 'Deduction ID' })
   @ApiResponse({ status: 200, description: 'Deduction matched successfully' })
@@ -232,10 +226,7 @@ export class DeductionsController {
   @ApiResponse({ status: 200, description: 'Deduction approved successfully' })
   @ApiResponse({ status: 400, description: 'Deduction is not in MATCHED status' })
   @ApiResponse({ status: 404, description: 'Deduction not found' })
-  async approve(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async approve(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.deductionsService.approve(id, userId);
   }
 
@@ -340,7 +331,8 @@ export class DeductionsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Resolve a dispute',
-    description: 'Resolve a dispute for a deduction. When all disputes are resolved, the deduction moves to UNDER_REVIEW.',
+    description:
+      'Resolve a dispute for a deduction. When all disputes are resolved, the deduction moves to UNDER_REVIEW.',
   })
   @ApiParam({ name: 'id', description: 'Deduction ID' })
   @ApiParam({ name: 'disputeId', description: 'Dispute ID' })

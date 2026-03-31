@@ -1,17 +1,9 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { CreateTemplateDto } from './dto/create-template.dto';
 import { UpdateTemplateDto } from './dto/update-template.dto';
 import { TemplateQueryDto } from './dto/template-query.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -66,9 +58,7 @@ export class TemplatesService {
       'isPublic',
     ];
     const orderBy: Prisma.PromotionTemplateOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     // Execute query
     const [data, total] = await Promise.all([
@@ -95,9 +85,7 @@ export class TemplatesService {
     ]);
 
     // Transform data to match frontend expectations
-    const transformedData = data.map((template) =>
-      this.transformTemplate(template),
-    );
+    const transformedData = data.map((template) => this.transformTemplate(template));
 
     return createPaginatedResponse(transformedData, total, page, pageSize);
   }
@@ -139,13 +127,7 @@ export class TemplatesService {
   // ═══════════════════════════════════════════════════════════════════════════
   async findByCategory(category: string) {
     // Validate category value
-    const validCategories = [
-      'SEASONAL',
-      'DISPLAY',
-      'LISTING',
-      'REBATE',
-      'CUSTOM',
-    ];
+    const validCategories = ['SEASONAL', 'DISPLAY', 'LISTING', 'REBATE', 'CUSTOM'];
     if (!validCategories.includes(category)) {
       throw new BadRequestException(
         `Invalid category "${category}". Valid values: ${validCategories.join(', ')}`,
@@ -185,9 +167,7 @@ export class TemplatesService {
     });
 
     if (!company) {
-      throw new BadRequestException(
-        `Company with ID ${dto.companyId} not found`,
-      );
+      throw new BadRequestException(`Company with ID ${dto.companyId} not found`);
     }
 
     const template = await this.prisma.promotionTemplate.create({
@@ -250,8 +230,7 @@ export class TemplatesService {
 
     if (dto.name !== undefined) updateData.name = dto.name;
     if (dto.description !== undefined) updateData.description = dto.description;
-    if (dto.template !== undefined)
-      updateData.template = dto.template as Prisma.InputJsonValue;
+    if (dto.template !== undefined) updateData.template = dto.template as Prisma.InputJsonValue;
     if (dto.category !== undefined) updateData.category = dto.category;
     if (dto.channels !== undefined) updateData.channels = dto.channels;
     if (dto.isPublic !== undefined) updateData.isPublic = dto.isPublic;
@@ -385,9 +364,7 @@ export class TemplatesService {
       },
     });
 
-    this.logger.log(
-      `Template duplicated: ${source.name} -> ${duplicate.name} (${duplicate.id})`,
-    );
+    this.logger.log(`Template duplicated: ${source.name} -> ${duplicate.name} (${duplicate.id})`);
 
     return this.transformTemplate(duplicate);
   }

@@ -16,7 +16,10 @@ export class UpdateDisputeDto {
   @IsEnum(DisputeStatusEnum)
   status?: DisputeStatusEnum;
 
-  @ApiPropertyOptional({ example: 'Customer agrees to partial resolution', description: 'Customer response' })
+  @ApiPropertyOptional({
+    example: 'Customer agrees to partial resolution',
+    description: 'Customer response',
+  })
   @IsOptional()
   @IsString()
   @MaxLength(2000)

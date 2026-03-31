@@ -19,7 +19,10 @@ export class CreateTargetAllocationDto {
   @IsEnum(TargetMetricEnum)
   metric?: TargetMetricEnum;
 
-  @ApiPropertyOptional({ example: 'alloc-parent-123', description: 'Parent allocation ID for hierarchy' })
+  @ApiPropertyOptional({
+    example: 'alloc-parent-123',
+    description: 'Parent allocation ID for hierarchy',
+  })
   @IsOptional()
   @IsString()
   parentId?: string;

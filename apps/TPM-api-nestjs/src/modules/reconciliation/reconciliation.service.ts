@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  NotFoundException,
-  BadRequestException,
-  Logger,
-} from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, Logger } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { AccrualQueryDto } from './dto/accrual-query.dto';
 import { CreateAccrualDto } from './dto/create-accrual.dto';
@@ -11,10 +6,7 @@ import { JournalQueryDto } from './dto/journal-query.dto';
 import { CreateJournalDto } from './dto/create-journal.dto';
 import { CreateGLAccountDto } from './dto/create-gl-account.dto';
 import { UpdateAccrualConfigDto } from './dto/update-accrual-config.dto';
-import {
-  createPaginatedResponse,
-  getPaginationParams,
-} from '../../common/dto/pagination.dto';
+import { createPaginatedResponse, getPaginationParams } from '../../common/dto/pagination.dto';
 import { Prisma } from '@prisma/client';
 
 @Injectable()
@@ -50,9 +42,7 @@ export class ReconciliationService {
 
     const validSortFields = ['createdAt', 'entryDate', 'amount', 'status'];
     const orderBy: Prisma.AccrualEntryOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     const [data, total] = await Promise.all([
       this.prisma.accrualEntry.findMany({
@@ -226,7 +216,14 @@ export class ReconciliationService {
   // ── LIST JOURNALS ──────────────────────────────────────────────────────────
   async findAllJournals(query: JournalQueryDto) {
     const { skip, take, page, pageSize } = getPaginationParams(query);
-    const { status, source, fiscalPeriodId, companyId, sortBy = 'createdAt', sortOrder = 'desc' } = query;
+    const {
+      status,
+      source,
+      fiscalPeriodId,
+      companyId,
+      sortBy = 'createdAt',
+      sortOrder = 'desc',
+    } = query;
 
     const where: Prisma.GLJournalWhereInput = {};
 
@@ -237,9 +234,7 @@ export class ReconciliationService {
 
     const validSortFields = ['createdAt', 'journalDate', 'journalNumber', 'totalDebit'];
     const orderBy: Prisma.GLJournalOrderByWithRelationInput =
-      sortBy && validSortFields.includes(sortBy)
-        ? { [sortBy]: sortOrder }
-        : { createdAt: 'desc' };
+      sortBy && validSortFields.includes(sortBy) ? { [sortBy]: sortOrder } : { createdAt: 'desc' };
 
     const [data, total] = await Promise.all([
       this.prisma.gLJournal.findMany({

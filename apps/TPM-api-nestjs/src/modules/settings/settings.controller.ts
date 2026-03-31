@@ -109,10 +109,7 @@ export class SettingsController {
   @ApiParam({ name: 'id', description: 'SOX Control ID' })
   @ApiResponse({ status: 200, description: 'SOX control updated' })
   @ApiResponse({ status: 404, description: 'SOX control not found' })
-  async updateSOXControl(
-    @Param('id') id: string,
-    @Body() dto: UpdateSOXControlDto,
-  ) {
+  async updateSOXControl(@Param('id') id: string, @Body() dto: UpdateSOXControlDto) {
     return this.settingsService.updateSOXControl(id, dto);
   }
 
@@ -185,10 +182,7 @@ export class SettingsController {
   @ApiParam({ name: 'id', description: 'SOX Violation ID' })
   @ApiResponse({ status: 200, description: 'Violation marked as exception' })
   @ApiResponse({ status: 404, description: 'Violation not found' })
-  async exceptViolation(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async exceptViolation(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.settingsService.exceptViolation(id, userId);
   }
 
@@ -237,10 +231,7 @@ export class SettingsController {
   @ApiParam({ name: 'id', description: 'Clash Rule ID' })
   @ApiResponse({ status: 200, description: 'Clash rule updated' })
   @ApiResponse({ status: 404, description: 'Clash rule not found' })
-  async updateClashRule(
-    @Param('id') id: string,
-    @Body() dto: UpdateClashRuleDto,
-  ) {
+  async updateClashRule(@Param('id') id: string, @Body() dto: UpdateClashRuleDto) {
     return this.settingsService.updateClashRule(id, dto);
   }
 

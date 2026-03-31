@@ -1,10 +1,4 @@
-import {
-  IsEnum,
-  IsOptional,
-  IsBoolean,
-  IsString,
-  IsArray,
-} from 'class-validator';
+import { IsEnum, IsOptional, IsBoolean, IsString, IsArray } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { NotificationTypeEnum, NotificationChannelEnum } from './create-notification.dto';
 

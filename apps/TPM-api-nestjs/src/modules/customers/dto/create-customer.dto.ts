@@ -1,10 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsEnum,
-  IsBoolean,
-  MaxLength,
-} from 'class-validator';
+import { IsString, IsOptional, IsEnum, IsBoolean, MaxLength } from 'class-validator';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export enum ChannelEnum {
@@ -37,7 +31,10 @@ export class CreateCustomerDto {
   @MaxLength(100)
   subChannel?: string;
 
-  @ApiPropertyOptional({ example: '123 Nguyen Hue, District 1, HCMC', description: 'Customer address' })
+  @ApiPropertyOptional({
+    example: '123 Nguyen Hue, District 1, HCMC',
+    description: 'Customer address',
+  })
   @IsOptional()
   @IsString()
   @MaxLength(500)

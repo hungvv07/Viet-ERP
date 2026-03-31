@@ -1,12 +1,4 @@
-import {
-  IsString,
-  IsOptional,
-  IsEnum,
-  IsInt,
-  IsBoolean,
-  Min,
-  MaxLength,
-} from 'class-validator';
+import { IsString, IsOptional, IsEnum, IsInt, IsBoolean, Min, MaxLength } from 'class-validator';
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { ERPTypeEnum } from './create-connection.dto';

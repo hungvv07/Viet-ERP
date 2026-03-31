@@ -26,12 +26,18 @@ export class ChequeQueryDto extends PaginationDto {
   @IsString()
   claimId?: string;
 
-  @ApiPropertyOptional({ description: 'Filter cheques issued from this date', example: '2024-01-01' })
+  @ApiPropertyOptional({
+    description: 'Filter cheques issued from this date',
+    example: '2024-01-01',
+  })
   @IsOptional()
   @IsDateString()
   dateFrom?: string;
 
-  @ApiPropertyOptional({ description: 'Filter cheques issued up to this date', example: '2024-12-31' })
+  @ApiPropertyOptional({
+    description: 'Filter cheques issued up to this date',
+    example: '2024-12-31',
+  })
   @IsOptional()
   @IsDateString()
   dateTo?: string;

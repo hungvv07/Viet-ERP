@@ -1,11 +1,5 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { ChannelsService } from './channels.service';
 
 @ApiTags('Channels')
@@ -35,7 +29,8 @@ export class ChannelsController {
   @Get('pepsi')
   @ApiOperation({
     summary: 'List PepsiChannel enum values',
-    description: 'Get all PepsiChannel enum values with labels (MT, GT, HORECA, VENDING, ECOMMERCE, WHOLESALE)',
+    description:
+      'Get all PepsiChannel enum values with labels (MT, GT, HORECA, VENDING, ECOMMERCE, WHOLESALE)',
   })
   @ApiResponse({ status: 200, description: 'List of Pepsi channel values with labels' })
   getPepsiChannels() {
@@ -63,7 +58,8 @@ export class ChannelsController {
   @Get('summary')
   @ApiOperation({
     summary: 'Get combined channel summary',
-    description: 'Get complete channel overview including Channel enum, PepsiChannel enum, and distribution stats',
+    description:
+      'Get complete channel overview including Channel enum, PepsiChannel enum, and distribution stats',
   })
   @ApiResponse({ status: 200, description: 'Combined channel summary' })
   async getSummary() {

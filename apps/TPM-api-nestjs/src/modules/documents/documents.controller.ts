@@ -9,13 +9,7 @@ import {
   HttpCode,
   HttpStatus,
 } from '@nestjs/common';
-import {
-  ApiTags,
-  ApiOperation,
-  ApiBearerAuth,
-  ApiResponse,
-  ApiParam,
-} from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse, ApiParam } from '@nestjs/swagger';
 import { DocumentsService } from './documents.service';
 import { FileQueryDto } from './dto/file-query.dto';
 import { CreateFileDto } from './dto/create-file.dto';
@@ -40,7 +34,8 @@ export class DocumentsController {
   @Get()
   @ApiOperation({
     summary: 'List all files',
-    description: 'Get paginated list of files with optional filtering by category, uploader, and date range',
+    description:
+      'Get paginated list of files with optional filtering by category, uploader, and date range',
   })
   @ApiResponse({ status: 200, description: 'File list with pagination' })
   async findAll(@Query() query: FileQueryDto) {
@@ -84,7 +79,8 @@ export class DocumentsController {
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary: 'Create a POA (Proof of Activity)',
-    description: 'Link a file to a promotion as Proof of Activity. Requires ADMIN, MANAGER, or KAM role.',
+    description:
+      'Link a file to a promotion as Proof of Activity. Requires ADMIN, MANAGER, or KAM role.',
   })
   @ApiResponse({ status: 201, description: 'POA created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
@@ -107,10 +103,7 @@ export class DocumentsController {
   @ApiResponse({ status: 200, description: 'POA approved successfully' })
   @ApiResponse({ status: 400, description: 'POA is not in PENDING status' })
   @ApiResponse({ status: 404, description: 'POA not found' })
-  async approvePoa(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async approvePoa(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.documentsService.approvePoa(id, userId);
   }
 
@@ -160,7 +153,8 @@ export class DocumentsController {
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({
     summary: 'Create a POP (Proof of Performance)',
-    description: 'Link a file to a claim as Proof of Performance. Requires ADMIN, MANAGER, or KAM role.',
+    description:
+      'Link a file to a claim as Proof of Performance. Requires ADMIN, MANAGER, or KAM role.',
   })
   @ApiResponse({ status: 201, description: 'POP created successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
@@ -183,10 +177,7 @@ export class DocumentsController {
   @ApiResponse({ status: 200, description: 'POP verified successfully' })
   @ApiResponse({ status: 400, description: 'POP is not in PENDING status' })
   @ApiResponse({ status: 404, description: 'POP not found' })
-  async verifyPop(
-    @Param('id') id: string,
-    @CurrentUser('id') userId: string,
-  ) {
+  async verifyPop(@Param('id') id: string, @CurrentUser('id') userId: string) {
     return this.documentsService.verifyPop(id, userId);
   }
 
@@ -241,10 +232,7 @@ export class DocumentsController {
   })
   @ApiResponse({ status: 201, description: 'File metadata registered successfully' })
   @ApiResponse({ status: 400, description: 'Validation error' })
-  async create(
-    @Body() dto: CreateFileDto,
-    @CurrentUser('id') userId: string,
-  ) {
+  async create(@Body() dto: CreateFileDto, @CurrentUser('id') userId: string) {
     return this.documentsService.create(dto, userId);
   }
 
@@ -257,7 +245,8 @@ export class DocumentsController {
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary: 'Delete file metadata',
-    description: 'Delete file metadata. Cannot delete files linked to POA or POP. Requires ADMIN role.',
+    description:
+      'Delete file metadata. Cannot delete files linked to POA or POP. Requires ADMIN role.',
   })
   @ApiParam({ name: 'id', description: 'File ID' })
   @ApiResponse({ status: 200, description: 'File deleted successfully' })

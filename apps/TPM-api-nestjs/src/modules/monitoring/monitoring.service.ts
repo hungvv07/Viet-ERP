@@ -24,19 +24,14 @@ export class MonitoringService {
   async getLiveDashboard() {
     this.logger.log('Getting live monitoring dashboard');
 
-    const [
-      todayClaims,
-      pendingApprovals,
-      activePromotions,
-      recentTransactions,
-      systemHealth,
-    ] = await Promise.all([
-      this.getTodayClaims(),
-      this.getPendingApprovals(),
-      this.getActivePromotions(),
-      this.getRecentTransactions(),
-      this.getSystemHealth(),
-    ]);
+    const [todayClaims, pendingApprovals, activePromotions, recentTransactions, systemHealth] =
+      await Promise.all([
+        this.getTodayClaims(),
+        this.getPendingApprovals(),
+        this.getActivePromotions(),
+        this.getRecentTransactions(),
+        this.getSystemHealth(),
+      ]);
 
     return {
       generatedAt: new Date().toISOString(),
@@ -73,10 +68,7 @@ export class MonitoringService {
     });
 
     const count = claims.length;
-    const totalAmount = claims.reduce(
-      (sum, c) => sum + Number(c.amount),
-      0,
-    );
+    const totalAmount = claims.reduce((sum, c) => sum + Number(c.amount), 0);
 
     // Group by status
     const byStatus: Record<string, number> = {};
@@ -97,29 +89,28 @@ export class MonitoringService {
   async getPendingApprovals() {
     this.logger.log('Getting pending approvals');
 
-    const [pendingBudgets, pendingClaims, pendingPromotions] =
-      await Promise.all([
-        // Budgets with approvalStatus SUBMITTED or UNDER_REVIEW
-        this.prisma.budget.count({
-          where: {
-            approvalStatus: {
-              in: ['SUBMITTED', 'UNDER_REVIEW'],
-            },
+    const [pendingBudgets, pendingClaims, pendingPromotions] = await Promise.all([
+      // Budgets with approvalStatus SUBMITTED or UNDER_REVIEW
+      this.prisma.budget.count({
+        where: {
+          approvalStatus: {
+            in: ['SUBMITTED', 'UNDER_REVIEW'],
           },
-        }),
-        // Claims with status PENDING
-        this.prisma.claim.count({
-          where: {
-            status: 'PENDING',
-          },
-        }),
-        // Promotions with status PLANNED (closest to pending approval)
-        this.prisma.promotion.count({
-          where: {
-            status: 'PLANNED',
-          },
-        }),
-      ]);
+        },
+      }),
+      // Claims with status PENDING
+      this.prisma.claim.count({
+        where: {
+          status: 'PENDING',
+        },
+      }),
+      // Promotions with status PLANNED (closest to pending approval)
+      this.prisma.promotion.count({
+        where: {
+          status: 'PLANNED',
+        },
+      }),
+    ]);
 
     const total = pendingBudgets + pendingClaims + pendingPromotions;
 
@@ -161,9 +152,7 @@ export class MonitoringService {
       const utilization = budget > 0 ? (actualSpend / budget) * 100 : 0;
       const daysRemaining = Math.max(
         0,
-        Math.ceil(
-          (p.endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24),
-        ),
+        Math.ceil((p.endDate.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)),
       );
 
       return {
@@ -365,9 +354,7 @@ export class MonitoringService {
       warning: 1,
       info: 2,
     };
-    alerts.sort(
-      (a, b) => severityOrder[a.severity] - severityOrder[b.severity],
-    );
+    alerts.sort((a, b) => severityOrder[a.severity] - severityOrder[b.severity]);
 
     return {
       count: alerts.length,
@@ -501,16 +488,11 @@ export class MonitoringService {
     const budgetAllocated = Number(totalBudgets._sum.allocatedAmount || 0);
     const targetTotal = Number(targets._sum.totalTarget || 0);
     const targetAchieved = Number(targets._sum.totalAchieved || 0);
-    const claimApprovalRate =
-      totalClaims > 0 ? (approvedClaims / totalClaims) * 100 : 0;
+    const claimApprovalRate = totalClaims > 0 ? (approvedClaims / totalClaims) * 100 : 0;
     const promotionCompletionRate =
-      totalPromotions > 0
-        ? (completedPromotions / totalPromotions) * 100
-        : 0;
-    const targetAchievementRate =
-      targetTotal > 0 ? (targetAchieved / targetTotal) * 100 : 0;
-    const budgetUtilizationRate =
-      budgetTotal > 0 ? (budgetSpent / budgetTotal) * 100 : 0;
+      totalPromotions > 0 ? (completedPromotions / totalPromotions) * 100 : 0;
+    const targetAchievementRate = targetTotal > 0 ? (targetAchieved / targetTotal) * 100 : 0;
+    const budgetUtilizationRate = budgetTotal > 0 ? (budgetSpent / budgetTotal) * 100 : 0;
 
     return {
       year,
