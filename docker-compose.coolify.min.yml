@@ -1,7 +1,7 @@
 x-app-env: &app-env
   NODE_ENV: production
   PORT: 3000
-  DATABASE_URL: postgresql://${POSTGRES_USER:-vierp}:${POSTGRES_PASSWORD}@pg:5432/${POSTGRES_DB:-vierp_prod}
+  DATABASE_URL: postgresql://${POSTGRES_USER:-vierp}:${POSTGRES_PASSWORD:-vierp_pass}@pg:5432/${POSTGRES_DB:-vierp_prod}
   REDIS_URL: redis://rd:6379
   NATS_URL: nats://nt:4222
   SSO_URL: http://kc:8080
@@ -20,7 +20,7 @@ services:
     image: postgres:16-alpine
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-vierp}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-vierp_pass}
       POSTGRES_DB: ${POSTGRES_DB:-vierp_prod}
     volumes:
       - pgd:/var/lib/postgresql/data
@@ -47,12 +47,12 @@ services:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://pg:5432/${POSTGRES_DB:-vierp_prod}
       KC_DB_USERNAME: ${POSTGRES_USER:-vierp}
-      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD:-vierp_pass}
       KC_HOSTNAME_STRICT: "false"
       KC_HTTP_ENABLED: "true"
       KC_PROXY: edge
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD:-admin123}
     depends_on:
       - pg
 
@@ -74,11 +74,11 @@ services:
     image: vierp-ta:coolify
     build:
       context: ./apps/TPM-api-nestjs
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.coolify
     environment:
       <<: *app-env
       SSO_CLIENT_ID: tpm-api
-      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET:-changeme}
     depends_on: [pg, rd, nt]
 
   tw:
@@ -89,6 +89,7 @@ services:
       dockerfile: Dockerfile.coolify
     environment:
       NODE_ENV: production
+      BROWSER: none
       PORT: 3000
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://kg:8000}
     depends_on:

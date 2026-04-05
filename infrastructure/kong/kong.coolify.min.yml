@@ -1,12 +1,15 @@
 _format_version: "3.0"
+_transform: true
 
 services:
-  - name: tpm
-    url: http://ta:3000
+  - name: ta-service
+    host: ta
+    port: 3000
+    protocol: http
     routes:
-      - name: tpm-route
-        paths: ["/api/tpm"]
-        strip_path: true
+      - name: ta-route
+        paths: ["/"]
+        strip_path: false
 
 plugins:
   - name: cors

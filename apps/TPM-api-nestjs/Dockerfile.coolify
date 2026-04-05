@@ -1,0 +1,17 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache python3 make g++
+
+COPY package*.json ./
+COPY prisma ./prisma/
+RUN npm install
+RUN npx prisma generate
+
+COPY . .
+
+EXPOSE 3000
+
+# Run Nest directly to avoid dist/startup mismatch during Coolify builds.
+CMD ["npm", "run", "start"]
