@@ -12,8 +12,8 @@ RUN apk add --no-cache python3 make g++
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# Install dependencies
-RUN npm ci
+# Install dependencies (no lockfile in this repo)
+RUN npm install
 
 # Generate Prisma client
 RUN npx prisma generate
@@ -41,8 +41,8 @@ RUN apk add --no-cache python3 make g++
 COPY package*.json ./
 COPY prisma ./prisma/
 
-# Install all dependencies (including dev)
-RUN npm ci
+# Install all dependencies (including dev, no lockfile in this repo)
+RUN npm install
 
 # Generate Prisma client
 RUN npx prisma generate
