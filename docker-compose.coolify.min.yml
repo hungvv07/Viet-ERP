@@ -86,7 +86,7 @@ services:
     image: vierp-tw:coolify
     build:
       context: ./apps/TPM-web
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.coolify
     environment:
       NODE_ENV: production
       PORT: 3000
