@@ -217,8 +217,10 @@ docker compose -f docker-compose.prod.yml up -d
 > Trên server dùng chung (ví dụ Coolify), nếu bị lỗi `port is already allocated`,
 > chỉnh các biến `*_HOST_PORT` trong `.env` (ví dụ `KEYCLOAK_HOST_PORT=18080`)
 > thay vì sửa trực tiếp `docker-compose*.yml`.
-> `docker-compose.prod.yml` đã được tối ưu cho Coolify để tránh lỗi
-> `proc_open(): posix_spawn() failed: Argument list too long`.
+> Nếu Coolify vẫn báo lỗi `proc_open(): posix_spawn() failed: Argument list too long`,
+> dùng file chuyên biệt:
+> - `docker-compose.coolify.yml` (đầy đủ services, rút gọn cho Coolify)
+> - `docker-compose.coolify.min.yml` (core stack + TPM, nhẹ nhất để deploy ổn định)
 
 ### Makefile Commands
 
@@ -284,6 +286,8 @@ Viet-ERP/
 │   └── workflows/                 # ci.yml, release.yml
 ├── docker-compose.yml             # Development infrastructure
 ├── docker-compose.prod.yml        # Production deployment
+├── docker-compose.coolify.yml     # Coolify-optimized full stack
+├── docker-compose.coolify.min.yml # Coolify minimal fallback stack
 ├── Makefile                       # Developer commands
 ├── turbo.json                     # Turborepo config
 ├── CHANGELOG.md                   # Lịch sử thay đổi

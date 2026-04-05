@@ -1,0 +1,71 @@
+_format_version: "3.0"
+
+services:
+  - name: mrp
+    url: http://mr:3000
+    routes:
+      - name: mrp-route
+        paths: ["/api/mrp"]
+        strip_path: true
+
+  - name: hrm
+    url: http://hm:3000
+    routes:
+      - name: hrm-route
+        paths: ["/api/hrm"]
+        strip_path: true
+
+  - name: crm
+    url: http://cr:3000
+    routes:
+      - name: crm-route
+        paths: ["/api/crm"]
+        strip_path: true
+
+  - name: tpm
+    url: http://ta:3000
+    routes:
+      - name: tpm-route
+        paths: ["/api/tpm"]
+        strip_path: true
+
+  - name: otb
+    url: http://ob:3000
+    routes:
+      - name: otb-route
+        paths: ["/api/otb"]
+        strip_path: true
+
+  - name: pm
+    url: http://pm:3000
+    routes:
+      - name: pm-route
+        paths: ["/api/pm"]
+        strip_path: true
+
+  - name: acc
+    url: http://ac:3000
+    routes:
+      - name: acc-route
+        paths: ["/api/acc"]
+        strip_path: true
+
+  - name: xai
+    url: http://xa:3000
+    routes:
+      - name: xai-route
+        paths: ["/api/excel-ai"]
+        strip_path: true
+
+plugins:
+  - name: cors
+    config:
+      origins: ["*"]
+      methods: [GET, POST, PUT, PATCH, DELETE, OPTIONS]
+      headers: [Accept, Authorization, Content-Type, X-Tenant-Id]
+      max_age: 3600
+
+  - name: rate-limiting
+    config:
+      minute: 100
+      policy: local

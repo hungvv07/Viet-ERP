@@ -1,0 +1,200 @@
+x-app-env: &app-env
+  NODE_ENV: production
+  PORT: 3000
+  DATABASE_URL: postgresql://${POSTGRES_USER:-vierp}:${POSTGRES_PASSWORD}@pg:5432/${POSTGRES_DB:-vierp_prod}
+  REDIS_URL: redis://rd:6379
+  NATS_URL: nats://nt:4222
+  SSO_URL: http://kc:8080
+  SSO_REALM: ${SSO_REALM:-vierp}
+
+x-defaults: &defaults
+  restart: unless-stopped
+  env_file:
+    - .env
+  networks:
+    - vn
+
+services:
+  pg:
+    <<: *defaults
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-vierp}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-vierp_prod}
+    volumes:
+      - pgd:/var/lib/postgresql/data
+
+  rd:
+    <<: *defaults
+    image: redis:7-alpine
+    command: redis-server --appendonly yes --appendfsync everysec
+    volumes:
+      - rdd:/data
+
+  nt:
+    <<: *defaults
+    image: nats:2-alpine
+    command: ["--js", "--sd", "/data", "--http_port", "8222", "--max_connections", "64000"]
+    volumes:
+      - ntd:/data
+
+  kc:
+    <<: *defaults
+    image: quay.io/keycloak/keycloak:24.0
+    command: start --optimized
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://pg:5432/${POSTGRES_DB:-vierp_prod}
+      KC_DB_USERNAME: ${POSTGRES_USER:-vierp}
+      KC_DB_PASSWORD: ${POSTGRES_PASSWORD}
+      KC_HOSTNAME_STRICT: "false"
+      KC_HTTP_ENABLED: "true"
+      KC_PROXY: edge
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN:-admin}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+    depends_on:
+      - pg
+
+  kg:
+    <<: *defaults
+    image: kong:3.6-ubuntu
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /etc/kong/kong.yml
+      KONG_PROXY_LISTEN: 0.0.0.0:8000
+      KONG_ADMIN_LISTEN: 0.0.0.0:8001
+      KONG_LOG_LEVEL: notice
+      KONG_WORKER_PROCESSES: 2
+    volumes:
+      - ./infrastructure/kong/kong.coolify.yml:/etc/kong/kong.yml:ro
+    depends_on:
+      - kc
+
+  ha:
+    <<: *defaults
+    image: ghcr.io/nclamvn/vierp-hrm-ai:${IMAGE_TAG:-latest}
+    environment:
+      <<: *app-env
+      SSO_CLIENT_ID: hrm-ai
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+    depends_on: [pg, rd, nt]
+
+  hu:
+    <<: *defaults
+    image: ghcr.io/nclamvn/vierp-hrm-unified:${IMAGE_TAG:-latest}
+    environment:
+      <<: *app-env
+      SSO_CLIENT_ID: hrm-unified
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+    depends_on: [pg, rd, nt]
+
+  ta:
+    <<: *defaults
+    image: ghcr.io/nclamvn/vierp-tpm-api-nestjs:${IMAGE_TAG:-latest}
+    environment:
+      <<: *app-env
+      SSO_CLIENT_ID: tpm-api
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+    depends_on: [pg, rd, nt]
+
+  hm:
+    <<: *defaults
+    image: ghcr.io/nclamvn/vierp-hrm:${IMAGE_TAG:-latest}
+    environment:
+      <<: *app-env
+      SSO_CLIENT_ID: hrm
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+    depends_on: [pg, rd, nt]
+
+  ac:
+    <<: *defaults
+    image: ghcr.io/nclamvn/vierp-accounting:${IMAGE_TAG:-latest}
+    environment:
+      <<: *app-env
+      SSO_CLIENT_ID: accounting
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+    depends_on: [pg, rd, nt]
+
+  cr:
+    <<: *defaults
+    image: ghcr.io/nclamvn/vierp-crm:${IMAGE_TAG:-latest}
+    environment:
+      <<: *app-env
+      SSO_CLIENT_ID: crm
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+    depends_on: [pg, rd, nt]
+
+  ec:
+    <<: *defaults
+    image: ghcr.io/nclamvn/vierp-ecommerce:${IMAGE_TAG:-latest}
+    environment:
+      <<: *app-env
+      SSO_CLIENT_ID: ecommerce
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+    depends_on: [pg, rd, nt]
+
+  mr:
+    <<: *defaults
+    image: ghcr.io/nclamvn/vierp-mrp:${IMAGE_TAG:-latest}
+    environment:
+      <<: *app-env
+      SSO_CLIENT_ID: mrp
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+    depends_on: [pg, rd, nt]
+
+  ob:
+    <<: *defaults
+    image: ghcr.io/nclamvn/vierp-otb:${IMAGE_TAG:-latest}
+    environment:
+      <<: *app-env
+      SSO_CLIENT_ID: otb
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+    depends_on: [pg, rd, nt]
+
+  pm:
+    <<: *defaults
+    image: ghcr.io/nclamvn/vierp-pm:${IMAGE_TAG:-latest}
+    environment:
+      <<: *app-env
+      SSO_CLIENT_ID: pm
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+    depends_on: [pg, rd, nt]
+
+  xa:
+    <<: *defaults
+    image: ghcr.io/nclamvn/vierp-excelai:${IMAGE_TAG:-latest}
+    environment:
+      <<: *app-env
+      SSO_CLIENT_ID: excel-ai
+      SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY}
+    depends_on: [pg, rd, nt]
+
+  dc:
+    <<: *defaults
+    image: ghcr.io/nclamvn/vierp-docs:${IMAGE_TAG:-latest}
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+
+  tw:
+    <<: *defaults
+    image: ghcr.io/nclamvn/vierp-tpm-web:${IMAGE_TAG:-latest}
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://kg:8000}
+    depends_on:
+      - ta
+      - kg
+
+volumes:
+  pgd:
+  rdd:
+  ntd:
+
+networks:
+  vn:
+    driver: bridge
