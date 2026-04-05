@@ -71,7 +71,10 @@ services:
 
   ta:
     <<: *defaults
-    image: ghcr.io/nclamvn/vierp-tpm-api-nestjs:${IMAGE_TAG:-latest}
+    image: vierp-ta:coolify
+    build:
+      context: ./apps/TPM-api-nestjs
+      dockerfile: Dockerfile
     environment:
       <<: *app-env
       SSO_CLIENT_ID: tpm-api
@@ -80,7 +83,10 @@ services:
 
   tw:
     <<: *defaults
-    image: ghcr.io/nclamvn/vierp-tpm-web:${IMAGE_TAG:-latest}
+    image: vierp-tw:coolify
+    build:
+      context: ./apps/TPM-web
+      dockerfile: Dockerfile
     environment:
       NODE_ENV: production
       PORT: 3000
