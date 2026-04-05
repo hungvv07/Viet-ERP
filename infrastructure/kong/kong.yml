@@ -2,56 +2,56 @@ _format_version: "3.0"
 
 services:
   - name: mrp-service
-    url: http://host.docker.internal:3001
+    url: http://mrp:3000
     routes:
       - name: mrp-route
         paths: ["/api/mrp"]
         strip_path: true
 
   - name: hrm-service
-    url: http://host.docker.internal:3002
+    url: http://hrm:3000
     routes:
       - name: hrm-route
         paths: ["/api/hrm"]
         strip_path: true
 
   - name: crm-service
-    url: http://host.docker.internal:3003
+    url: http://crm:3000
     routes:
       - name: crm-route
         paths: ["/api/crm"]
         strip_path: true
 
   - name: tpm-service
-    url: http://host.docker.internal:3004
+    url: http://tpm-api:3000
     routes:
       - name: tpm-route
         paths: ["/api/tpm"]
         strip_path: true
 
   - name: otb-service
-    url: http://host.docker.internal:3005
+    url: http://otb:3000
     routes:
       - name: otb-route
         paths: ["/api/otb"]
         strip_path: true
 
   - name: pm-service
-    url: http://host.docker.internal:3006
+    url: http://pm:3000
     routes:
       - name: pm-route
         paths: ["/api/pm"]
         strip_path: true
 
   - name: acc-service
-    url: http://host.docker.internal:3007
+    url: http://accounting:3000
     routes:
       - name: acc-route
         paths: ["/api/acc"]
         strip_path: true
 
   - name: xai-service
-    url: http://host.docker.internal:3008
+    url: http://excel-ai:3000
     routes:
       - name: xai-route
         paths: ["/api/excel-ai"]
