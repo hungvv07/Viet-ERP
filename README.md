@@ -214,6 +214,10 @@ cp .env.production.example .env
 docker compose -f docker-compose.prod.yml up -d
 ```
 
+> Trên server dùng chung (ví dụ Coolify), nếu bị lỗi `port is already allocated`,
+> chỉnh các biến `*_HOST_PORT` trong `.env` (ví dụ `KEYCLOAK_HOST_PORT=18080`)
+> thay vì sửa trực tiếp `docker-compose*.yml`.
+
 ### Makefile Commands
 
 ```bash
