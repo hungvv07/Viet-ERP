@@ -42,7 +42,8 @@ services:
   kc:
     <<: *defaults
     image: quay.io/keycloak/keycloak:24.0
-    command: start --optimized
+    # Use non-optimized start so DB vendor/env are applied at runtime
+    command: start
     environment:
       KC_DB: postgres
       KC_DB_URL: jdbc:postgresql://pg:5432/${POSTGRES_DB:-vierp_prod}
@@ -75,6 +76,8 @@ services:
       <<: *app-env
       SSO_CLIENT_ID: tpm-api
       SSO_CLIENT_SECRET: ${SSO_CLIENT_SECRET:-changeme}
+      PRISMA_CLIENT_ENGINE_TYPE: binary
+      PRISMA_CLI_QUERY_ENGINE_TYPE: binary
     depends_on: [pg, rd, nt]
 
   tw:
