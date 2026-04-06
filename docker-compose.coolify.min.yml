@@ -58,16 +58,10 @@ services:
 
   kg:
     <<: *defaults
-    image: kong:3.6-ubuntu
-    environment:
-      KONG_DATABASE: "off"
-      # Use a single declarative file mount to avoid path resolution errors
-      KONG_DECLARATIVE_CONFIG: /etc/kong/kong.yml
-      KONG_PROXY_LISTEN: 0.0.0.0:8000
-      KONG_ADMIN_LISTEN: 0.0.0.0:8001
-    volumes:
-      # Mount file directly so /etc/kong/kong.yml is a file (not a directory)
-      - ./infrastructure/kong/kong.coolify.min.yml:/etc/kong/kong.yml:ro
+    build:
+      context: ./infrastructure/kong
+      dockerfile: Dockerfile.coolify
+    image: vierp-kong:coolify
     depends_on:
       - kc
 
