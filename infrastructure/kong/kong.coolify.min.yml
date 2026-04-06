@@ -1,10 +1,20 @@
 _format_version: "3.0"
 
 services:
+  # Public web (TPM-web)
+  - name: tw
+    url: http://tw:3000
+    routes:
+      - name: web-root
+        paths:
+          - /
+        strip_path: false
+
+  # API (TPM-api-nestjs)
   - name: ta
     url: http://ta:3000
     routes:
-      - name: ta-root
+      - name: api
         paths:
-          - /
+          - /api
         strip_path: false
